@@ -1,8 +1,4 @@
-header {
-    display: flex;
-}
-
-nav {
-    display: flex;
-    gap: 10px;
+header,
+footer {
+    background: lightgrey;
 }

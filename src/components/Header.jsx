@@ -1,14 +1,13 @@
-import { useAuth0 } from "@auth0/auth0-react";
-import LogInButton from "./LogInButton";
-import LogOutButton from "./LogOutButton";
+import { Link } from "react-router-dom";
 
 export default function Header() {
-    const { user, isAuthenticated, isLoading } = useAuth0();
-
     return (
         <header>
-            <div>Cotraveller</div>
-            {isAuthenticated ? <LogOutButton /> : <LogInButton />}           
+            <Link to="/" id="logo">Cotraveller</Link>
+            <div>
+                <Link to="/sign-in">Sign In</Link>
+                <Link to="/sign-up">Sign Up</Link>
+            </div>
         </header>
     )
 }
