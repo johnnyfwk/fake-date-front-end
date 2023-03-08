@@ -1,4 +1,5 @@
 import './App.css';
+import { useState } from "react";
 import { Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
 import Nav from './components/Nav';
@@ -7,9 +8,12 @@ import Index from './components/Index';
 import Home from './components/Home';
 import About from './components/About';
 import Contact from './components/Contact';
-import LogIn from './components/LogIn';
+import SignUp from './components/SignUp';
+import SignIn from './components/SignIn';
 
 function App() {
+  const [users, setUsers] = useState([]);
+
   return (
     <div className="App">
       <Header />
@@ -17,7 +21,8 @@ function App() {
       <Routes>
         <Route path="/" element={<Index />}/>
         <Route path="/home" element={<Home />}/>
-        <Route path="/log-in" element={<LogIn />}/>
+        <Route path="/sign-in" element={<SignIn />}/>
+        <Route path="/sign-up" element={<SignUp users={users} setUsers={setUsers}/>}/>
         <Route path="/about" element={<About />}/>
         <Route path="/contact" element={<Contact />}/>
       </Routes>
