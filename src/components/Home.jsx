@@ -13,8 +13,6 @@ export default function Home() {
         }
     }, [])
 
-    console.log(userLoggedIn, "<------ userLoggedIn");
-
     return (
         <main>
             <h1>Home</h1>
