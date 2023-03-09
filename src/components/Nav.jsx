@@ -10,7 +10,7 @@ export default function Nav() {
             {Object.keys(userLoggedIn).length > 0
                 ? <nav>
                     <Link to="/home">Home</Link>
-                    <Link to="/create-a-post">Create a Post</Link>
+                    <Link to="/post-a-trip">Post a Trip</Link>
                   </nav>
                 : null}
         </div>

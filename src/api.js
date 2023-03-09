@@ -19,3 +19,16 @@ export function addUser(username, password, avatar_url, join_date) {
             return response.data.user;
         })
 }
+
+export function getWorldCities() {
+    const options = {
+        method: "GET",
+        url: "https://pkgstore.datahub.io/core/world-cities/world-cities_json/data/5b3dd46ad10990bca47b04b4739a02ba/world-cities_json.json"
+    };
+
+    return axios
+        .request(options)
+        .then((response) => {
+            return response.data;
+        })
+}
