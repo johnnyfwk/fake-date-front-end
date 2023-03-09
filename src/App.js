@@ -6,6 +6,7 @@ import Nav from './components/Nav';
 import Footer from './components/Footer';
 import Index from './components/Index';
 import Home from './components/Home';
+import CreateAPost from './components/CreateAPost';
 import About from './components/About';
 import Contact from './components/Contact';
 import SignUp from './components/SignUp';
@@ -19,12 +20,13 @@ function App() {
       <Header />
       <Nav />
       <Routes>
-        <Route path="/" element={<Index />}/>
-        <Route path="/home" element={<Home />}/>
-        <Route path="/sign-in" element={<SignIn />}/>
-        <Route path="/sign-up" element={<SignUp users={users} setUsers={setUsers}/>}/>
-        <Route path="/about" element={<About />}/>
-        <Route path="/contact" element={<Contact />}/>
+        <Route path="/" element={<Index />} />
+        <Route path="/home" element={<Home />} />
+        <Route path="/sign-in" element={<SignIn />} />
+        <Route path="/sign-up" element={<SignUp users={users} setUsers={setUsers}/>} />
+        <Route path="/create-a-post" element={<CreateAPost />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<Contact />} />
       </Routes>
       <Footer />
     </div>

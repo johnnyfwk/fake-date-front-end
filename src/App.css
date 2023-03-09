@@ -2,3 +2,11 @@ header,
 footer {
     background: lightgrey;
 }
+
+.error {
+    color: #ff0000;
+}
+
+.success {
+    color: #15ff00
+}
