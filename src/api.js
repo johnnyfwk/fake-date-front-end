@@ -28,6 +28,14 @@ export function getPosts() {
         })
 }
 
+export function createPost(post_date, destination, arrival_date, departure_date, description, user_id) {
+    return baseUrl
+        .post("/posts", {post_date, destination, arrival_date, departure_date, description, user_id})
+        .then((response) => {
+            return response.data.post;
+        })
+}
+
 export function getWorldCities() {
     const options = {
         method: "GET",

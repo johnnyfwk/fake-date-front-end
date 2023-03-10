@@ -16,6 +16,7 @@ export default function PostATrip() {
     const [isArrivaleDateTheSameAsOrAfterTodaysDate, setIsArrivalDateTheSameAsOrAfterTodaysDate] = useState(null);
     const [isDepartureDateAfterTodaysDate, setIsDepartureDateAfterTodaysDate] = useState(null);
     const [isDepartureDateAfterArrivalDate, setIsDepartureDateAfterArrivalDate] = useState(null);
+    const [wasPostCreated, setWasPostCreated] = useState(null);
 
     const navigate = useNavigate();
 
@@ -34,10 +35,16 @@ export default function PostATrip() {
 
     function handleSubmit(event) {
         event.preventDefault();
-        console.log(selectedCity, "<------ selectedCity");
-        console.log(arrivalDateInput, "<------ arrivalDateInput");
-        console.log(departureDateInput, "<------ departureDateInput");
-        console.log(descriptionInput, "<------- descriptionInput");
+        setWasPostCreated(null);
+        api.createPost(new Date(), selectedCity, arrivalDateInput, departureDateInput, descriptionInput, userLoggedIn.user_id)
+            .then((response) => {
+                setWasPostCreated(true);
+                navigate("/home");
+            })
+            .catch((error) => {
+                console.log(error);
+                setWasPostCreated(false);
+            })
     }
 
     function onChangeCityInput(event) {
@@ -47,7 +54,6 @@ export default function PostATrip() {
             const releventCities = cities.filter((city) => {
                 return city.name.toLowerCase().includes(cityInputInLowercase);
             })
-            console.log(releventCities, "<------ releventCities");
             const releventCitiesFirst5 = [];
             if (releventCities.length > 5) {
                 for (let i = 0; i < 5; i++) {
@@ -58,7 +64,6 @@ export default function PostATrip() {
                     releventCitiesFirst5.push(releventCities[i]);
                 }
             }
-            console.log(releventCitiesFirst5, "<-------- releventCitiesFirst5");
             setFilteredCitiesToDisplay(releventCitiesFirst5);
         } else {
             setFilteredCitiesToDisplay([]);
@@ -83,10 +88,8 @@ export default function PostATrip() {
         }
         if (departureDateInput) {
             if (departureDateInput > arrivalDateAsString) {
-                console.log("Departure date is after arrival date.");
                 setIsDepartureDateAfterArrivalDate(true);
             } else {
-                console.log("Departure date is NOT after arrival date.");
                 setIsDepartureDateAfterArrivalDate(false);
             }
         }
@@ -104,10 +107,8 @@ export default function PostATrip() {
         }
         if (arrivalDateInput) {
             if (arrivalDateInput < departureDateAsString) {
-                console.log("Departure date is after arrival date.");
                 setIsDepartureDateAfterArrivalDate(true);
             } else {
-                console.log("Departure date is NOT after arrival date.");
                 setIsDepartureDateAfterArrivalDate(false);
             }
         }
@@ -132,6 +133,12 @@ export default function PostATrip() {
             {isDepartureDateAfterArrivalDate === null || isDepartureDateAfterArrivalDate === true
                 ? null
                 : <p className="error">Please enter a departure date that is after your arrival date.</p>}
+
+            {wasPostCreated === null
+                ? null
+                : wasPostCreated === true
+                    ? <p className="success">Post was created successfully!</p>
+                    : <p className="error">Post could not be created.</p>}
 
             <form onSubmit={handleSubmit}>
                 <div id="post-a-trip-filtered-cities">
