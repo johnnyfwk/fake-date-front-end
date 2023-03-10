@@ -21,7 +21,13 @@ export default function Header() {
                 : null}
 
             {Object.keys(userLoggedIn).length > 0
-                ? <Link to="/sign-in" onClick={onClickLogOut}>Log out</Link>
+                ? <div id="log-out-and-user-profile-links">
+                    <Link to="/sign-in" onClick={onClickLogOut}>Log out</Link>
+                    <Link to={`/profile/${userLoggedIn.user_id}`}>
+                        <img src={userLoggedIn.avatar_url} title={userLoggedIn.username}></img>
+                    </Link>
+                  </div>
+                
                 : null}            
         </header>
     )

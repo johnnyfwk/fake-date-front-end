@@ -11,6 +11,21 @@ footer {
     background: #a5a5a5;
 }
 
+header {
+    display: flex;
+    justify-content: space-between;
+}
+
+#log-out-and-user-profile-links img {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+}
+
+#profile-avatar-image {
+    max-width: 300px;
+}
+
 #post-cards {
     display: grid;
     gap: 20px;
