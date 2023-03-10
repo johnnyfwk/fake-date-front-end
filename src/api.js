@@ -20,6 +20,14 @@ export function addUser(username, password, avatar_url, join_date) {
         })
 }
 
+export function getPosts() {
+    return baseUrl
+        .get("/posts")
+        .then((response) => {
+            return response.data.posts;
+        })
+}
+
 export function getWorldCities() {
     const options = {
         method: "GET",
