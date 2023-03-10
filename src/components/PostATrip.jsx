@@ -67,6 +67,7 @@ export default function PostATrip() {
 
     function onClickCity(event) {
         setSelectedCity(event.target.innerText);
+        setCityInput(event.target.innerText);
         setFilteredCitiesToDisplay([]);
     }
 
@@ -119,10 +120,6 @@ export default function PostATrip() {
     return (
         <main>
             <h1>Post a Trip</h1>
-
-            {Object.keys(selectedCity).length > 0
-                ? <p>Destination: {selectedCity}</p>
-                : null}
             
             {isArrivaleDateTheSameAsOrAfterTodaysDate === null || isArrivaleDateTheSameAsOrAfterTodaysDate === true
                 ? null
@@ -137,9 +134,9 @@ export default function PostATrip() {
                 : <p className="error">Please enter a departure date that is after your arrival date.</p>}
 
             <form onSubmit={handleSubmit}>
-                <div>
+                <div id="post-a-trip-filtered-cities">
                     {filteredCitiesToDisplay.map((city) => {
-                        return <div onClick={onClickCity} key={city.geonameid}>{city?.name}, {city?.subcountry}, {city?.country}, {city?.geonameid}</div>
+                        return <div onClick={onClickCity} key={city.geonameid}>{city?.name}, {city?.subcountry}, {city?.country}</div>
                     })}
                 </div>
 

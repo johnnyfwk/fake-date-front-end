@@ -26,6 +26,14 @@ footer {
     border-radius: 50%;
 }
 
+#post-a-trip-filtered-cities {
+    background: #e2e2e2;
+}
+
+#post-a-trip-filtered-cities > div {
+    cursor: pointer;
+}
+
 .error {
     color: #ff0000;
 }
