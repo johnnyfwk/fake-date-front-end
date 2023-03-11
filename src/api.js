@@ -12,9 +12,9 @@ export function getUsers() {
         })
 }
 
-export function addUser(username, password, avatar_url, join_date) {
+export function addUser(username, password, gender, avatar_url, join_date) {
     return baseUrl
-        .post("/users", {username, password, avatar_url, join_date})
+        .post("/users", {username, password, gender, avatar_url, join_date})
         .then((response) => {
             return response.data.user;
         })

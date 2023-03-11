@@ -9,6 +9,7 @@ export default function SignUp({users, setUsers}) {
     const [isLoading, setIsLoading] = useState(true);
     const [usernameInput, setUsernameInput] = useState("");
     const [passwordInput, setPasswordInput] = useState("");
+    const [genderInput, setGenderInput] = useState("");
     const [avatarUrlInput, setAvatarUrlInput] = useState("");
     const [isUsernameTaken, setIsUsernameTaken] = useState(null);
     const [isUsernameValid, setIsUsernameValid] = useState(null);
@@ -36,8 +37,8 @@ export default function SignUp({users, setUsers}) {
             })
     }, [])
 
-    function createAccount(username, password, avatarUrl) {
-        api.addUser(username, password, avatarUrl, new Date())
+    function createAccount(username, password, gender, avatarUrl) {
+        api.addUser(username, password, gender, avatarUrl, new Date())
             .then((response) => {
                 setUserLoggedIn(response);
                 setIsUserAddedSuccessfully(true);
@@ -57,17 +58,17 @@ export default function SignUp({users, setUsers}) {
             const avatarUrlIsValid = /([a-z\-_0-9\/\:\.]*\.(jpg|jpeg|png|gif))/i.test(avatarUrlInput);
             if (avatarUrlIsValid) {
                 setIsAvatarUrlValid(true);
-                createAccount(usernameInput, passwordInput, avatarUrlInput);
+                createAccount(usernameInput, passwordInput, genderInput, avatarUrlInput);
             } else {
                 setIsAvatarUrlValid(false);
             }
         } else {
             setIsAvatarUrlValid(true);
-            createAccount(usernameInput, passwordInput, "http://cdn.onlinewebfonts.com/svg/img_258083.png");
+            createAccount(usernameInput, passwordInput, genderInput, "http://cdn.onlinewebfonts.com/svg/img_258083.png");
         }
     }
 
-    function onChangeUsernameInput(event) {
+    function handleUsernameInput(event) {
         setUsernameInput(event.target.value);
         setIsUsernameTaken(null);
         setIsUsernameValid(null);
@@ -83,17 +84,20 @@ export default function SignUp({users, setUsers}) {
             } else {
                 setIsUsernameValid(false);
             }
-            
         } else {
             setIsUsernameTaken(null);
         }
     }
 
-    function onChangePasswordInput(event) {
+    function handlePasswordInput(event) {
         setPasswordInput(event.target.value);
     }
 
-    function onChangeAvatarUrlInput(event) {
+    function handleGenderInput(event) {
+        setGenderInput(event.target.value);
+    }
+
+    function handleAvatarUrlInput(event) {
         setAvatarUrlInput(event.target.value);
     }
 
@@ -117,7 +121,7 @@ export default function SignUp({users, setUsers}) {
                     id="sign-up-username"
                     name="sign-up-username"
                     maxLength="20"
-                    onChange={onChangeUsernameInput}
+                    onChange={handleUsernameInput}
                     value={usernameInput}
                 ></input>
                 {isUsernameValid === null || isUsernameValid === true
@@ -135,21 +139,32 @@ export default function SignUp({users, setUsers}) {
                     id="sign-up-password"
                     name="sign-up-password"
                     maxLength="20"
-                    onChange={onChangePasswordInput}
+                    onChange={handlePasswordInput}
                     value={passwordInput}
                 ></input>
+
+                <label htmlFor="gender">Gender:</label>
+                <select
+                    id="gender"
+                    name="gender"
+                    defaultValue="default"
+                    onChange={handleGenderInput}>
+                        <option disabled value="default">Select Gender</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                </select>
 
                 <label htmlFor="sign-up-avatar-url">Avatar URL (optional):</label>
                 <input
                     type="text"
                     id="sign-up-avatar-url"
                     name="sign-up-avatar-url"
-                    onChange={onChangeAvatarUrlInput}
+                    onChange={handleAvatarUrlInput}
                     value={avatarUrlInput}
                 ></input>
                 {isAvatarUrlValid ? null : <span className="error">Please enter a valid image URL.</span>}
 
-                <input type="submit" value="Create Account" disabled={!usernameInput || !passwordInput || isUsernameTaken || !isUsernameValid}></input>
+                <input type="submit" value="Create Account" disabled={!usernameInput || !passwordInput || isUsernameTaken || !isUsernameValid || !genderInput}></input>
             </form>
         </main>
     )
