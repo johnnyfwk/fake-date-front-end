@@ -1,5 +1,4 @@
 export default function PostCard({post}) {
-    console.log(post, "<------ post")
     const date = new Date(post.post_date).toLocaleDateString();
     const time = new Date(post.post_date).toLocaleTimeString();
 
