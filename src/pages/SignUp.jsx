@@ -54,10 +54,6 @@ export default function SignUp({users, setUsers}) {
         event.preventDefault();
         setIsAvatarUrlValid(true);
         setIsUserAddedSuccessfully(null);
-        console.log(usernameInput);
-        console.log(passwordInput);
-        console.log(genderInput);
-        console.log(avatarUrlInput);
         if (avatarUrlInput.length > 0) {
             const avatarUrlIsValid = /([a-z\-_0-9\/\:\.]*\.(jpg|jpeg|png|gif))/i.test(avatarUrlInput);
             if (avatarUrlIsValid) {
@@ -155,8 +151,8 @@ export default function SignUp({users, setUsers}) {
                     defaultValue="default"
                     onChange={handleGenderInput}>
                         <option disabled value="default">Select Gender</option>
-                        <option value="male">Male</option>
-                        <option value="female">Female</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
                 </select>
 
                 <label htmlFor="sign-up-avatar-url">Avatar URL (optional):</label>

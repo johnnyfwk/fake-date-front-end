@@ -30,12 +30,10 @@ export default function Home({posts, setPosts}) {
             })
     }, [])
 
-    // console.log(posts);
-
     return (
         <main>
             <h1>Home</h1>
-            <p>Hi {userLoggedIn.username}. Browse the posts below to find a travel buddy.</p>
+            <p>Browse posts by other users who are looking for a fake date.</p>
 
             <div id="post-cards">
                 {posts.map((post) => {
