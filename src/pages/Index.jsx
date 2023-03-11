@@ -15,8 +15,8 @@ export default function Index() {
 
     return (
         <main>
-            <h1>Welcome to Cotraveller</h1>
-            <p>The app to find a travel buddy.</p>
+            <h1>Welcome to FakeDate</h1>
+            <p>The app to find a fake date for any occasion.</p>
         </main>
     )
 }

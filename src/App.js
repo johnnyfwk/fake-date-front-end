@@ -4,14 +4,14 @@ import { Routes, Route } from "react-router-dom";
 import Header from "./components/Header";
 import Nav from "./components/Nav";
 import Footer from "./components/Footer";
-import Index from "./components/Index";
-import SignUp from "./components/SignUp";
-import SignIn from "./components/SignIn";
-import Home from "./components/Home";
-import Profile from "./components/Profile";
-import PostATrip from "./components/PostATrip";
-import About from "./components/About";
-import Contact from "./components/Contact";
+import Index from "./pages/Index";
+import SignUp from "./pages/SignUp";
+import SignIn from "./pages/SignIn";
+import Home from "./pages/Home";
+import Profile from "./pages/Profile";
+import CreatePost from "./pages/CreatePost";
+import About from "./pages/About";
+import Contact from "./pages/Contact";
 
 
 function App() {
@@ -28,7 +28,7 @@ function App() {
         <Route path="/sign-up" element={<SignUp users={users} setUsers={setUsers} />} />
         <Route path="/home" element={<Home posts={posts} setPosts={setPosts} />} />
         <Route path="/profile/:user_id" element={<Profile users={users} setUsers={setUsers} />} />
-        <Route path="/post-a-trip" element={<PostATrip />} />
+        <Route path="/create-post" element={<CreatePost />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
       </Routes>

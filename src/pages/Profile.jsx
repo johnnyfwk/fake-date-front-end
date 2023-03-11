@@ -49,7 +49,8 @@ export default function Profile({users, setUsers}) {
         <main>
             <h1>{user.username}</h1>
             <img src={user.avatar_url} id="profile-avatar-image"></img>
-            <p>Join date: {new Date(user.join_date).toLocaleDateString()}</p>
+            <div>Join date: {new Date(user.join_date).toLocaleDateString()}</div>
+            <div>Gender: {user.gender}</div>
         </main>
     )
 }

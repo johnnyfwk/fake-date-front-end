@@ -2,7 +2,7 @@ import { useState, useEffect, useContext } from "react";
 import { UserContext } from "../contexts/user";
 import { useNavigate } from "react-router-dom";
 import * as api from "../api";
-import PostCard from "./PostCard";
+import PostCard from "../components/PostCard";
 
 export default function Home({posts, setPosts}) {
     const {userLoggedIn, setUserLoggedIn} = useContext(UserContext);

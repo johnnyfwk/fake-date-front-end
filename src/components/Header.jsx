@@ -11,7 +11,7 @@ export default function Header() {
 
     return (
         <header>
-            <Link to="/" id="logo">Cotraveller</Link>
+            <Link to="/" id="logo">FakeDate</Link>
 
             {Object.keys(userLoggedIn).length === 0
                 ? <div>

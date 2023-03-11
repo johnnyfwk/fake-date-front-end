@@ -1,4 +1,5 @@
 export default function PostCard({post}) {
+    console.log(post, "<------ post")
     const date = new Date(post.post_date).toLocaleDateString();
     const time = new Date(post.post_date).toLocaleTimeString();
 
@@ -8,9 +9,10 @@ export default function PostCard({post}) {
             <div>{time}</div>
             <img src={post.avatar_url} alt={post.avatar_url}></img>
             <div>{post.username}</div>
-            <div>{post.destination}</div>
-            <div>Arrival date: {post.arrival_date}</div>
-            <div>Departure date: {post.departure_date}</div>
+            <div>Seeking: {post.gender_of_date}</div>
+            <div>City: {post.city}</div>
+            <div>Date: {post.date}</div>
+            <div>Occasion: {post.occasion}</div>
             <div>{post.description}</div>
         </div>
     )

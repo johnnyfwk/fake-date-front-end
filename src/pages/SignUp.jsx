@@ -54,6 +54,10 @@ export default function SignUp({users, setUsers}) {
         event.preventDefault();
         setIsAvatarUrlValid(true);
         setIsUserAddedSuccessfully(null);
+        console.log(usernameInput);
+        console.log(passwordInput);
+        console.log(genderInput);
+        console.log(avatarUrlInput);
         if (avatarUrlInput.length > 0) {
             const avatarUrlIsValid = /([a-z\-_0-9\/\:\.]*\.(jpg|jpeg|png|gif))/i.test(avatarUrlInput);
             if (avatarUrlIsValid) {
@@ -108,7 +112,8 @@ export default function SignUp({users, setUsers}) {
     return (
         <main>
             <h1>Sign Up</h1>
-            <p>Create an account to find a travel partner. Already have an account? <Link to="/sign-in">Sign in</Link>.</p>
+            <p>Create an account to find someone to go on a fake date with.</p>
+            <p>Already have an account? <Link to="/sign-in">Sign in</Link>.</p>
 
             {isUserAddedSuccessfully === false
                 ? <p className="error">Account could not be created. Try again later.</p>
