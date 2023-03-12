@@ -7,6 +7,7 @@ export default function LogIn({users, setUsers}) {
     const {userLoggedIn, setUserLoggedIn} = useContext(UserContext);
 
     const [isLoading, setIsLoading] = useState(true);
+    const [isLoadingUsersSuccessful, setIsLoadingUsersSuccessful] = useState(null);
     const [usernameInput, setUsernameInput] = useState("");
     const [passwordInput, setPasswordInput] = useState("");
     const [isUsernameInDatabase, setIsUsernameInDatabase] = useState(null);
@@ -22,13 +23,16 @@ export default function LogIn({users, setUsers}) {
 
     useEffect(() => {
         setIsLoading(true);
+        setIsLoadingUsersSuccessful(null);
         api.getUsers()
             .then((response) => {
                 setIsLoading(false);
+                setIsLoadingUsersSuccessful(true);
                 setUsers(response);
             })
             .catch((error) => {
                 setIsLoading(false);
+                setIsLoadingUsersSuccessful(false);
                 console.log(error);
             })
     }, [])
@@ -64,6 +68,10 @@ export default function LogIn({users, setUsers}) {
 
     if (isLoading) {
         return <p>Loading...</p>
+    }
+
+    if (isLoadingUsersSuccessful === false) {
+        return <p className="error">Could not connect to the server. Please try again later.</p>
     }
 
     return (
