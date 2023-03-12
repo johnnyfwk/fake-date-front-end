@@ -29,7 +29,7 @@ export default function Post() {
 
     return (
         <main>
-            <h1>Post</h1>
+            <h1>{post.title}</h1>
             <Link to={`/profile/${post.user_id}`}>
                 <img src={post.avatar_url} id="post-avatar-image"/>
             </Link>            

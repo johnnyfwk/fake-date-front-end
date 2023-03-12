@@ -36,9 +36,9 @@ export function getPostById(postId) {
         })
 }
 
-export function createPost(post_date, city, gender_of_date, date, occasion, description, user_id) {
+export function createPost(post_date, title, city, gender_of_date, date, occasion, description, user_id) {
     return baseUrl
-        .post("/posts", {post_date, city, gender_of_date, date, occasion, description, user_id})
+        .post("/posts", {post_date, title, city, gender_of_date, date, occasion, description, user_id})
         .then((response) => {
             return response.data.post;
         })

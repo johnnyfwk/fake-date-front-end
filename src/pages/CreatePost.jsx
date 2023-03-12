@@ -1,6 +1,7 @@
 import { useState, useEffect, useContext } from "react";
 import { UserContext } from "../contexts/user";
 import { useNavigate } from "react-router-dom";
+import Title from "../components/Title";
 import Cities from "../components/Cities";
 import DateOfDate from "../components/DateOfDate";
 import Gender from "../components/Gender";
@@ -11,6 +12,7 @@ import * as api from "../api";
 export default function CreatePost() {
     const {userLoggedIn, setUserLoggedIn} = useContext(UserContext);
 
+    const [titleInput, setTitleInput] = useState("");
     const [cityInput, setCityInput] = useState("");
     const [genderOfDateInput, setGenderOfDateInput] = useState("");
     const [dateInput, setDateInput] = useState("");
@@ -30,12 +32,13 @@ export default function CreatePost() {
     function handleSubmit(event) {
         event.preventDefault();
         setIsPostCreatedSuccessfully(null);
-        api.createPost(new Date(), cityInput, genderOfDateInput, dateInput, occasionInput, descriptionInput, userLoggedIn.user_id)
+        api.createPost(new Date(), titleInput, cityInput, genderOfDateInput, dateInput, occasionInput, descriptionInput, userLoggedIn.user_id)
             .then((response) => {
                 setIsPostCreatedSuccessfully(true);
                 navigate("/home");
             })
             .catch((error) => {
+                console.log(error);
                 setIsPostCreatedSuccessfully(false);
             })
     }
@@ -56,11 +59,12 @@ export default function CreatePost() {
                     : <p className="error">Post could not be created. Please try again later.</p>}
 
             <form onSubmit={handleSubmit}>
+                <Title titleInput={titleInput} setTitleInput={setTitleInput} />
                 <Cities setCityInput={setCityInput} />
                 <Gender setGenderOfDateInput={setGenderOfDateInput} />
                 <DateOfDate setDateInput={setDateInput} setIsDateValid={setIsDateValid} />
                 <Occasion setOccasionInput={setOccasionInput} />
-                <Description setDescriptionInput={setDescriptionInput}/>
+                <Description descriptionInput={descriptionInput} setDescriptionInput={setDescriptionInput}/>
                 <input type="submit" value="Submit" disabled={!cityInput || !genderOfDateInput || !dateInput || !isDateValid || !occasionInput || !descriptionInput}></input>
             </form>
         </main>

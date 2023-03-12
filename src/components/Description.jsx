@@ -1,4 +1,4 @@
-export default function Description({setDescriptionInput}) {
+export default function Description({descriptionInput, setDescriptionInput}) {
     
     function handleDescriptionInput(event) {
         setDescriptionInput(event.target.value);
@@ -10,8 +10,11 @@ export default function Description({setDescriptionInput}) {
             <textarea
                 id="descrption"
                 name="description"
+                value={descriptionInput}
                 onChange={handleDescriptionInput}
+                maxLength="300"
             ></textarea>
+            <span>{descriptionInput.length}/300</span>
         </div>
     )
 }

@@ -57,19 +57,23 @@ header {
 
 
 /***** Post Card *****/
-.post-card {
+#post-card {
     background: #d1f6ff;
     display: grid;
     grid-template-columns: 75px auto;
 }
 
-.post-card img {
+#post-card-title {
+    font-size: 1.5rem;
+}
+
+#post-card img {
     width: 50px;
     height: 50px;
     border-radius: 50%;
 }
 
-.post-card-owner {
+#post-card-owner {
     background: #d2ffce;
 }
 /***** Post Card *****/
