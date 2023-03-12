@@ -35,6 +35,7 @@ header {
     width: 30px;
     height: 30px;
     border-radius: 50%;
+    object-fit: cover;
 }
 /***** Header *****/
 
@@ -42,7 +43,10 @@ header {
 
 /***** Profile *****/
 #profile-avatar-image {
-    max-width: 300px;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    object-fit: cover;
 }
 /***** Profile *****/
 
@@ -54,8 +58,6 @@ header {
     gap: 20px;
 }
 /***** Post Cards *****/
-
-
 /***** Post Card *****/
 #post-card {
     background: #d1f6ff;
@@ -71,6 +73,7 @@ header {
     width: 50px;
     height: 50px;
     border-radius: 50%;
+    object-fit: cover;
 }
 
 #post-card-owner {
@@ -82,6 +85,36 @@ header {
 
 /***** Post *****/
 #post-avatar-image {
-    max-width: 50px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
 }
 /***** Post *****/
+
+
+
+/***** Reply Cards *****/
+#reply-cards {
+    display: grid;
+    gap: 20px;
+}
+/***** Reply Cards *****/
+/***** Reply Card *****/
+#reply-card {
+    background: #c1deff;
+    display: grid;
+    grid-template-columns: 75px auto;
+}
+
+#reply-card-owner {
+    background: #dfffdc;
+}
+
+#reply-card img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+/***** Reply Card *****/

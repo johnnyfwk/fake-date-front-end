@@ -44,15 +44,18 @@ export function createPost(post_date, title, city, gender_of_date, date, occasio
         })
 }
 
-export function getWorldCities() {
-    const options = {
-        method: "GET",
-        url: "https://pkgstore.datahub.io/core/world-cities/world-cities_json/data/5b3dd46ad10990bca47b04b4739a02ba/world-cities_json.json"
-    };
-
-    return axios
-        .request(options)
+export function getRepliesByPostId(postId) {
+    return baseUrl
+        .get(`/posts/${postId}/replies`)
         .then((response) => {
-            return response.data;
+            return response.data.replies;
+        })
+}
+
+export function replyToAPost(reply_date, reply, post_id, user_id) {
+    return baseUrl
+        .post("/replies", {reply_date, reply, post_id, user_id})
+        .then((response) => {
+            return response;
         })
 }

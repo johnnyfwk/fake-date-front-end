@@ -1,9 +1,6 @@
 import { Link } from "react-router-dom";
 
 export default function PostCard({post}) {
-    const date = new Date(post.post_date).toLocaleDateString();
-    const time = new Date(post.post_date).toLocaleTimeString();
-
     return (
         <div id="post-card">
             <div id="post-card-owner">
@@ -18,7 +15,7 @@ export default function PostCard({post}) {
                 <div>Seeking: {post.gender_of_date}</div>
                 <div>Occasion: {post.occasion}</div>
                 <div>City: {post.city}</div>
-                <div>Date: {post.date}</div>
+                <div>Date: {new Date(post.date).toLocaleDateString()}</div>
                 <div>{post.description}</div>
             </Link>
         </div>
