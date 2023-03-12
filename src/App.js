@@ -9,6 +9,7 @@ import SignUp from "./pages/SignUp";
 import SignIn from "./pages/SignIn";
 import Home from "./pages/Home";
 import Profile from "./pages/Profile";
+import Post from "./pages/Post";
 import CreatePost from "./pages/CreatePost";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
@@ -28,6 +29,7 @@ function App() {
         <Route path="/sign-up" element={<SignUp users={users} setUsers={setUsers} />} />
         <Route path="/home" element={<Home posts={posts} setPosts={setPosts} />} />
         <Route path="/profile/:user_id" element={<Profile users={users} setUsers={setUsers} />} />
+        <Route path="/posts/:post_id" element={<Post />} />
         <Route path="/create-post" element={<CreatePost />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />

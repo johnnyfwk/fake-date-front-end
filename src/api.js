@@ -28,6 +28,14 @@ export function getPosts() {
         })
 }
 
+export function getPostById(postId) {
+    return baseUrl
+        .get(`/posts/${postId}`)
+        .then((response) => {
+            return response.data.post;
+        })
+}
+
 export function createPost(post_date, city, gender_of_date, date, occasion, description, user_id) {
     return baseUrl
         .post("/posts", {post_date, city, gender_of_date, date, occasion, description, user_id})

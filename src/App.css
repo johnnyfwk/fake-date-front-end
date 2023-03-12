@@ -1,3 +1,15 @@
+.error {
+    color: #ff0000;
+}
+
+.success {
+    color: #15ff00
+}
+
+* {
+    text-decoration: none;
+}
+
 img {
     width: 100%;
 }
@@ -11,6 +23,9 @@ footer {
     background: #a5a5a5;
 }
 
+
+
+/***** Header *****/
 header {
     display: flex;
     justify-content: space-between;
@@ -21,38 +36,48 @@ header {
     height: 30px;
     border-radius: 50%;
 }
+/***** Header *****/
 
+
+
+/***** Profile *****/
 #profile-avatar-image {
     max-width: 300px;
 }
+/***** Profile *****/
 
+
+
+/***** Post Cards *****/
 #post-cards {
     display: grid;
     gap: 20px;
 }
+/***** Post Cards *****/
 
+
+/***** Post Card *****/
 .post-card {
     background: #d1f6ff;
+    display: grid;
+    grid-template-columns: 75px auto;
 }
 
-.post-card > img {
+.post-card img {
     width: 50px;
     height: 50px;
     border-radius: 50%;
 }
 
-#post-a-trip-filtered-cities {
-    background: #e2e2e2;
+.post-card-owner {
+    background: #d2ffce;
 }
+/***** Post Card *****/
 
-#post-a-trip-filtered-cities > div {
-    cursor: pointer;
-}
 
-.error {
-    color: #ff0000;
-}
 
-.success {
-    color: #15ff00
+/***** Post *****/
+#post-avatar-image {
+    max-width: 50px;
 }
+/***** Post *****/
