@@ -91,7 +91,7 @@ export default function Cities({setCityInput}) {
                     <option value="St Asaph">St Asaph</option>
                     <option value="St Davids">St Davids</option>
                     <option value="Swansea">Swansea</option>
-                    <option value="Wrexham"></option>
+                    <option value="Wrexham">Wrexham</option>
                 </optgroup>
             </select>
         </div>
