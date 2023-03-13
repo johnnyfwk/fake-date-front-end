@@ -11,6 +11,9 @@ export default function ReplyCard({reply}) {
             </div>
             <div id="reply-card-body">
                 <div>{new Date(reply.reply_date).toLocaleDateString()} {new Date(reply.reply_date).toLocaleTimeString()}</div>
+                {window.location.href.includes("profile")
+                    ? <h3><Link to={`/posts/${reply.post_id}`}>{reply.title}</Link></h3>
+                    : null}
                 <div>{reply.reply}</div>
             </div>
         </div>

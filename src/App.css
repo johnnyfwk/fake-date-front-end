@@ -48,6 +48,15 @@ header {
     border-radius: 50%;
     object-fit: cover;
 }
+
+#profile-tabs {
+    display: flex;
+    gap: 20px;
+}
+
+#profile-tabs > h2 {
+    cursor: pointer;
+}
 /***** Profile *****/
 
 

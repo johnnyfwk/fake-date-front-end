@@ -59,3 +59,19 @@ export function replyToAPost(reply_date, reply, post_id, user_id) {
             return response;
         })
 }
+
+export function getPostsByUserId(userId) {
+    return baseUrl
+        .get(`/users/${userId}/posts`)
+        .then((response) => {
+            return response.data.posts;
+        })
+}
+
+export function getRepliesByUserId(userId) {
+    return baseUrl
+        .get(`/users/${userId}/replies`)
+        .then((response) => {
+            return response.data.replies;
+        })
+}
