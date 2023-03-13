@@ -75,3 +75,19 @@ export function getRepliesByUserId(userId) {
             return response.data.replies;
         })
 }
+
+export function editReplyById(replyId, reply) {
+    return baseUrl
+        .patch(`/replies/${replyId}`, {reply})
+        .then((response) => {
+            return response;
+        })
+}
+
+export function deleteReplyById(replyId) {
+    return baseUrl
+        .delete(`/replies/${replyId}`)
+        .then((response) => {
+            return response;
+        })
+}

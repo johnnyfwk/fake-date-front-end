@@ -21,6 +21,8 @@ export default function Profile({users, setUsers}) {
     const [isUsersRepliesLoading, setIsUsersRepliesLoading] = useState(true);
     const [isGetUsersRepliesSuccessful, setIsGetUsersRepliesSuccessful] = useState(null);
 
+    const [isReplyUpdatedSuccessfully, setIsReplyUpdatedSuccessfully] = useState(null);
+
     const [visibleTab, setVisibleTab] = useState("Posts");
 
     const navigate = useNavigate();
@@ -96,7 +98,7 @@ export default function Profile({users, setUsers}) {
             <h1>{user.username}</h1>
 
             <section id="profile-info">
-                <img src={user.avatar_url} id="profile-avatar-image"></img>
+                <img src={user.avatar_url} alt={user.avatar_url} id="profile-avatar-image"></img>
                 <div>Join date: {new Date(user.join_date).toLocaleDateString()}</div>
                 <div>Gender: {user.gender}</div>
             </section>
@@ -114,7 +116,7 @@ export default function Profile({users, setUsers}) {
                     {isGetUsersPostsSuccessful === null || isGetUsersPostsSuccessful === true
                         ? null
                         : <p className="error">Posts could not be loaded.</p>}
-                    {usersPosts?.length == 0 ? <p>No posts created.</p> : null}
+                    {usersPosts?.length === 0 ? <p>No posts created.</p> : null}
                     
                     <div id="post-cards">
                         {usersPosts
@@ -132,12 +134,14 @@ export default function Profile({users, setUsers}) {
                     {isGetUsersRepliesSuccessful === null || isGetUsersRepliesSuccessful === true
                         ? null
                         : <p className="error">Replies could not be loaded.</p>}
-                    {usersReplies?.length == 0 ? <p>No replies made.</p> : null}
+                    {usersReplies?.length === 0 ? <p>No replies made.</p> : null}
                     
                     <div id="reply-cards">
                         {usersReplies
                             ? usersReplies.map((reply) => {
-                                return <ReplyCard key={reply.reply_id} reply={reply} />
+                                return <ReplyCard
+                                    key={reply.reply_id}
+                                    reply={reply}/>
                             })
                             : null}
                     </div>
