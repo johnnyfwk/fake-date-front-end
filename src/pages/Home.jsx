@@ -36,9 +36,11 @@ export default function Home({posts, setPosts}) {
             <p>Browse posts by other users who are looking for a fake date.</p>
 
             <div id="post-cards">
-                {posts.map((post) => {
-                    return <PostCard key={post.post_id} post={post} />
-                })}
+                {posts
+                    ? posts.map((post) => {
+                        return <PostCard key={post.post_id} post={post} />
+                      })
+                    : null}
             </div>            
         </main>
     )
