@@ -1,20 +1,141 @@
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import * as api from "../api";
 
-export default function ReplyCard({reply}) {
+export default function ReplyCard({reply, userLoggedIn, setIsReplyUpdatedSuccessfully, setIsReplyDeletedSuccessfully}) {
+    const [isEditReplyButtonVisible, setIsEditReplyButtonVisible] = useState(true);
+    const [isDeleteReplyButtonVisible, setIsDeleteReplyButtonVisible] = useState(true);
+    const [isCancelEditReplyButtonVisible, setIsCancelEditReplyButtonVisible] = useState(false);
+    const [isUpdateReplyButtonVisible, setIsUpdateReplyButtonVisible] = useState(false);
+    const [isEditReplyInputVisible, setIsEditReplyInputVisible] = useState(false);
+    const [areDeleteReplyConfirmationButtonsVisible, setAreDeleteReplyConfirmationButtonsVisible] = useState(false);
+    const [editReplyInput, setEditReplyInput] = useState("");
+    
+    function onClickEditReplyButton() {
+        setIsEditReplyButtonVisible(false);
+        setIsDeleteReplyButtonVisible(false);
+        setAreDeleteReplyConfirmationButtonsVisible(false);
+        setIsEditReplyInputVisible(true);
+        setIsCancelEditReplyButtonVisible(true);
+        setIsUpdateReplyButtonVisible(true);
+        setEditReplyInput(reply.reply);
+    }
+
+    function onClickDeleteReplyButton() {
+        setIsEditReplyButtonVisible(false);
+        setIsDeleteReplyButtonVisible(false);
+        setAreDeleteReplyConfirmationButtonsVisible(true);
+        setIsEditReplyInputVisible(false);
+        setIsCancelEditReplyButtonVisible(false);
+        setIsUpdateReplyButtonVisible(false);
+    }
+
+    function onClickDeleteReplyNo() {
+        setIsEditReplyButtonVisible(true);
+        setIsDeleteReplyButtonVisible(true);
+        setAreDeleteReplyConfirmationButtonsVisible(false);
+        setIsEditReplyInputVisible(false);
+        setIsCancelEditReplyButtonVisible(false);
+        setIsUpdateReplyButtonVisible(false);
+    }
+
+    function onClickDeleteReplyYes() {
+        setIsEditReplyButtonVisible(true);
+        setIsDeleteReplyButtonVisible(true);
+        setAreDeleteReplyConfirmationButtonsVisible(false);
+        setIsEditReplyInputVisible(false);
+        setIsCancelEditReplyButtonVisible(false);
+        setIsUpdateReplyButtonVisible(false);
+        setIsReplyDeletedSuccessfully(null);
+        api.deleteReplyById(reply.reply_id)
+            .then((response) => {
+                setIsReplyDeletedSuccessfully(true);
+                setTimeout(() => setIsReplyDeletedSuccessfully(null), 3000);
+            })
+            .catch((error) => {
+                setIsReplyDeletedSuccessfully(false);
+                setTimeout(() => setIsReplyDeletedSuccessfully(null), 3000);
+            })
+    }
+
+    function onClickCancelEditReplyButton() {
+        setIsEditReplyButtonVisible(true);
+        setIsDeleteReplyButtonVisible(true);
+        setAreDeleteReplyConfirmationButtonsVisible(false);
+        setIsEditReplyInputVisible(false);
+        setIsCancelEditReplyButtonVisible(false);
+        setIsUpdateReplyButtonVisible(false);
+    }
+
+    function onClickUpdateReplyButton() {
+        setIsEditReplyButtonVisible(true);
+        setIsDeleteReplyButtonVisible(true);
+        setAreDeleteReplyConfirmationButtonsVisible(false);
+        setIsEditReplyInputVisible(false);
+        setIsCancelEditReplyButtonVisible(false);
+        setIsUpdateReplyButtonVisible(false);
+        setIsReplyUpdatedSuccessfully(null);
+        api.editReplyById(reply.reply_id, editReplyInput)
+            .then((response) => {
+                setIsReplyUpdatedSuccessfully(true);
+                setTimeout(() => setIsReplyUpdatedSuccessfully(null), 3000);
+            })
+            .catch((error) => {
+                setIsReplyUpdatedSuccessfully(false);
+                setTimeout(() => setIsReplyUpdatedSuccessfully(null), 3000);
+            })
+    }
+
+    function handleEditReplyInput(event) {
+        setEditReplyInput(event.target.value);
+    }
+
     return (
         <div id="reply-card">
             <div id="reply-card-owner">
                 <Link to={`/profile/${reply.user_id}`}>
-                    <img src={reply.avatar_url}></img>
+                    <img src={reply.avatar_url} alt={reply.avatar_url}></img>
                 </Link>
                 <Link to={`/profile/${reply.user_id}`}>{reply.username}</Link>
             </div>
+
             <div id="reply-card-body">
                 <div>{new Date(reply.reply_date).toLocaleDateString()} {new Date(reply.reply_date).toLocaleTimeString()}</div>
+
                 {window.location.href.includes("profile")
                     ? <h3><Link to={`/posts/${reply.post_id}`}>{reply.title}</Link></h3>
                     : null}
-                <div>{reply.reply}</div>
+                
+                {isEditReplyInputVisible
+                    ? <textarea
+                        value={editReplyInput}
+                        onChange={handleEditReplyInput}
+                      ></textarea>
+                    : <div>{reply.reply}</div>}                            
+                
+                {userLoggedIn?.user_id === reply.user_id && isEditReplyButtonVisible
+                    ? <button onClick={onClickEditReplyButton}>Edit</button>
+                    : null}
+
+                {userLoggedIn?.user_id === reply.user_id && isCancelEditReplyButtonVisible
+                    ? <button onClick={onClickCancelEditReplyButton}>Cancel</button>
+                    : null}
+
+                {userLoggedIn?.user_id === reply.user_id && isUpdateReplyButtonVisible
+                    ? <button onClick={onClickUpdateReplyButton} disabled={!editReplyInput}>Update</button>
+                    : null}
+                
+                {userLoggedIn?.user_id === reply.user_id && isDeleteReplyButtonVisible
+                    ? <button onClick={onClickDeleteReplyButton}>Delete</button>
+                    : null}
+                
+                {userLoggedIn?.user_id === reply.user_id && areDeleteReplyConfirmationButtonsVisible
+                    ? <div>
+                        <span className="error">Delete reply?</span>
+                        <button onClick={onClickDeleteReplyNo}>No</button>
+                        <button onClick={onClickDeleteReplyYes}>Yes</button>
+                      </div>
+                    : null}
             </div>
         </div>
     )

@@ -16,6 +16,8 @@ export default function Post() {
     const [replies, setReplies] = useState([]);
     const [replyInput, setReplyInput] = useState("");
     const [isReplyPostedSuccessfully, setIsReplyPostedSuccessfully] = useState(null);
+    const [isReplyUpdatedSuccessfully, setIsReplyUpdatedSuccessfully] = useState(null);
+    const [isReplyDeletedSuccessfully, setIsReplyDeletedSuccessfully] = useState(null);
 
     const navigate = useNavigate();
 
@@ -53,7 +55,7 @@ export default function Post() {
                 setIsRepliesLoading(false);
                 setIsRepliesLoadedSuccessfully(false);
             })
-    }, [isReplyPostedSuccessfully])
+    }, [isReplyPostedSuccessfully, isReplyUpdatedSuccessfully, isReplyDeletedSuccessfully])
 
     function handleSubmit(event) {
         event.preventDefault();
@@ -86,7 +88,7 @@ export default function Post() {
         <main>
             <h1>{post.title}</h1>
             <Link to={`/profile/${post.user_id}`}>
-                <img src={post.avatar_url} id="post-avatar-image"/>
+                <img src={post.avatar_url} alt={post.avatar_url} id="post-avatar-image"/>
             </Link>            
             <Link to={`/profile/${post.user_id}`}>{post.username}</Link>
             <div>Posted: {new Date(post.post_date).toLocaleDateString()} {new Date(post.post_date).toLocaleTimeString()}</div>
@@ -101,22 +103,26 @@ export default function Post() {
             {isReplyPostedSuccessfully === null
                 ? null
                 : isReplyPostedSuccessfully === true
-                    ? <p className="success">Your reply was posted!</p>
+                    ? <p className="success">Your reply was posted.</p>
                     : <p className="error">Your reply could not be posted.</p>}
+            
+            {userLoggedIn.gender === post.gender_of_date || post.gender_of_date === "Either"
+                ? <form onSubmit={handleSubmit}>
+                    <label htmlFor="post-reply"></label>
+                    <textarea
+                        id="post-reply"
+                        name="post-reply"
+                        maxLength="300"
+                        value={replyInput}
+                        onChange={handleReplyInput}
+                    ></textarea>
+                    <span>{replyInput.length}/300</span>
 
-            <form onSubmit={handleSubmit}>
-                <label htmlFor="post-reply"></label>
-                <textarea
-                    id="post-reply"
-                    name="post-reply"
-                    maxLength="300"
-                    value={replyInput}
-                    onChange={handleReplyInput}
-                ></textarea>
-                <span>{replyInput.length}/300</span>
+                    <input type="submit" value="Send Reply" disabled={!replyInput}></input>
+                  </form>
+                : <p className="error">This user is looking for a {post.gender_of_date} date.</p>}
 
-                <input type="submit" value="Send Reply" disabled={!replyInput}></input>
-            </form>
+            
 
             <h2>Replies ({replies.length})</h2>
 
@@ -124,9 +130,27 @@ export default function Post() {
             {replies.length ? null : <p>Be the first to reply to this post.</p>}
             {isRepliesLoadedSuccessfully === false ? <p className="error">Replies could not be loaded.</p> : null}
 
+            {isReplyUpdatedSuccessfully === null
+                ? null
+                : isReplyUpdatedSuccessfully === true
+                    ? <p className="success" id="update-reply-success-message">Reply was updated.</p>
+                    : <p className="error" id="update-reply-error-message">Reply could not be updated.</p>}
+            
+            {isReplyDeletedSuccessfully === null
+                ? null
+                : isReplyDeletedSuccessfully === true
+                    ? <p className="success" id="delete-reply-success-message">Reply was deleted.</p>
+                    : <p className="error" id="delete-reply-error-message">Reply could not be deleted.</p>}
+
             <div id="reply-cards">
                 {replies.map((reply) => {
-                    return <ReplyCard key={reply.reply_id} reply={reply} />
+                    return <ReplyCard
+                        key={reply.reply_id}
+                        reply={reply}
+                        userLoggedIn={userLoggedIn}
+                        setIsReplyUpdatedSuccessfully={setIsReplyUpdatedSuccessfully}
+                        setIsReplyDeletedSuccessfully={setIsReplyDeletedSuccessfully}
+                    />
                 })}
             </div>
         </main>

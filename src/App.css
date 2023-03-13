@@ -3,7 +3,7 @@
 }
 
 .success {
-    color: #15ff00
+    color: #06b600
 }
 
 * {
@@ -99,6 +99,19 @@ header {
     border-radius: 50%;
     object-fit: cover;
 }
+
+#update-reply-success-message,
+#update-reply-error-message,
+#delete-reply-success-message,
+#delete-reply-error-message {
+    background: #f0f0f0;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    padding: 20px;
+    text-align: center;
+    transform: translate(-50%, -50%)
+}
 /***** Post *****/
 
 
@@ -111,7 +124,7 @@ header {
 /***** Reply Cards *****/
 /***** Reply Card *****/
 #reply-card {
-    background: #c1deff;
+    background: #d1d1d1;
     display: grid;
     grid-template-columns: 75px auto;
 }
