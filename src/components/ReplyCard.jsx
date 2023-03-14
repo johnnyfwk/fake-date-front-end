@@ -99,45 +99,47 @@ export default function ReplyCard({reply, userLoggedIn, setIsReplyUpdatedSuccess
                 <Link to={`/profile/${reply.user_id}`}>{reply.username}</Link>
             </div>
 
-            <div id="reply-card-body">
-                <div>{new Date(reply.reply_date).toLocaleDateString()} {new Date(reply.reply_date).toLocaleTimeString()}</div>
+            <div id="reply-card-body-and-buttons">
+                <div id="reply-card-body">
+                    <div>{new Date(reply.reply_date).toLocaleDateString()} {new Date(reply.reply_date).toLocaleTimeString()}</div>
 
-                {window.location.href.includes("profile")
-                    ? <h3><Link to={`/posts/${reply.post_id}`}>{reply.title}</Link></h3>
-                    : null}
-                
-                {isEditReplyInputVisible
-                    ? <textarea
-                        value={editReplyInput}
-                        onChange={onChangeEditReplyInput}
-                      ></textarea>
-                    : <div>{reply.reply}</div>}                            
-            </div>
+                    {window.location.href.includes("profile")
+                        ? <h3><Link to={`/posts/${reply.post_id}`}>{reply.title}</Link></h3>
+                        : null}
+                    
+                    {isEditReplyInputVisible
+                        ? <textarea
+                            value={editReplyInput}
+                            onChange={onChangeEditReplyInput}
+                        ></textarea>
+                        : <div>{reply.reply}</div>}                            
+                </div>
 
-            <div id="reply-card-buttons">
-                {userLoggedIn?.user_id === reply.user_id && isEditReplyButtonVisible
-                    ? <button onClick={onClickEditReplyButton}>Edit</button>
-                    : null}
+                <div id="reply-card-buttons">
+                    {userLoggedIn?.user_id === reply.user_id && isEditReplyButtonVisible
+                        ? <button onClick={onClickEditReplyButton}>Edit</button>
+                        : null}
 
-                {userLoggedIn?.user_id === reply.user_id && isCancelEditReplyButtonVisible
-                    ? <button onClick={onClickCancelEditReplyButton}>Cancel</button>
-                    : null}
+                    {userLoggedIn?.user_id === reply.user_id && isCancelEditReplyButtonVisible
+                        ? <button onClick={onClickCancelEditReplyButton}>Cancel</button>
+                        : null}
 
-                {userLoggedIn?.user_id === reply.user_id && isUpdateReplyButtonVisible
-                    ? <button onClick={onClickUpdateReplyButton} disabled={!editReplyInput}>Update</button>
-                    : null}
-                
-                {userLoggedIn?.user_id === reply.user_id && isDeleteReplyButtonVisible
-                    ? <button onClick={onClickDeleteReplyButton}>Delete</button>
-                    : null}
-                
-                {userLoggedIn?.user_id === reply.user_id && areDeleteReplyConfirmationButtonsVisible
-                    ? <div>
-                        <span className="confirm">Delete reply?</span>
-                        <button onClick={onClickDeleteReplyNo}>No</button>
-                        <button onClick={onClickDeleteReplyYes}>Yes</button>
-                    </div>
-                    : null}
+                    {userLoggedIn?.user_id === reply.user_id && isUpdateReplyButtonVisible
+                        ? <button onClick={onClickUpdateReplyButton} disabled={!editReplyInput}>Update</button>
+                        : null}
+                    
+                    {userLoggedIn?.user_id === reply.user_id && isDeleteReplyButtonVisible
+                        ? <button onClick={onClickDeleteReplyButton}>Delete</button>
+                        : null}
+                    
+                    {userLoggedIn?.user_id === reply.user_id && areDeleteReplyConfirmationButtonsVisible
+                        ? <div>
+                            <span className="confirm">Delete reply?</span>
+                            <button onClick={onClickDeleteReplyNo}>No</button>
+                            <button onClick={onClickDeleteReplyYes}>Yes</button>
+                        </div>
+                        : null}
+                </div>
             </div>
         </div>
     )
