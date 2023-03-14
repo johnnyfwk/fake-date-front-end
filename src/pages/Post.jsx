@@ -16,7 +16,7 @@ export default function Post() {
 
     const [isPostLoading, setIsPostLoading] = useState(true);
     const [isPostLoadedSuccessfully, setIsPostLoadedSuccessfully] = useState(null);
-    const [post, setPost] = useState({});
+    const [post, setPost] = useState({});    
     const [isRepliesLoading, setIsRepliesLoading] = useState(true);
     const [isRepliesLoadedSuccessfully, setIsRepliesLoadedSuccessfully] = useState(null);
     const [replies, setReplies] = useState([]);
@@ -40,6 +40,8 @@ export default function Post() {
     const [isDateValid, setIsDateValid] = useState(true);    
     const [descriptionInput, setDescriptionInput] = useState("");
     const [isPostUpdatedSuccessfully, setIsPostUpdatedSuccessfully] = useState(null);
+    const [isPostDeletedSuccessfully, setIsPostDeletedSuccessfully] = useState(null);
+    const [areRepliesByPostIdDeletedSuccessfully, setAreRepliesByPostIdDeletedSuccessfully] = useState(null);
     
     const navigate = useNavigate();
 
@@ -120,6 +122,7 @@ export default function Post() {
         setIsCancelEditPostButtonVisible(false);
         setIsUpdatePostButtonVisible(false);
         setIsDeletePostConfirmationMessageAndButtonsVisible(true);
+        setIsPostDeletedSuccessfully(null);
     }
 
     function onClickCancelEditPostButton() {
@@ -130,7 +133,6 @@ export default function Post() {
         setIsUpdatePostButtonVisible(false);
         setIsDeletePostConfirmationMessageAndButtonsVisible(false);
         setIsDateValid(true);
-
     }
 
     function onClickUpdatePostButton() {
@@ -167,6 +169,23 @@ export default function Post() {
         setIsCancelEditPostButtonVisible(false);
         setIsUpdatePostButtonVisible(false);
         setIsDeletePostConfirmationMessageAndButtonsVisible(false);
+        setAreRepliesByPostIdDeletedSuccessfully(null);
+        setIsPostDeletedSuccessfully(null);
+        api.deleteRepliesByPostId(post_id)
+            .then((response) => {
+                setAreRepliesByPostIdDeletedSuccessfully(true);
+                return api.deletePostById(post_id);
+            })
+            .then((response) => {
+                setIsPostDeletedSuccessfully(true);
+                navigate("/home");
+            })
+            .catch((error) => {
+                setAreRepliesByPostIdDeletedSuccessfully(false);
+                setIsPostDeletedSuccessfully(false);
+                setTimeout(() => setAreRepliesByPostIdDeletedSuccessfully(null), 3000);
+                setTimeout(() => setIsPostDeletedSuccessfully(null), 3000);
+            })
     }
 
     if (isPostLoading) {
@@ -181,6 +200,24 @@ export default function Post() {
         <main>
             <h1>{post.title}</h1>
 
+            {isPostUpdatedSuccessfully === null
+                ? null
+                : isPostUpdatedSuccessfully === true
+                    ? <p className="success">Post has been updated.</p>
+                    : <p className="error">Post could not be updated.</p>}
+
+            {isPostDeletedSuccessfully === null
+                ? null
+                : isPostDeletedSuccessfully === true
+                    ? <p className="success">Post has been deleted.</p>
+                    : <p className="error">Post could not be deleted.</p>}
+            
+            {areRepliesByPostIdDeletedSuccessfully === null
+                ? null
+                : areRepliesByPostIdDeletedSuccessfully === true
+                    ? <p className="success">Replies for this post have been deleted.</p>
+                    : <p className="error">Replies for this post could not be deleted.</p>}
+
             <section id="post-info">
                 <div>
                     <Link to={`/profile/${post.user_id}`}>
@@ -188,12 +225,6 @@ export default function Post() {
                     </Link>            
                     <Link to={`/profile/${post.user_id}`}>{post.username}</Link>
                 </div>
-
-                {isPostUpdatedSuccessfully === null
-                    ? null
-                    : isPostUpdatedSuccessfully === true
-                        ? <p className="success">Post has been updated.</p>
-                        : <p className="error">Post could not be updated.</p>}
 
                 {isPostBeingEdited
                     ? <div>

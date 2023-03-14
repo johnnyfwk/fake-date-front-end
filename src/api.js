@@ -4,19 +4,12 @@ const baseUrl = axios.create({
     baseURL: "http://localhost:9090/api"
 });
 
+///////////// GET
 export function getUsers() {
     return baseUrl
         .get("/users")
         .then((response) => {
             return response.data.users;
-        })
-}
-
-export function addUser(username, password, gender, avatar_url, join_date) {
-    return baseUrl
-        .post("/users", {username, password, gender, avatar_url, join_date})
-        .then((response) => {
-            return response.data.user;
         })
 }
 
@@ -36,11 +29,11 @@ export function getPostById(postId) {
         })
 }
 
-export function createPost(post_date, title, city, gender_of_date, date, occasion, description, user_id) {
+export function getPostsByUserId(userId) {
     return baseUrl
-        .post("/posts", {post_date, title, city, gender_of_date, date, occasion, description, user_id})
+        .get(`/users/${userId}/posts`)
         .then((response) => {
-            return response.data.post;
+            return response.data.posts;
         })
 }
 
@@ -52,6 +45,34 @@ export function getRepliesByPostId(postId) {
         })
 }
 
+export function getRepliesByUserId(userId) {
+    return baseUrl
+        .get(`/users/${userId}/replies`)
+        .then((response) => {
+            return response.data.replies;
+        })
+}
+///////////// GET
+
+
+
+///////////// POST
+export function addUser(username, password, gender, avatar_url, join_date) {
+    return baseUrl
+        .post("/users", {username, password, gender, avatar_url, join_date})
+        .then((response) => {
+            return response.data.user;
+        })
+}
+
+export function createPost(post_date, title, city, gender_of_date, date, occasion, description, user_id) {
+    return baseUrl
+        .post("/posts", {post_date, title, city, gender_of_date, date, occasion, description, user_id})
+        .then((response) => {
+            return response.data.post;
+        })
+}
+
 export function replyToAPost(reply_date, reply, post_id, user_id) {
     return baseUrl
         .post("/replies", {reply_date, reply, post_id, user_id})
@@ -59,20 +80,16 @@ export function replyToAPost(reply_date, reply, post_id, user_id) {
             return response;
         })
 }
+///////////// POST
 
-export function getPostsByUserId(userId) {
-    return baseUrl
-        .get(`/users/${userId}/posts`)
-        .then((response) => {
-            return response.data.posts;
-        })
-}
 
-export function getRepliesByUserId(userId) {
+
+///////////// PATCH
+export function editPostById(postId, title, city, gender_of_date, date, occasion, description) {
     return baseUrl
-        .get(`/users/${userId}/replies`)
+        .patch(`/posts/${postId}`, {title, city, gender_of_date, date, occasion, description})
         .then((response) => {
-            return response.data.replies;
+            return response;
         })
 }
 
@@ -83,7 +100,11 @@ export function editReplyById(replyId, reply) {
             return response;
         })
 }
+///////////// PATCH
 
+
+
+///////////// DELETE
 export function deleteReplyById(replyId) {
     return baseUrl
         .delete(`/replies/${replyId}`)
@@ -92,10 +113,19 @@ export function deleteReplyById(replyId) {
         })
 }
 
-export function editPostById(postId, title, city, gender_of_date, date, occasion, description) {
+export function deletePostById(postId) {
     return baseUrl
-        .patch(`/posts/${postId}`, {title, city, gender_of_date, date, occasion, description})
+        .delete(`/posts/${postId}`)
         .then((response) => {
             return response;
         })
 }
+
+export function deleteRepliesByPostId(postId) {
+    return baseUrl
+        .delete(`/posts/${postId}/replies`)
+        .then((response) => {
+            return response;
+        })
+}
+///////////// DELETE
