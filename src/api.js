@@ -13,6 +13,14 @@ export function getUsers() {
         })
 }
 
+export function getUserById(userId) {
+    return baseUrl
+        .get(`/users/${userId}`)
+        .then((response) => {
+            return response.data.user;
+        })
+}
+
 export function getPosts() {
     return baseUrl
         .get("/posts")

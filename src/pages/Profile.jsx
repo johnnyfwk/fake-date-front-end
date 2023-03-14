@@ -7,12 +7,12 @@ import ReplyCard from "../components/ReplyCard";
 import Gender from "../components/Gender";
 import Avatar from "../components/Avatar";
 
-export default function Profile({users, setUsers}) {
+export default function Profile() {
     const {userLoggedIn, setUserLoggedIn} = useContext(UserContext);
     const {user_id} = useParams();
     
     const [isLoading, setIsLoading] = useState(true);
-    const [isGetUsersSuccessful, setIsGetUsersSuccessful] = useState(null);
+    const [isGetUserInfoSuccessful, setIsGetUserInfoSuccessful] = useState(null);
     const [user, setUser] = useState({});
 
     const [usersPosts, setUsersPosts] = useState();
@@ -44,22 +44,19 @@ export default function Profile({users, setUsers}) {
             navigate("/sign-in");
         }
     }, [])
-    
+
     useEffect(() => {
         setIsLoading(true);
-        setIsGetUsersSuccessful(null);
-        api.getUsers()
+        setIsGetUserInfoSuccessful(null);
+        api.getUserById(user_id)
             .then((response) => {
                 setIsLoading(false);
-                setIsGetUsersSuccessful(true);
-                const userDetails = response.filter((user) => {
-                    return user.user_id === parseInt(user_id);
-                })
-                setUser(userDetails[0]);
+                setIsGetUserInfoSuccessful(true);
+                setUser(response);
             })
             .catch((error) => {
                 setIsLoading(false);
-                setIsGetUsersSuccessful(false);
+                setIsGetUserInfoSuccessful(false);
             })
     }, [user_id, isProfileUpdatedSuccessfully])
 
@@ -191,7 +188,7 @@ export default function Profile({users, setUsers}) {
         return <p>Loading...</p>
     }
 
-    if (isGetUsersSuccessful === false) {
+    if (isGetUserInfoSuccessful === false) {
         return <p className="error">User information could not be loaded.</p>
     }
 
@@ -202,15 +199,17 @@ export default function Profile({users, setUsers}) {
             <section id="profile-info">
                 <img src={user.avatar_url} alt={user.avatar_url} id="profile-avatar-image"></img>
 
-                {userLoggedIn.user_id === user.user_id && isAvatarUrlValid === false
+                {userLoggedIn.user_id === parseInt(user_id) && isAvatarUrlValid === false
                     ? <p className="error">Please enter a valid image URL.</p>
                     : null}
                 
-                {userLoggedIn.user_id === user.user_id && isProfileUpdatedSuccessfully === null
+                {userLoggedIn.user_id !== parseInt(user_id)
                     ? null
-                    : userLoggedIn.user_id === user.user_id && isProfileUpdatedSuccessfully === true
-                        ? <p className="success">Profile has been updated.</p>
-                        : <p className="error">Profile could not be updated.</p>}
+                    : isProfileUpdatedSuccessfully === null
+                        ? null
+                        : isProfileUpdatedSuccessfully === true
+                            ? <p className="success">Profile has been updated.</p>
+                            : <p className="error">Profile could not be updated.</p>}
 
                 <div>Join date: {new Date(user.join_date).toLocaleDateString()}</div>
 
