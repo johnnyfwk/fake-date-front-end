@@ -13,6 +13,7 @@ import Post from "./pages/Post";
 import CreatePost from "./pages/CreatePost";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
+import Error404 from "./pages/Error404";
 
 
 function App() {
@@ -33,6 +34,7 @@ function App() {
         <Route path="/create-post" element={<CreatePost />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="*" element={<Error404 />} />
       </Routes>
       <Footer />
     </div>
