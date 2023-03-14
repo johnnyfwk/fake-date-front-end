@@ -91,3 +91,11 @@ export function deleteReplyById(replyId) {
             return response;
         })
 }
+
+export function editPostById(postId, title, city, gender_of_date, date, occasion, description) {
+    return baseUrl
+        .patch(`/posts/${postId}`, {title, city, gender_of_date, date, occasion, description})
+        .then((response) => {
+            return response;
+        })
+}

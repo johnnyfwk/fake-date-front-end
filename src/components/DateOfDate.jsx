@@ -1,4 +1,4 @@
-export default function DateOfDate({setDateInput,setIsDateValid}) {
+export default function DateOfDate({dateInput, setDateInput, setIsDateValid}) {
 
     function handleDateInput(event) {
         const todaysDate = new Date().toLocaleDateString();
@@ -14,7 +14,7 @@ export default function DateOfDate({setDateInput,setIsDateValid}) {
     return (
         <div>
             <label htmlFor="date">Date:</label>
-            <input type="date" id="date" name="date" onChange={handleDateInput}></input>
+            <input type="date" id="date" name="date" defaultValue={dateInput} onChange={handleDateInput}></input>
         </div>
     )
 }

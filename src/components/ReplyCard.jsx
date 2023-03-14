@@ -86,7 +86,7 @@ export default function ReplyCard({reply, userLoggedIn, setIsReplyUpdatedSuccess
             })
     }
 
-    function handleEditReplyInput(event) {
+    function onChangeEditReplyInput(event) {
         setEditReplyInput(event.target.value);
     }
 
@@ -109,10 +109,12 @@ export default function ReplyCard({reply, userLoggedIn, setIsReplyUpdatedSuccess
                 {isEditReplyInputVisible
                     ? <textarea
                         value={editReplyInput}
-                        onChange={handleEditReplyInput}
+                        onChange={onChangeEditReplyInput}
                       ></textarea>
                     : <div>{reply.reply}</div>}                            
-                
+            </div>
+
+            <div id="reply-card-buttons">
                 {userLoggedIn?.user_id === reply.user_id && isEditReplyButtonVisible
                     ? <button onClick={onClickEditReplyButton}>Edit</button>
                     : null}
@@ -131,10 +133,10 @@ export default function ReplyCard({reply, userLoggedIn, setIsReplyUpdatedSuccess
                 
                 {userLoggedIn?.user_id === reply.user_id && areDeleteReplyConfirmationButtonsVisible
                     ? <div>
-                        <span className="error">Delete reply?</span>
+                        <span className="confirm">Delete reply?</span>
                         <button onClick={onClickDeleteReplyNo}>No</button>
                         <button onClick={onClickDeleteReplyYes}>Yes</button>
-                      </div>
+                    </div>
                     : null}
             </div>
         </div>

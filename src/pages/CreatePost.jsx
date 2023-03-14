@@ -13,11 +13,11 @@ export default function CreatePost() {
     const {userLoggedIn, setUserLoggedIn} = useContext(UserContext);
 
     const [titleInput, setTitleInput] = useState("");
-    const [cityInput, setCityInput] = useState("");
-    const [genderOfDateInput, setGenderOfDateInput] = useState("");
+    const [cityInput, setCityInput] = useState("default");
+    const [genderOfDateInput, setGenderOfDateInput] = useState("default");
     const [dateInput, setDateInput] = useState("");
     const [isDateValid, setIsDateValid] = useState(null);
-    const [occasionInput, setOccasionInput] = useState("");
+    const [occasionInput, setOccasionInput] = useState("default");
     const [descriptionInput, setDescriptionInput] = useState("");
     const [isPostCreatedSuccessfully, setIsPostCreatedSuccessfully] = useState(null);
 
@@ -60,12 +60,12 @@ export default function CreatePost() {
 
             <form onSubmit={handleSubmit}>
                 <Title titleInput={titleInput} setTitleInput={setTitleInput} />
-                <Cities setCityInput={setCityInput} />
-                <Gender setGenderOfDateInput={setGenderOfDateInput} />
-                <DateOfDate setDateInput={setDateInput} setIsDateValid={setIsDateValid} />
-                <Occasion setOccasionInput={setOccasionInput} />
+                <Gender genderOfDateInput={genderOfDateInput} setGenderOfDateInput={setGenderOfDateInput} />
+                <Cities cityInput={cityInput} setCityInput={setCityInput} />
+                <Occasion occasionInput={occasionInput} setOccasionInput={setOccasionInput} />            
+                <DateOfDate dateInput={dateInput} setDateInput={setDateInput} setIsDateValid={setIsDateValid} />                
                 <Description descriptionInput={descriptionInput} setDescriptionInput={setDescriptionInput}/>
-                <input type="submit" value="Submit" disabled={!cityInput || !genderOfDateInput || !dateInput || !isDateValid || !occasionInput || !descriptionInput}></input>
+                <input type="submit" value="Submit" disabled={!titleInput || !cityInput || !genderOfDateInput || !dateInput || !isDateValid || !occasionInput || !descriptionInput}></input>
             </form>
         </main>
     )

@@ -21,8 +21,6 @@ export default function Profile({users, setUsers}) {
     const [isUsersRepliesLoading, setIsUsersRepliesLoading] = useState(true);
     const [isGetUsersRepliesSuccessful, setIsGetUsersRepliesSuccessful] = useState(null);
 
-    const [isReplyUpdatedSuccessfully, setIsReplyUpdatedSuccessfully] = useState(null);
-
     const [visibleTab, setVisibleTab] = useState("Posts");
 
     const navigate = useNavigate();
