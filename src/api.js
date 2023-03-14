@@ -100,6 +100,14 @@ export function editReplyById(replyId, reply) {
             return response;
         })
 }
+
+export function editProfileById(userId, gender, avatar_url) {
+    return baseUrl
+        .patch(`/users/${userId}`, {gender, avatar_url})
+        .then((response) => {
+            return response;
+        })
+}
 ///////////// PATCH
 
 

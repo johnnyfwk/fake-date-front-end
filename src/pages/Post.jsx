@@ -6,7 +6,7 @@ import ReplyCard from "../components/ReplyCard";
 import Title from "../components/Title";
 import Cities from "../components/Cities";
 import DateOfDate from "../components/DateOfDate";
-import Gender from "../components/Gender";
+import GenderOfDate from "../components/GenderOfDate";
 import Occasion from "../components/Occasion";
 import Description from "../components/Description";
 
@@ -233,7 +233,7 @@ export default function Post() {
                             : <p className="error">Please select a date that is the same as or after today's date.</p>}
 
                         <Title titleInput={titleInput} setTitleInput={setTitleInput} />
-                        <Gender genderOfDateInput={genderOfDateInput} setGenderOfDateInput={setGenderOfDateInput} />
+                        <GenderOfDate genderOfDateInput={genderOfDateInput} setGenderOfDateInput={setGenderOfDateInput} />
                         <Cities cityInput={cityInput} setCityInput={setCityInput} />
                         <Occasion occasionInput={occasionInput} setOccasionInput={setOccasionInput} />
                         <DateOfDate dateInput={dateInput} setDateInput={setDateInput} setIsDateValid={setIsDateValid} />                        

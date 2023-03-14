@@ -2,6 +2,8 @@ import { useState, useEffect, useContext } from "react";
 import { UserContext } from "../contexts/user";
 import { useNavigate, Link } from "react-router-dom";
 import * as api from "../api";
+import Gender from "../components/Gender";
+import Avatar from "../components/Avatar";
 
 export default function SignUp({users, setUsers}) {
     const {userLoggedIn, setUserLoggedIn} = useContext(UserContext);
@@ -10,11 +12,11 @@ export default function SignUp({users, setUsers}) {
     const [isLoadingUsersSuccessful, setIsLoadingUsersSuccessful] = useState(null);
     const [usernameInput, setUsernameInput] = useState("");
     const [passwordInput, setPasswordInput] = useState("");
-    const [genderInput, setGenderInput] = useState("");
+    const [genderInput, setGenderInput] = useState("default");
     const [avatarUrlInput, setAvatarUrlInput] = useState("");
     const [isUsernameTaken, setIsUsernameTaken] = useState(null);
     const [isUsernameValid, setIsUsernameValid] = useState(null);
-    const [isAvatarUrlValid, setIsAvatarUrlValid] = useState(true);
+    const [isAvatarUrlValid, setIsAvatarUrlValid] = useState(null);
     const [isUserAddedSuccessfully, setIsUserAddedSuccessfully] = useState(null);
 
     const navigate = useNavigate();
@@ -56,7 +58,7 @@ export default function SignUp({users, setUsers}) {
 
     function handleSubmit(event) {
         event.preventDefault();
-        setIsAvatarUrlValid(true);
+        setIsAvatarUrlValid(null);
         setIsUserAddedSuccessfully(null);
         if (avatarUrlInput.length > 0) {
             const avatarUrlIsValid = /([a-z\-_0-9\/\:\.]*\.(jpg|jpeg|png|gif))/i.test(avatarUrlInput);
@@ -95,14 +97,6 @@ export default function SignUp({users, setUsers}) {
 
     function handlePasswordInput(event) {
         setPasswordInput(event.target.value);
-    }
-
-    function handleGenderInput(event) {
-        setGenderInput(event.target.value);
-    }
-
-    function handleAvatarUrlInput(event) {
-        setAvatarUrlInput(event.target.value);
     }
 
     if (isLoading) {
@@ -152,26 +146,13 @@ export default function SignUp({users, setUsers}) {
                     value={passwordInput}
                 ></input>
 
-                <label htmlFor="gender">Gender:</label>
-                <select
-                    id="gender"
-                    name="gender"
-                    defaultValue="default"
-                    onChange={handleGenderInput}>
-                        <option disabled value="default">Select Gender</option>
-                        <option value="Male">Male</option>
-                        <option value="Female">Female</option>
-                </select>
+                <Gender genderInput={genderInput} setGenderInput={setGenderInput}/>
 
-                <label htmlFor="sign-up-avatar-url">Avatar URL (optional):</label>
-                <input
-                    type="text"
-                    id="sign-up-avatar-url"
-                    name="sign-up-avatar-url"
-                    onChange={handleAvatarUrlInput}
-                    value={avatarUrlInput}
-                ></input>
-                {isAvatarUrlValid ? null : <span className="error">Please enter a valid image URL.</span>}
+                <Avatar avatarUrlInput={avatarUrlInput} setAvatarUrlInput={setAvatarUrlInput} setIsAvatarUrlValid={setIsAvatarUrlValid}/>
+
+                {isAvatarUrlValid === false
+                    ? <span className="error">Please enter a valid image URL.</span>
+                    : null}
 
                 <input type="submit" value="Create Account" disabled={!usernameInput || !passwordInput || isUsernameTaken || !isUsernameValid || !genderInput}></input>
             </form>
