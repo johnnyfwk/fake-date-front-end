@@ -101,10 +101,8 @@ export default function ReplyCard({reply, userLoggedIn, setIsReplyUpdatedSuccess
 
             <div id="reply-card-body-and-buttons">
                 <div id="reply-card-body">
-                    <div>{new Date(reply.reply_date).toLocaleDateString()} {new Date(reply.reply_date).toLocaleTimeString()}</div>
-
                     {window.location.href.includes("profile")
-                        ? <h3><Link to={`/posts/${reply.post_id}`}>{reply.title}</Link></h3>
+                        ? <div><Link to={`/posts/${reply.post_id}`} id="reply-card-title">{reply.title}</Link></div>
                         : null}
                     
                     {isEditReplyInputVisible
@@ -112,7 +110,9 @@ export default function ReplyCard({reply, userLoggedIn, setIsReplyUpdatedSuccess
                             value={editReplyInput}
                             onChange={onChangeEditReplyInput}
                         ></textarea>
-                        : <div>{reply.reply}</div>}                            
+                        : <div>{reply.reply}</div>}
+
+                    <div>{new Date(reply.reply_date).toLocaleDateString()} {new Date(reply.reply_date).toLocaleTimeString()}</div>                         
                 </div>
 
                 <div id="reply-card-buttons">

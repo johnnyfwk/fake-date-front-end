@@ -33,8 +33,8 @@ header {
 }
 
 #log-out-and-user-profile-links img {
-    width: 30px;
-    height: 30px;
+    max-width: 30px;
+    max-height: 30px;
     border-radius: 50%;
     object-fit: cover;
 }
@@ -44,8 +44,8 @@ header {
 
 /***** Profile *****/
 #profile-avatar-image {
-    width: 300px;
-    height: 300px;
+    max-width: 200px;
+    max-height: 200px;
     border-radius: 50%;
     object-fit: cover;
 }
@@ -76,12 +76,12 @@ header {
 }
 
 #post-card-title {
-    font-size: 1.5rem;
+    font-size: 1.3rem;
 }
 
 #post-card img {
-    width: 50px;
-    height: 50px;
+    max-width: 50px;
+    max-height: 50px;
     border-radius: 50%;
     object-fit: cover;
 }
@@ -139,9 +139,13 @@ header {
 }
 
 #reply-card img {
-    width: 50px;
-    height: 50px;
+    max-width: 50px;
+    max-height: 50px;
     border-radius: 50%;
     object-fit: cover;
+}
+
+#reply-card-title {
+    font-size: 1.3rem;
 }
 /***** Reply Card *****/

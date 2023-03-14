@@ -4,6 +4,8 @@ import { UserContext } from "../contexts/user";
 import * as api from "../api";
 import PostCard from "../components/PostCard";
 import ReplyCard from "../components/ReplyCard";
+import Gender from "../components/Gender";
+import Avatar from "../components/Avatar";
 
 export default function Profile({users, setUsers}) {
     const {userLoggedIn, setUserLoggedIn} = useContext(UserContext);
@@ -22,6 +24,18 @@ export default function Profile({users, setUsers}) {
     const [isGetUsersRepliesSuccessful, setIsGetUsersRepliesSuccessful] = useState(null);
 
     const [visibleTab, setVisibleTab] = useState("Posts");
+
+    const [isProfileBeingEdited, setIsProfileBeingEdited] = useState(false);
+    const [isEditProfileButtonVisible, setIsEditProfileButtonVisible] = useState(true);
+    const [isCancelEditProfileButtonVisible, setIsCancelEditProfileButtonVisible] = useState(false);
+    const [isUpdateProfileButtonVisible, setIsUpdateProfileButtonVisible] = useState(false);
+    const [isDeleteProfileButtonVisible, setIsDeleteProfileButtonVisible] = useState(true);
+    const [isDeleteProfileConfirmationMessageAndButtonsVisible, setIsDeleteProfileConfirmationMessageAndButtonsVisible] = useState(false);
+
+    const [genderInput, setGenderInput] = useState("default");
+    const [avatarUrlInput, setAvatarUrlInput] = useState("");
+    const [isAvatarUrlValid, setIsAvatarUrlValid] = useState(null);
+    const [isProfileUpdatedSuccessfully, setIsProfileUpdatedSuccessfully] = useState(null);
 
     const navigate = useNavigate();
 
@@ -47,7 +61,7 @@ export default function Profile({users, setUsers}) {
                 setIsLoading(false);
                 setIsGetUsersSuccessful(false);
             })
-    }, [user_id])
+    }, [user_id, isProfileUpdatedSuccessfully])
 
     useEffect(() => {
         setIsUsersPostsLoading(true);
@@ -62,7 +76,7 @@ export default function Profile({users, setUsers}) {
                 setIsUsersPostsLoading(false);
                 setIsGetUsersPostsSuccessful(false);
             })
-    }, [user_id])
+    }, [user_id, isProfileUpdatedSuccessfully])
 
     useEffect(() => {
         setIsUsersRepliesLoading(true);
@@ -77,10 +91,100 @@ export default function Profile({users, setUsers}) {
                 setIsUsersRepliesLoading(false);
                 setIsGetUsersRepliesSuccessful(false);
             })
-    }, [user_id])
+    }, [user_id, isProfileUpdatedSuccessfully])
 
     function handleTabSelection(event) {
         setVisibleTab(event.target.innerText);
+    }
+
+    function onClickEditProfileButton() {
+        setIsProfileBeingEdited(true);
+        setIsEditProfileButtonVisible(false);
+        setIsCancelEditProfileButtonVisible(true);
+        setIsUpdateProfileButtonVisible(true);
+        setIsDeleteProfileButtonVisible(false);
+        setIsDeleteProfileConfirmationMessageAndButtonsVisible(false);
+        setGenderInput(user.gender);
+        setAvatarUrlInput(user.avatar_url);
+        setIsAvatarUrlValid(true);
+    }
+
+    function onClickCancelEditProfileButton() {
+        setIsProfileBeingEdited(false);
+        setIsEditProfileButtonVisible(true);
+        setIsCancelEditProfileButtonVisible(false);
+        setIsUpdateProfileButtonVisible(false);
+        setIsDeleteProfileButtonVisible(true);
+        setIsDeleteProfileConfirmationMessageAndButtonsVisible(false);
+        setIsAvatarUrlValid(null);
+    }
+
+    function editProfile(userId, gender, avatarUrl) {
+        setIsProfileUpdatedSuccessfully(null);
+        api.editProfileById(user_id, gender, avatarUrl)
+            .then((response) => {
+                setIsProfileBeingEdited(false);
+                setIsProfileUpdatedSuccessfully(true);
+                setIsEditProfileButtonVisible(true);
+                setIsCancelEditProfileButtonVisible(false);
+                setIsUpdateProfileButtonVisible(false);
+                setIsDeleteProfileButtonVisible(true);
+                setIsDeleteProfileConfirmationMessageAndButtonsVisible(false);
+                setTimeout(() => setIsProfileUpdatedSuccessfully(null), 3000);
+            })
+            .catch((error) => {
+                setIsProfileBeingEdited(true);
+                setIsProfileUpdatedSuccessfully(false);
+                setIsEditProfileButtonVisible(false);
+                setIsCancelEditProfileButtonVisible(true);
+                setIsUpdateProfileButtonVisible(true);
+                setIsDeleteProfileButtonVisible(false);
+                setIsDeleteProfileConfirmationMessageAndButtonsVisible(false);
+                setTimeout(() => setIsProfileUpdatedSuccessfully(null), 3000);
+            })
+    }
+
+    function onClickUpdateProfileButton() {
+        setIsAvatarUrlValid(null);
+        const avatarUrlIsValid = /([a-z\-_0-9\/\:\.]*\.(jpg|jpeg|png|gif))/i.test(avatarUrlInput);
+        if (avatarUrlInput.length > 0) {
+            if (avatarUrlIsValid) {
+                setIsAvatarUrlValid(true);
+                editProfile(user_id, genderInput, avatarUrlInput);
+            } else {
+                setIsAvatarUrlValid(false);
+            }
+        } else {
+            setIsAvatarUrlValid(true);
+            editProfile(user_id, genderInput, "http://cdn.onlinewebfonts.com/svg/img_258083.png");
+        }
+    }
+
+    function onClickDeleteProfileButton() {
+        setIsProfileBeingEdited(false);
+        setIsEditProfileButtonVisible(false);
+        setIsCancelEditProfileButtonVisible(false);
+        setIsUpdateProfileButtonVisible(false);
+        setIsDeleteProfileButtonVisible(false);
+        setIsDeleteProfileConfirmationMessageAndButtonsVisible(true);
+    }
+
+    function onClickDeleteProfileNoButton() {
+        setIsProfileBeingEdited(false);
+        setIsEditProfileButtonVisible(true);
+        setIsCancelEditProfileButtonVisible(false);
+        setIsUpdateProfileButtonVisible(false);
+        setIsDeleteProfileButtonVisible(true);
+        setIsDeleteProfileConfirmationMessageAndButtonsVisible(false);
+    }
+
+    function onClickDeleteProfileYesButton() {
+        setIsProfileBeingEdited(false);
+        setIsEditProfileButtonVisible(true);
+        setIsCancelEditProfileButtonVisible(false);
+        setIsUpdateProfileButtonVisible(false);
+        setIsDeleteProfileButtonVisible(true);
+        setIsDeleteProfileConfirmationMessageAndButtonsVisible(false);
     }
 
     if (isLoading) {
@@ -97,8 +201,51 @@ export default function Profile({users, setUsers}) {
 
             <section id="profile-info">
                 <img src={user.avatar_url} alt={user.avatar_url} id="profile-avatar-image"></img>
+
+                {userLoggedIn.user_id === user.user_id && isAvatarUrlValid === false
+                    ? <p className="error">Please enter a valid image URL.</p>
+                    : null}
+                
+                {userLoggedIn.user_id === user.user_id && isProfileUpdatedSuccessfully === null
+                    ? null
+                    : userLoggedIn.user_id === user.user_id && isProfileUpdatedSuccessfully === true
+                        ? <p className="success">Profile has been updated.</p>
+                        : <p className="error">Profile could not be updated.</p>}
+
                 <div>Join date: {new Date(user.join_date).toLocaleDateString()}</div>
-                <div>Gender: {user.gender}</div>
+
+                {userLoggedIn.user_id === user.user_id && isProfileBeingEdited
+                    ? <div>
+                        <Gender genderInput={genderInput} setGenderInput={setGenderInput} />
+                        <Avatar avatarUrlInput={avatarUrlInput} setAvatarUrlInput={setAvatarUrlInput} setIsAvatarUrlValid={setIsAvatarUrlValid} />
+                      </div>
+                    : <div>Gender: {user.gender}</div>}                    
+
+                <div id="profile-buttons">
+                    {userLoggedIn.user_id === user.user_id && isEditProfileButtonVisible
+                        ? <button onClick={onClickEditProfileButton}>Edit</button>
+                        : null}
+                    
+                    {userLoggedIn.user_id === user.user_id && isCancelEditProfileButtonVisible
+                        ? <button onClick={onClickCancelEditProfileButton}>Cancel</button>
+                        : null}
+                    
+                    {userLoggedIn.user_id === user.user_id && isUpdateProfileButtonVisible
+                        ? <button onClick={onClickUpdateProfileButton}>Update</button>
+                        : null}
+                    
+                    {userLoggedIn.user_id === user.user_id && isDeleteProfileButtonVisible
+                        ? <button onClick={onClickDeleteProfileButton}>Delete</button>
+                        : null}
+                    
+                    {userLoggedIn.user_id === user.user_id && isDeleteProfileConfirmationMessageAndButtonsVisible
+                        ? <div>
+                            <span className="confirm">Delete profile?</span>
+                            <button onClick={onClickDeleteProfileNoButton}>No</button>
+                            <button onClick={onClickDeleteProfileYesButton}>Yes</button>
+                          </div>
+                        : null}
+                </div>
             </section>
 
             <section id="profile-tabs">
@@ -114,7 +261,7 @@ export default function Profile({users, setUsers}) {
                     {isGetUsersPostsSuccessful === null || isGetUsersPostsSuccessful === true
                         ? null
                         : <p className="error">Posts could not be loaded.</p>}
-                    {usersPosts?.length === 0 ? <p>No posts created.</p> : null}
+                    {usersPosts?.length === 0 ? <div>No posts created.</div> : null}
                     
                     <div id="post-cards">
                         {usersPosts
