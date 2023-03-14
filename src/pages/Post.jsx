@@ -89,6 +89,7 @@ export default function Post() {
                 setIsReplyPostedSuccessfully(true);
                 setTimeout(() => setIsReplyPostedSuccessfully(null), 3000);
                 setReplyInput("");
+                return api.editPostById(post_id, new Date(), post.title, post.city, post.gender_of_date, post.date, post.occasion, post.description)
             })
             .catch((error) => {
                 setIsReplyPostedSuccessfully(false);
@@ -142,7 +143,7 @@ export default function Post() {
         setIsCancelEditPostButtonVisible(false);
         setIsUpdatePostButtonVisible(false);
         setIsDeletePostConfirmationMessageAndButtonsVisible(false);
-        api.editPostById(post_id, titleInput, cityInput, genderOfDateInput, dateInput, occasionInput, descriptionInput)
+        api.editPostById(post_id, new Date(), titleInput, cityInput, genderOfDateInput, dateInput, occasionInput, descriptionInput)
             .then((response) => {
                 setIsPostUpdatedSuccessfully(true);
                 setTimeout(() => setIsPostUpdatedSuccessfully(null), 3000);
@@ -278,12 +279,16 @@ export default function Post() {
             <section>
                 <h2>Send a Reply</h2>
 
+                {new Date(post.date).toISOString() < new Date().toISOString()
+                    ? <p className="error">This fake date has passed.</p>
+                    : null}
+
                 {isReplyPostedSuccessfully === null
                     ? null
                     : isReplyPostedSuccessfully === true
                         ? <p className="success">Your reply was posted.</p>
                         : <p className="error">Your reply could not be posted.</p>}
-                
+
                 {userLoggedIn.user_id === post.user_id || userLoggedIn.gender === post.gender_of_date || post.gender_of_date === "Either"
                     ? <form onSubmit={handleSubmit}>
                         <label htmlFor="post-reply"></label>
@@ -297,7 +302,7 @@ export default function Post() {
                         <span>{replyInput.length}/300</span>
 
                         <input type="submit" value="Send Reply" disabled={!replyInput}></input>
-                    </form>
+                      </form>
                     : <p className="error">This user is looking for a {post.gender_of_date} date.</p>}
             </section>
 

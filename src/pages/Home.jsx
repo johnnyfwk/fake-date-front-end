@@ -8,6 +8,7 @@ export default function Home({posts, setPosts}) {
     const {userLoggedIn, setUserLoggedIn} = useContext(UserContext);
 
     const [isPostsLoading, setIsPostsLoading] = useState(true);
+    const [arePostsLoadedSuccessfully, setArePostsLoadedSuccessfully] = useState(null);
 
     const navigate = useNavigate();
 
@@ -19,14 +20,17 @@ export default function Home({posts, setPosts}) {
 
     useEffect(() => {
         setIsPostsLoading(true);
+        setArePostsLoadedSuccessfully(null);
         api.getPosts()
             .then((response) => {
                 setPosts(response);
                 setIsPostsLoading(false);
+                setArePostsLoadedSuccessfully(true);
             })
             .catch((error) => {
                 console.log(error);
                 setIsPostsLoading(false);
+                setArePostsLoadedSuccessfully(false);
             })
     }, [])
 
@@ -34,6 +38,12 @@ export default function Home({posts, setPosts}) {
         <main>
             <h1>Home</h1>
             <p>Browse posts by other users who are looking for a fake date.</p>
+
+            {isPostsLoading ? <p>Loading posts...</p> : null}
+
+            {arePostsLoadedSuccessfully === null || arePostsLoadedSuccessfully === true
+                ? null
+                : <p className="error">Posts could not be loaded.</p>}
 
             <div id="post-cards">
                 {posts

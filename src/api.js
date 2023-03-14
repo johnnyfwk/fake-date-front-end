@@ -93,9 +93,9 @@ export function replyToAPost(reply_date, reply, post_id, user_id) {
 
 
 ///////////// PATCH
-export function editPostById(postId, title, city, gender_of_date, date, occasion, description) {
+export function editPostById(postId, post_updated, title, city, gender_of_date, date, occasion, description) {
     return baseUrl
-        .patch(`/posts/${postId}`, {title, city, gender_of_date, date, occasion, description})
+        .patch(`/posts/${postId}`, {post_updated, title, city, gender_of_date, date, occasion, description})
         .then((response) => {
             return response;
         })
