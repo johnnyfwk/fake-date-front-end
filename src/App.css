@@ -1,4 +1,5 @@
-.error {
+.error, 
+.confirm {
     color: #ff0000;
 }
 
@@ -100,6 +101,10 @@ header {
     object-fit: cover;
 }
 
+#post-info {
+    background: #e2e2e2;
+}
+
 #update-reply-success-message,
 #update-reply-error-message,
 #delete-reply-success-message,
@@ -124,7 +129,7 @@ header {
 /***** Reply Cards *****/
 /***** Reply Card *****/
 #reply-card {
-    background: #d1d1d1;
+    background: #ececec;
     display: grid;
     grid-template-columns: 75px auto;
 }
