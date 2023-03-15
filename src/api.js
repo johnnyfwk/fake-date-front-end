@@ -60,6 +60,14 @@ export function getRepliesByUserId(userId) {
             return response.data.replies;
         })
 }
+
+export function getMessages() {
+    return baseUrl
+        .get("/messages")
+        .then((response) => {
+            return response.data.messages;
+        })
+}
 ///////////// GET
 
 

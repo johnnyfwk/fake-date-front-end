@@ -11,6 +11,7 @@ import Home from "./pages/Home";
 import Profile from "./pages/Profile";
 import Post from "./pages/Post";
 import CreatePost from "./pages/CreatePost";
+import Messages from "./pages/Messages";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Error404 from "./pages/Error404";
@@ -32,6 +33,7 @@ function App() {
         <Route path="/profile/:user_id" element={<Profile />} />
         <Route path="/posts/:post_id" element={<Post />} />
         <Route path="/create-post" element={<CreatePost />} />
+        <Route path="/profile/:user_id/messages" element={<Messages />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="*" element={<Error404 />} />
