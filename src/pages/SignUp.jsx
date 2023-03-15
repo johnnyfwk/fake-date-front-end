@@ -4,6 +4,7 @@ import { useNavigate, Link } from "react-router-dom";
 import * as api from "../api";
 import Gender from "../components/Gender";
 import Avatar from "../components/Avatar";
+import Password from "../components/Password";
 
 export default function SignUp({users, setUsers}) {
     const {userLoggedIn, setUserLoggedIn} = useContext(UserContext);
@@ -12,6 +13,7 @@ export default function SignUp({users, setUsers}) {
     const [isLoadingUsersSuccessful, setIsLoadingUsersSuccessful] = useState(null);
     const [usernameInput, setUsernameInput] = useState("");
     const [passwordInput, setPasswordInput] = useState("");
+    const [passwordInputLabel, setPasswordInputLabel] = useState("Password: ");
     const [genderInput, setGenderInput] = useState("default");
     const [avatarUrlInput, setAvatarUrlInput] = useState("");
     const [isUsernameTaken, setIsUsernameTaken] = useState(null);
@@ -95,10 +97,6 @@ export default function SignUp({users, setUsers}) {
         }
     }
 
-    function handlePasswordInput(event) {
-        setPasswordInput(event.target.value);
-    }
-
     if (isLoading) {
         return <p>Loading...</p>
     }
@@ -136,15 +134,7 @@ export default function SignUp({users, setUsers}) {
                         ? <span className="error">Unavailable</span>
                         : <span className="success">Available</span>}
 
-                <label htmlFor="sign-up-password">Password:</label>
-                <input
-                    type="password"
-                    id="sign-up-password"
-                    name="sign-up-password"
-                    maxLength="20"
-                    onChange={handlePasswordInput}
-                    value={passwordInput}
-                ></input>
+                <Password passwordInput={passwordInput} setPasswordInput={setPasswordInput} passwordInputLabel={passwordInputLabel}/>
 
                 <Gender genderInput={genderInput} setGenderInput={setGenderInput}/>
 
@@ -154,7 +144,7 @@ export default function SignUp({users, setUsers}) {
                     ? <span className="error">Please enter a valid image URL.</span>
                     : null}
 
-                <input type="submit" value="Create Account" disabled={!usernameInput || !passwordInput || isUsernameTaken || !isUsernameValid || !genderInput}></input>
+                <input type="submit" value="Create Account" disabled={!usernameInput || !passwordInput || isUsernameTaken || !isUsernameValid || genderInput === "default"}></input>
             </form>
         </main>
     )
