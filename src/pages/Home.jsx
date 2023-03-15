@@ -28,7 +28,6 @@ export default function Home({posts, setPosts}) {
                 setArePostsLoadedSuccessfully(true);
             })
             .catch((error) => {
-                console.log(error);
                 setIsPostsLoading(false);
                 setArePostsLoadedSuccessfully(false);
             })

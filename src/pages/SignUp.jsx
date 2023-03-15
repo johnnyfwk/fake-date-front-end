@@ -41,7 +41,6 @@ export default function SignUp({users, setUsers}) {
             .catch((error) => {
                 setIsLoading(false);
                 setIsLoadingUsersSuccessful(false);
-                console.log(error);
             })
     }, [])
 
@@ -53,7 +52,6 @@ export default function SignUp({users, setUsers}) {
                 navigate("/home");
             })
             .catch((error) => {
-                console.log(error);
                 setIsUserAddedSuccessfully(false);
             })
     }
