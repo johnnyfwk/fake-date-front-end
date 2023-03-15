@@ -33,7 +33,6 @@ export default function LogIn({users, setUsers}) {
             .catch((error) => {
                 setIsLoading(false);
                 setIsLoadingUsersSuccessful(false);
-                console.log(error);
             })
     }, [])
 

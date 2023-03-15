@@ -73,9 +73,9 @@ export function addUser(username, password, gender, avatar_url, join_date) {
         })
 }
 
-export function createPost(post_date, title, city, gender_of_date, date, occasion, description, user_id) {
+export function createPost(post_date, post_updated, title, city, gender_of_date, date, occasion, description, user_id) {
     return baseUrl
-        .post("/posts", {post_date, title, city, gender_of_date, date, occasion, description, user_id})
+        .post("/posts", {post_date, post_updated, title, city, gender_of_date, date, occasion, description, user_id})
         .then((response) => {
             return response.data.post;
         })
@@ -140,6 +140,22 @@ export function deletePostById(postId) {
 export function deleteRepliesByPostId(postId) {
     return baseUrl
         .delete(`/posts/${postId}/replies`)
+        .then((response) => {
+            return response;
+        })
+}
+
+export function deleteRepliesByUserId(userId) {
+    return baseUrl
+        .delete(`/users/${userId}/replies`)
+        .then((response) => {
+            return response;
+        })
+}
+
+export function deleteUserById(userId) {
+    return baseUrl
+        .delete(`/users/${userId}`)
         .then((response) => {
             return response;
         })

@@ -32,13 +32,12 @@ export default function CreatePost() {
     function handleSubmit(event) {
         event.preventDefault();
         setIsPostCreatedSuccessfully(null);
-        api.createPost(new Date(), titleInput, cityInput, genderOfDateInput, dateInput, occasionInput, descriptionInput, userLoggedIn.user_id)
+        api.createPost(new Date(), new Date(), titleInput, cityInput, genderOfDateInput, dateInput, occasionInput, descriptionInput, userLoggedIn.user_id)
             .then((response) => {
                 setIsPostCreatedSuccessfully(true);
-                navigate("/home");
+                setTimeout(() => navigate("/home"), 3000);
             })
             .catch((error) => {
-                console.log(error);
                 setIsPostCreatedSuccessfully(false);
             })
     }
@@ -55,7 +54,7 @@ export default function CreatePost() {
             {isPostCreatedSuccessfully === null
                 ? null
                 : isPostCreatedSuccessfully === true
-                    ? <p className="success">Post was successfully created.</p>
+                    ? <p className="success">Your post was created.</p>
                     : <p className="error">Post could not be created. Please try again later.</p>}
 
             <form onSubmit={handleSubmit}>
@@ -65,7 +64,20 @@ export default function CreatePost() {
                 <Occasion occasionInput={occasionInput} setOccasionInput={setOccasionInput} />            
                 <DateOfDate dateInput={dateInput} setDateInput={setDateInput} setIsDateValid={setIsDateValid} />                
                 <Description descriptionInput={descriptionInput} setDescriptionInput={setDescriptionInput}/>
-                <input type="submit" value="Submit" disabled={!titleInput || !cityInput || !genderOfDateInput || !dateInput || !isDateValid || !occasionInput || !descriptionInput}></input>
+                <input
+                    type="submit"
+                    value="Submit"
+                    disabled={
+                        !titleInput ||
+                        !cityInput ||
+                        !genderOfDateInput ||
+                        !dateInput ||
+                        !isDateValid ||
+                        !occasionInput ||
+                        !descriptionInput ||
+                        isPostCreatedSuccessfully
+                    }
+                ></input>
             </form>
         </main>
     )

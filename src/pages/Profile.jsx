@@ -36,6 +36,7 @@ export default function Profile() {
     const [isCancelChangePasswordButtonVisible, setIsCancelChangePasswordButtonVisible] = useState(false);
     const [isUpdatePasswordButtonVisible, setIsUpdatePasswordButtonVisible] = useState(false);
     const [isPasswordBeingChanged, setIsPasswordBeingChanged] = useState(false);
+    const [isAccountDeletedSuccessfully, setIsAccountDeletedSuccessfully] = useState(null);
 
     const [genderInput, setGenderInput] = useState("default");
     const [avatarUrlInput, setAvatarUrlInput] = useState("");
@@ -138,7 +139,7 @@ export default function Profile() {
 
     function editProfile(userId, gender, avatarUrl) {
         setIsProfileUpdatedSuccessfully(null);
-        api.editUserById(user_id, userLoggedIn.password, gender, avatarUrl)
+        api.editUserById(userId, userLoggedIn.password, gender, avatarUrl)
             .then((response) => {
                 setUserLoggedIn((currentUserLoggedIn) => {
                     return {
@@ -185,13 +186,13 @@ export default function Profile() {
         if (avatarUrlInput.length > 0) {
             if (avatarUrlIsValid) {
                 setIsAvatarUrlValid(true);
-                editProfile(user_id, genderInput, avatarUrlInput);
+                editProfile(userLoggedIn.user_id, genderInput, avatarUrlInput);
             } else {
                 setIsAvatarUrlValid(false);
             }
         } else {
             setIsAvatarUrlValid(true);
-            editProfile(user_id, genderInput, "http://cdn.onlinewebfonts.com/svg/img_258083.png");
+            editProfile(userLoggedIn.user_id, genderInput, "http://cdn.onlinewebfonts.com/svg/img_258083.png");
         }
     }
 
@@ -222,16 +223,58 @@ export default function Profile() {
     }
 
     function onClickDeleteProfileYesButton() {
-        setIsProfileBeingEdited(false);
-        setIsEditProfileButtonVisible(true);
-        setIsCancelEditProfileButtonVisible(false);
-        setIsUpdateProfileButtonVisible(false);
-        setIsChangePasswordButtonVisible(true);
-        setIsPasswordBeingChanged(false);
-        setIsCancelChangePasswordButtonVisible(false);
-        setIsUpdatePasswordButtonVisible(false);
-        setIsDeleteProfileButtonVisible(true);
-        setIsDeleteProfileConfirmationMessageAndButtonsVisible(false);
+        setIsAccountDeletedSuccessfully(null);
+        // Deletes all replies for posts created by the user, if any
+        if (usersPosts) {
+            usersPosts.forEach((userPost) => {
+                api.deleteRepliesByPostId(userPost.post_id)
+                    .then((response) => {
+                        console.log(response);
+                    })
+            })
+        }
+        // Deletes all replies posted by the user, if any
+        if (usersReplies) {
+            usersReplies.forEach((userReply) => {
+                api.deleteReplyById(userReply.reply_id)
+                    .then((response) => {
+                        console.log(response);
+                    })
+            })
+        }        
+        // Deletes all posts the user created, if any
+        if (usersPosts) {
+            usersPosts.forEach((userPost) => {
+                api.deletePostById(userPost.post_id)
+                    .then((response) => {
+                        console.log(response);
+                    })
+            })
+        }
+        // Deletes user account
+        api.deleteUserById(userLoggedIn.user_id)
+            .then((response) => {
+                setIsAccountDeletedSuccessfully(true);
+                setIsDeleteProfileConfirmationMessageAndButtonsVisible(false);
+                setTimeout(() => {
+                    setUserLoggedIn({});
+                    navigate("/");
+                } , 3000);
+            })
+            .catch((error) => {
+                setIsAccountDeletedSuccessfully(false);
+                setTimeout(() => setIsAccountDeletedSuccessfully(null), 3000)
+                setIsProfileBeingEdited(false);
+                setIsEditProfileButtonVisible(true);
+                setIsCancelEditProfileButtonVisible(false);
+                setIsUpdateProfileButtonVisible(false);
+                setIsChangePasswordButtonVisible(true);
+                setIsPasswordBeingChanged(false);
+                setIsCancelChangePasswordButtonVisible(false);
+                setIsUpdatePasswordButtonVisible(false);
+                setIsDeleteProfileButtonVisible(true);
+                setIsDeleteProfileConfirmationMessageAndButtonsVisible(false);
+            })
     }
 
     function onClickChangePasswordButton() {
@@ -267,7 +310,7 @@ export default function Profile() {
         if (currentPasswordInput === userLoggedIn.password) {
             setDoesCurrentPasswordInputMatchStoredPassword(true);
             setIsPasswordChangedSuccessfully(null);
-            api.editUserById(user_id, newPasswordInput, userLoggedIn.gender, userLoggedIn.avatar_url)
+            api.editUserById(userLoggedIn.user_id, newPasswordInput, userLoggedIn.gender, userLoggedIn.avatar_url)
                 .then((response) => {
                     setUserLoggedIn((currentUserLoggedIn) => {
                         return {
@@ -355,6 +398,14 @@ export default function Profile() {
                         : doesCurrentPasswordInputMatchStoredPassword === true
                             ? null
                             : <p className="error">Password is incorrect.</p>}
+                
+                {userLoggedIn.user_id !== parseInt(user_id)
+                    ? null
+                    : isAccountDeletedSuccessfully === null
+                        ? null
+                        : isAccountDeletedSuccessfully === true
+                            ? <p className="success">Your account has been deleted. You will now be redirected to the homepage.</p>
+                            : <p className="error">Your account could not be deleted.</p>}
 
                 <div>Join date: {new Date(user.join_date).toLocaleDateString()}</div>
 
@@ -412,9 +463,11 @@ export default function Profile() {
                     
                     {userLoggedIn.user_id === user.user_id && isDeleteProfileConfirmationMessageAndButtonsVisible
                         ? <div>
-                            <span className="confirm">Delete profile?</span>
-                            <button onClick={onClickDeleteProfileNoButton}>No</button>
-                            <button onClick={onClickDeleteProfileYesButton}>Yes</button>
+                            <p className="confirm">Delete account? Your details, posts, and replies can not be restored once deleted.</p>
+                            <div id="profile-delete-account-buttons">
+                                <button onClick={onClickDeleteProfileNoButton}>No</button>
+                                <button onClick={onClickDeleteProfileYesButton}>Yes</button>
+                            </div>
                           </div>
                         : null}
                 </div>
