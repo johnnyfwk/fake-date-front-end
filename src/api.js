@@ -169,6 +169,14 @@ export function deletePostById(postId) {
         })
 }
 
+export function deletePostsByUserId(userId) {
+    return baseUrl
+        .delete(`/users/${userId}/posts`)
+        .then((response) => {
+            return response;
+        })
+}
+
 export function deleteRepliesByPostId(postId) {
     return baseUrl
         .delete(`/posts/${postId}/replies`)
@@ -188,6 +196,14 @@ export function deleteRepliesByUserId(userId) {
 export function deleteUserById(userId) {
     return baseUrl
         .delete(`/users/${userId}`)
+        .then((response) => {
+            return response;
+        })
+}
+
+export function deleteMessagesByUserId(userId) {
+    return baseUrl
+        .delete(`/users/${userId}/messages`)
         .then((response) => {
             return response;
         })

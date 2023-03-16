@@ -223,42 +223,54 @@ export default function Profile() {
     }
 
     function onClickDeleteProfileYesButton() {
-        setIsAccountDeletedSuccessfully(null);
-        // Deletes all replies for posts created by the user, if any
         if (usersPosts) {
             usersPosts.forEach((userPost) => {
                 api.deleteRepliesByPostId(userPost.post_id)
                     .then((response) => {
                         console.log(response);
                     })
+                    .catch((error) => {
+                        console.log(error);
+                    })
             })
         }
-        // Deletes all replies posted by the user, if any
+
         if (usersReplies) {
             usersReplies.forEach((userReply) => {
                 api.deleteReplyById(userReply.reply_id)
                     .then((response) => {
                         console.log(response);
                     })
-            })
-        }        
-        // Deletes all posts the user created, if any
-        if (usersPosts) {
-            usersPosts.forEach((userPost) => {
-                api.deletePostById(userPost.post_id)
-                    .then((response) => {
-                        console.log(response);
+                    .catch((error) => {
+                        console.log(error);
                     })
             })
         }
-        // Deletes user account
-        api.deleteUserById(userLoggedIn.user_id)
+
+        api.deletePostsByUserId(userLoggedIn.user_id)
             .then((response) => {
+                console.log(response);
+            })
+            .catch((error) => {
+                console.log(error);
+            })
+
+        api.deleteMessagesByUserId(userLoggedIn.user_id)
+            .then((response) => {
+                console.log(response);
+            })
+            .catch((error) => {
+                console.log(error);
+            })
+
+        setIsAccountDeletedSuccessfully(null);
+        api.deleteUserById(userLoggedIn.user_id)
+            .then(() => {
                 setIsAccountDeletedSuccessfully(true);
                 setIsDeleteProfileConfirmationMessageAndButtonsVisible(false);
                 setTimeout(() => {
-                    setUserLoggedIn({});
                     navigate("/");
+                    setUserLoggedIn({});
                 } , 3000);
             })
             .catch((error) => {
