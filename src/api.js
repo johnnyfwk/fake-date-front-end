@@ -68,6 +68,14 @@ export function getMessages() {
             return response.data.messages;
         })
 }
+
+export function getMessagesByUserId(userId) {
+    return baseUrl
+        .get(`/users/${userId}/messages`)
+        .then((response) => {
+            return response.data.messages;
+        })
+}
 ///////////// GET
 
 

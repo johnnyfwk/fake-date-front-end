@@ -10,11 +10,9 @@ export default function Messages() {
 
     const [isMessagesLoading, setIsMessagesLoading] = useState(true);
     const [isGetMessagesSuccessful, setIsGetMessagesSuccessful] = useState(null);
-    const [messages, setMessages] = useState();
+    const [latestMessagesFromOtherUsers, setLatestMessagesFromOtherUsers] = useState([]);
 
     const navigate = useNavigate();
-
-    console.log(userLoggedIn, "<------ userLoggedIn")
 
     useEffect(() => {
         if (Object.keys(userLoggedIn).length === 0) {
@@ -25,22 +23,43 @@ export default function Messages() {
     useEffect(() => {
         setIsMessagesLoading(true);
         setIsGetMessagesSuccessful(null);
-        api.getMessages()
+        api.getMessagesByUserId(userLoggedIn.user_id)
             .then((response) => {
                 setIsMessagesLoading(false);
-                setIsGetMessagesSuccessful(true);
-                const usersMessages = response.filter((userMessage) => {
-                    return userMessage.sender_user_id === userLoggedIn.user_id || userMessage.receiver_user_id === userLoggedIn.user_id; 
-                })
-                setMessages(usersMessages);
+                setIsGetMessagesSuccessful(true);                
+                const otherUsers = [];
+                const lastMessagesFromEachUser = [];
+                if (response) {
+                    response.forEach((message) => {
+                        if (lastMessagesFromEachUser.length === 0) {
+                            if (message.sender_user_id === userLoggedIn.user_id) {
+                                otherUsers.push(message.receiver_user_id);
+                            } else {
+                                otherUsers.push(message.sender_user_id);
+                            }
+                            lastMessagesFromEachUser.push(message);
+                        } else {
+                            if (message.sender_user_id === userLoggedIn.user_id) {
+                                if (!otherUsers.includes(message.receiver_user_id)) {
+                                    otherUsers.push(message.receiver_user_id);
+                                    lastMessagesFromEachUser.push(message);
+                                }
+                            } else {
+                                if (!otherUsers.includes(message.sender_user_id)) {
+                                    otherUsers.push(message.sender_user_id);
+                                    lastMessagesFromEachUser.push(message);
+                                }
+                            }
+                        }
+                    })                    
+                }
+                setLatestMessagesFromOtherUsers(lastMessagesFromEachUser);
             })
             .catch((error) => {
                 setIsMessagesLoading(false);
                 setIsGetMessagesSuccessful(false);
             })
     }, [user_id]);
-
-    // console.log(messages, "<------- messages")
 
     return (
         <main>
@@ -52,8 +71,10 @@ export default function Messages() {
                 ? null
                 : <p className="error">Could not load messages.</p>}
             
+            {latestMessagesFromOtherUsers.length === 0 ? <p>You don't have any messages.</p> : null}
+
             <div id="message-cards">
-                {messages?.map((message) => {
+                {latestMessagesFromOtherUsers?.map((message) => {
                     return <MessageCard key={message.message_id} userLoggedIn={userLoggedIn} message={message}/>
                 })}
             </div>

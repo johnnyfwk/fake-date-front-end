@@ -161,7 +161,7 @@ header {
 /***** Message Card *****/
 #message-card {
     background: #aeffa9;
-    display: grid;
+    display: flex;
 }
 
 #message-card img {
