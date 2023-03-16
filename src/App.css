@@ -24,8 +24,6 @@ footer {
     background: #a5a5a5;
 }
 
-
-
 /***** Header *****/
 header {
     display: flex;
@@ -39,6 +37,12 @@ header {
     object-fit: cover;
 }
 /***** Header *****/
+
+
+
+/***** Main *****/
+
+/***** Main *****/
 
 
 
@@ -151,6 +155,7 @@ header {
 /***** Reply Card *****/
 
 
+
 /***** Message Cards *****/
 #message-cards {
     display: grid;
@@ -161,7 +166,6 @@ header {
 /***** Message Card *****/
 #message-card {
     background: #aeffa9;
-    display: flex;
 }
 
 #message-card img {
@@ -169,3 +173,52 @@ header {
     height: 50px;
 }
 /***** Message Card *****/
+
+
+
+/***** Direct Message *****/
+#direct-message-form {
+    position: sticky;
+    bottom: 0px;
+    display: grid;
+    grid-template-columns: auto 100px;
+}
+
+#direct-message-avatar {
+    width: 100px;
+    height: 100px;
+}
+/***** Direct Message *****/
+
+
+
+/***** Direct Message Cards *****/
+#direct-message-cards {
+    display: grid;
+    gap: 20px;
+}
+/***** Direct Message Cards *****/
+/***** Direct Message Card *****/
+#direct-message-card {
+    display: grid;
+}
+
+.justify-content-left {
+    justify-content: left;
+}
+
+.justify-content-right {
+    justify-content: right;
+}
+
+#direct-message-card img {
+    width: 30px;
+    height: 30px;
+}
+
+#direct-message-card-message,
+#direct-message-card-avatar-username-and-message {
+    background: #ddffd6;
+    padding: 20px;
+}
+/***** Direct Message Card *****/
