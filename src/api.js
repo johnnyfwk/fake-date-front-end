@@ -69,9 +69,17 @@ export function getMessages() {
         })
 }
 
-export function getMessagesByUserId(userId) {
+export function getMessagesByUserIdDesc(userId) {
     return baseUrl
-        .get(`/users/${userId}/messages`)
+        .get(`/users/${userId}/messages_desc`)
+        .then((response) => {
+            return response.data.messages;
+        })
+}
+
+export function getMessagesByUserIdAsc(userId) {
+    return baseUrl
+        .get(`/users/${userId}/messages_asc`)
         .then((response) => {
             return response.data.messages;
         })
@@ -100,6 +108,14 @@ export function createPost(post_date, post_updated, title, city, gender_of_date,
 export function replyToAPost(reply_date, reply, post_id, user_id) {
     return baseUrl
         .post("/replies", {reply_date, reply, post_id, user_id})
+        .then((response) => {
+            return response;
+        })
+}
+
+export function sendDirectMessage(message_date, message, sender_user_id, sender_username, sender_avatar_url, receiver_user_id, receiver_username, receiver_avatar_url) {
+    return baseUrl
+        .post("/messages", {message_date, message, sender_user_id, sender_username, sender_avatar_url, receiver_user_id, receiver_username, receiver_avatar_url})
         .then((response) => {
             return response;
         })

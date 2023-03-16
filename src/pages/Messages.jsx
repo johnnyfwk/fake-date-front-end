@@ -1,8 +1,7 @@
 import { useState, useEffect, useContext } from "react";
 import { UserContext } from "../contexts/user";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import * as api from "../api";
-import MessageCard from "../components/MessageCard";
 
 export default function Messages() {
     const {userLoggedIn, setUserLoggedIn} = useContext(UserContext);
@@ -23,7 +22,7 @@ export default function Messages() {
     useEffect(() => {
         setIsMessagesLoading(true);
         setIsGetMessagesSuccessful(null);
-        api.getMessagesByUserId(userLoggedIn.user_id)
+        api.getMessagesByUserIdDesc(userLoggedIn.user_id)
             .then((response) => {
                 setIsMessagesLoading(false);
                 setIsGetMessagesSuccessful(true);                
@@ -74,8 +73,22 @@ export default function Messages() {
             {latestMessagesFromOtherUsers.length === 0 ? <p>You don't have any messages.</p> : null}
 
             <div id="message-cards">
-                {latestMessagesFromOtherUsers?.map((message) => {
-                    return <MessageCard key={message.message_id} userLoggedIn={userLoggedIn} message={message}/>
+                {latestMessagesFromOtherUsers.map((message) => {
+                    return <div key={message.message_id} id="message-card">
+                        {userLoggedIn.user_id === message.sender_user_id
+                            ? <Link to={`/profile/${message.receiver_user_id}`}>
+                                <img src={message.receiver_avatar_url} alt={message.receiver_avatar_url} />
+                                <div>{message.receiver_username}</div>
+                            </Link>
+                            : <Link to={`/profile/${message.sender_user_id}`}>
+                                <img src={message.sender_avatar_url} alt={message.sender_avatar_url} />
+                                <div>{message.sender_username}</div>
+                            </Link>}
+                        <Link to={`/profile/${userLoggedIn.user_id}/messages/${userLoggedIn.user_id === message.sender_user_id ? message.receiver_user_id : message.sender_user_id}`}>
+                            <div>{message.message}</div>
+                            <div>{new Date(message.message_date).toLocaleDateString()} {new Date(message.message_date).toLocaleTimeString()}</div>
+                        </Link>
+                    </div>
                 })}
             </div>
         </main>

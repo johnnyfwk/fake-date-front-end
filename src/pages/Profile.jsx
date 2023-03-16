@@ -356,6 +356,10 @@ export default function Profile() {
         }
     }
 
+    function onClickSendMessageButton() {
+        navigate(`/profile/${userLoggedIn.user_id}/messages/${user_id}`);
+    }
+
     if (isLoading) {
         return <p>Loading...</p>
     }
@@ -366,11 +370,10 @@ export default function Profile() {
 
     return (
         <main>
+            <img src={user.avatar_url} alt={user.avatar_url} id="profile-avatar-image"></img>
             <h1>{user.username}</h1>
 
             <section id="profile-info">
-                <img src={user.avatar_url} alt={user.avatar_url} id="profile-avatar-image"></img>
-
                 {userLoggedIn.user_id === parseInt(user_id) && isAvatarUrlValid === false
                     ? <p className="error">Please enter a valid image URL.</p>
                     : null}
@@ -446,7 +449,6 @@ export default function Profile() {
                                 newPasswordInputLabel={newPasswordInputLabel}
                             />
                           </div>
-                        
                         : null}
                     
                     {userLoggedIn.user_id === user.user_id && isCancelChangePasswordButtonVisible
@@ -469,6 +471,10 @@ export default function Profile() {
                                 <button onClick={onClickDeleteProfileYesButton}>Yes</button>
                             </div>
                           </div>
+                        : null}
+
+                    {userLoggedIn.user_id !== user.user_id
+                        ? <button onClick={onClickSendMessageButton}>Send Message</button>
                         : null}
                 </div>
             </section>

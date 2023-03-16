@@ -12,6 +12,7 @@ import Profile from "./pages/Profile";
 import Post from "./pages/Post";
 import CreatePost from "./pages/CreatePost";
 import Messages from "./pages/Messages";
+import DirectMessage from "./pages/DirectMessage";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Error404 from "./pages/Error404";
@@ -34,6 +35,7 @@ function App() {
         <Route path="/posts/:post_id" element={<Post />} />
         <Route path="/create-post" element={<CreatePost />} />
         <Route path="/profile/:user_id/messages" element={<Messages />} />
+        <Route path="/profile/:logged_in_user_id/messages/:other_user_id" element={<DirectMessage />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="*" element={<Error404 />} />
