@@ -6,7 +6,7 @@ export default function Occasion({occasionInput, setOccasionInput}) {
 
     return (
         <div>
-            <label htmlFor="occasion">Occasion:</label>
+            <label htmlFor="occasion">Occasion: </label>
             <select id="occasion" name="occasion" defaultValue={occasionInput} onChange={handleOccasionInput}>
                 <option disabled value="default">Select Occasion</option>
                 <option value="Wedding">Wedding</option>

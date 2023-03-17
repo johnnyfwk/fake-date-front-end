@@ -6,7 +6,7 @@ export default function GenderOfDate({genderOfDateInput, setGenderOfDateInput}) 
 
     return (
         <div>
-            <label htmlFor="gender-of-date">Seeking:</label>
+            <label htmlFor="gender-of-date">Seeking: </label>
             <select id="gender-of-date" name="gender-of-date" defaultValue={genderOfDateInput} onChange={handleGenderOfDateInput}>
                 <option disabled value="default">Select Gender</option>
                 <option value="Male">Male</option>

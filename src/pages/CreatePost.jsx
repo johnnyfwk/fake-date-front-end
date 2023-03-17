@@ -48,8 +48,8 @@ export default function CreatePost() {
 
     return (
         <main>
-            <h1>Find a Fake Date</h1>
-            <p>Enter where and when it will happen, who you are looking for, what the occasion will be, and additional information about why  you are looking for a fake date.</p>
+            <h1>Create a Post</h1>
+            <p>Enter where and when the date will happen, who you are looking for, what the occasion will be, and additional information about why you are looking for a fake date.</p>
 
             {isDateValid === null || isDateValid === true
                 ? null

@@ -85,7 +85,7 @@ export default function Home({posts, setPosts}) {
 
     return (
         <main>
-            <h1>Home</h1>
+            <h1>Find a Fake Date</h1>
             <p>Browse posts by other users who are looking for a fake dateor filter them by gender and city.</p>
 
             {isPostsLoading ? <p>Loading posts...</p> : null}
@@ -94,23 +94,28 @@ export default function Home({posts, setPosts}) {
                 ? null
                 : <p className="error">Posts could not be loaded.</p>}
             
-            <form onSubmit={handleSubmit}>
-                <label htmlFor="gender">Seeking:</label>
-                <select
-                    id="gender"
-                    name="gender"
-                    value={genderInput}
-                    onChange={handleGenderInput}>
-                        <option disabled value="default">Select Gender</option>
-                        <option value="Male">Male</option>
-                        <option value="Female">Female</option>
-                        <option value="Either">Either</option>
-                </select>
+            <form onSubmit={handleSubmit} id="home-form">
+                <div id="home-form-filters">
+                    <div id="home-form-filters-gender">
+                        <label htmlFor="gender">Seeking: </label>
+                        <select
+                            id="gender"
+                            name="gender"
+                            value={genderInput}
+                            onChange={handleGenderInput}>
+                                <option disabled value="default">Select Gender</option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                                <option value="Either">Either</option>
+                        </select>
+                    </div>
+                    <Cities cityInput={cityInput} setCityInput={setCityInput} />
+                </div>
 
-                <Cities cityInput={cityInput} setCityInput={setCityInput} />
-
-                <button onClick={onClickSearchButton}>Search</button>
-                <button onClick={onClickResetFiltersButton}>Reset</button>
+                <div id="home-form-filters-buttons">
+                    <button onClick={onClickSearchButton}>Search</button>
+                    <button onClick={onClickResetFiltersButton}>Reset</button>
+                </div>
             </form>
 
             {filteredPosts.length === 0 ? <p>No posts match your filters</p> : null}
