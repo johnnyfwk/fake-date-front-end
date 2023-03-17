@@ -1,5 +1,5 @@
 export default function Cities({cityInput, setCityInput}) {
-    
+
     function handleCityInput(event) {
         setCityInput(event.target.value);
     }
@@ -7,7 +7,7 @@ export default function Cities({cityInput, setCityInput}) {
     return (
         <div>
             <label htmlFor="cities">City:</label>
-            <select id="cities" name="cities" defaultValue={cityInput} onChange={handleCityInput}>
+            <select id="cities" name="cities" value={cityInput} onChange={handleCityInput}>
                 <option disabled value="default">Select City</option>
                 <optgroup label="England">
                     <option value="Bath">Bath</option>
