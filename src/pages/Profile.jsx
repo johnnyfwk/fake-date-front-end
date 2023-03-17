@@ -451,14 +451,14 @@ export default function Profile() {
                     {userLoggedIn.user_id === user.user_id && isPasswordBeingChanged
                         ? <div>
                             <Password
-                                currentPasswordInput={currentPasswordInput}
-                                setCurrentPasswordInput={setCurrentPasswordInput}
-                                currentPasswordInputLabel={currentPasswordInputLabel}
+                                passwordInput={currentPasswordInput}
+                                setPasswordInput={setCurrentPasswordInput}
+                                passwordInputLabel={currentPasswordInputLabel}
                             />
                             <Password
-                                newPasswordInput={newPasswordInput}
-                                setNewPasswordInput={setNewPasswordInput}
-                                newPasswordInputLabel={newPasswordInputLabel}
+                                passwordInput={newPasswordInput}
+                                setPasswordInput={setNewPasswordInput}
+                                passwordInputLabel={newPasswordInputLabel}
                             />
                           </div>
                         : null}

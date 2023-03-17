@@ -2,6 +2,7 @@ import { useState, useEffect, useContext } from "react";
 import { UserContext } from "../contexts/user";
 import { useNavigate, Link } from "react-router-dom";
 import * as api from "../api";
+import Password from "../components/Password";
 
 export default function LogIn({users, setUsers}) {
     const {userLoggedIn, setUserLoggedIn} = useContext(UserContext);
@@ -10,6 +11,7 @@ export default function LogIn({users, setUsers}) {
     const [isLoadingUsersSuccessful, setIsLoadingUsersSuccessful] = useState(null);
     const [usernameInput, setUsernameInput] = useState("");
     const [passwordInput, setPasswordInput] = useState("");
+    const [passwordInputLabel, setPasswordInputLabel] = useState("Password: ");
     const [isUsernameInDatabase, setIsUsernameInDatabase] = useState(null);
     const [isPasswordCorrect, setIsPasswordCorrect] = useState(null);
 
@@ -61,10 +63,6 @@ export default function LogIn({users, setUsers}) {
         setUsernameInput(event.target.value)
     }
 
-    function onChangePasswordInput(event) {
-        setPasswordInput(event.target.value);
-    }
-
     if (isLoading) {
         return <p>Loading...</p>
     }
@@ -85,6 +83,7 @@ export default function LogIn({users, setUsers}) {
             {isPasswordCorrect === null || isPasswordCorrect === true
                 ? null
                 : <p className="error">Password is incorrect</p>}
+
             <form onSubmit={handleSubmit}>
                 <label htmlFor="sign-in-username">Username:</label>
                 <input
@@ -96,14 +95,11 @@ export default function LogIn({users, setUsers}) {
                     value={usernameInput}
                 ></input>
 
-                <label htmlFor="sign-in-password">Password:</label>
-                <input
-                    type="password"
-                    id="sign-in-password"
-                    name="sign-in-password"
-                    onChange={onChangePasswordInput}
-                    value={passwordInput}
-                ></input>
+                <Password
+                    passwordInput={passwordInput}
+                    setPasswordInput={setPasswordInput}
+                    passwordInputLabel={passwordInputLabel}
+                />
 
                 <input type="submit" value="Log In" disabled={!usernameInput || !passwordInput}></input>
             </form>

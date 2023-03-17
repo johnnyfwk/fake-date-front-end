@@ -1,29 +1,18 @@
-export default function Password({passwordInput, setPasswordInput, passwordInputLabel, currentPasswordInput, setCurrentPasswordInput, currentPasswordInputLabel, newPasswordInput, setNewPasswordInput, newPasswordInputLabel}) {
+export default function Password({passwordInput, setPasswordInput, passwordInputLabel}) {
 
     function handlePasswordInput(event) {
-        if (setPasswordInput) {
-            setPasswordInput(event.target.value)
-        }
-        if (setCurrentPasswordInput) {
-            setCurrentPasswordInput(event.target.value);
-        }
-        if (setNewPasswordInput) {
-            setNewPasswordInput(event.target.value);
-        }
+        setPasswordInput(event.target.value);
     }
-
-    const passwordInputValue = passwordInput || currentPasswordInput || newPasswordInput;
-    const passwordInputLabelName = passwordInputLabel || currentPasswordInputLabel || newPasswordInputLabel;
 
     return (
         <div>
-            <label htmlFor="password-input">{passwordInputLabelName}</label>
+            <label htmlFor="password-input">{passwordInputLabel}</label>
             <input
                 type="password"
                 name="password-input"
                 maxLength="20"
                 onChange={handlePasswordInput}
-                value={passwordInputValue}
+                value={passwordInput}
             ></input>
         </div>
     )
