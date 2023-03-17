@@ -280,7 +280,7 @@ export default function Post() {
                 <h2>Send a Reply</h2>
 
                 {new Date(post.date).toISOString() < new Date().toISOString()
-                    ? <p className="error">This fake date has passed.</p>
+                    ? <p className="error">This date has passed.</p>
                     : null}
 
                 {isReplyPostedSuccessfully === null

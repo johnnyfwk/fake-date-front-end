@@ -42,6 +42,10 @@ export default function CreatePost() {
             })
     }
 
+    function handleCityInput(event) {
+        setCityInput(event.target.value);
+    }
+
     return (
         <main>
             <h1>Find a Fake Date</h1>
@@ -60,7 +64,7 @@ export default function CreatePost() {
             <form onSubmit={handleSubmit}>
                 <Title titleInput={titleInput} setTitleInput={setTitleInput} />
                 <GenderOfDate genderOfDateInput={genderOfDateInput} setGenderOfDateInput={setGenderOfDateInput} />
-                <Cities cityInput={cityInput} setCityInput={setCityInput} />
+                <Cities cityInput={cityInput} setCityInput={setCityInput} handleCityInput={handleCityInput} />
                 <Occasion occasionInput={occasionInput} setOccasionInput={setOccasionInput} />            
                 <DateOfDate dateInput={dateInput} setDateInput={setDateInput} setIsDateValid={setIsDateValid} />                
                 <Description descriptionInput={descriptionInput} setDescriptionInput={setDescriptionInput}/>
