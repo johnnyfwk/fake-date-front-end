@@ -19,30 +19,94 @@ body {
     margin: 0;
 }
 
+#header,
+#footer {
+    background: #e2e2e2;
+}
+
+#nav {
+    background: #f3cbff;
+}
+
+header,
+nav,
+main,
+footer {
+    max-width: 800px;
+    margin: auto;
+}
+
 header,
 footer {
-    background: #a5a5a5;
+    background: #ff8282;
 }
 
 /***** Header *****/
 header {
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 
-#log-out-and-user-profile-links img {
+header img {
     width: 30px;
     height: 30px;
     border-radius: 50%;
     object-fit: cover;
 }
+
+#log-out-messages-and-profile-links {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+#messages-link {
+    font-size: 1.8rem;
+}
 /***** Header *****/
 
 
 
-/***** Main *****/
+/***** Nav *****/
+nav {
+    background: #d9ffc9;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+/***** Nav *****/
+
+
 
 /***** Main *****/
+main {
+    padding: 0 20px 20px 20px;
+}
+/***** Main *****/
+
+
+
+/***** Home *****/
+#home-form {
+    /* background: #e0e0e0; */
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+#home-form-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+#home-form-filters-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+/***** Home *****/
 
 
 
@@ -65,6 +129,30 @@ header {
 /***** Profile *****/
 
 
+#post-card,
+#reply-card {
+    display: grid;
+    grid-template-columns: 75px auto;
+}
+
+#post-card-avatar,
+#reply-card-avatar,
+#post-card-body,
+#reply-card-body-and-buttons {
+    padding: 10px;
+}
+
+#post-card-avatar,
+#reply-card-avatar {
+    background: #ffe3e3;
+    text-align: center;
+    border-radius: 10px 0px 0px 10px;
+}
+
+#post-card-body,
+#reply-card-body-and-buttons {
+    border-radius: 0px 10px 10px 0px;
+}
 
 /***** Post Cards *****/
 #post-cards {
@@ -73,14 +161,14 @@ header {
 }
 /***** Post Cards *****/
 /***** Post Card *****/
-#post-card {
-    background: #d1f6ff;
+#post-card-body {
+    background: #dfdfdf;
     display: grid;
-    grid-template-columns: 75px auto;
+    gap: 5px;
 }
 
 #post-card-title {
-    font-size: 1.3rem;
+    font-size: 1.5rem;
 }
 
 #post-card img {
@@ -90,8 +178,9 @@ header {
     object-fit: cover;
 }
 
-#post-card-owner {
-    background: #d2ffce;
+#post-card-description {
+    font-size: 1.2rem;
+    line-height: 1.5rem;
 }
 /***** Post Card *****/
 
@@ -107,6 +196,24 @@ header {
 
 #post-info {
     background: #e2e2e2;
+    display: grid;
+    gap: 10px;
+}
+
+#post-owner {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+#post-body {
+    display: grid;
+    gap: 3px;
+}
+
+#post-description {
+    font-size: 1.2rem;
+    line-height: 1.5rem;
 }
 
 #update-reply-success-message,
@@ -132,14 +239,25 @@ header {
 }
 /***** Reply Cards *****/
 /***** Reply Card *****/
-#reply-card {
-    background: #ececec;
+#reply-card-body-and-buttons {
+    background: #e0e0e0;
     display: grid;
-    grid-template-columns: 75px auto;
+    gap: 5px;
 }
 
-#reply-card-owner {
-    background: #dfffdc;
+#reply-card-body {
+    display: grid;
+    gap: 5px;
+}
+
+#reply-card-username-time-and-date {
+    display: flex;
+    gap: 10px;
+}
+
+#reply-card-time-and-date {
+    display: flex;
+    gap: 5px;
 }
 
 #reply-card img {
@@ -151,6 +269,18 @@ header {
 
 #reply-card-title {
     font-size: 1.3rem;
+}
+
+#reply-card-reply {
+    font-size: 1.2rem;
+    line-height: 1.5rem;
+}
+
+#reply-card-buttons {
+    background: #e0e0e0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
 }
 /***** Reply Card *****/
 
@@ -222,3 +352,9 @@ header {
     padding: 20px;
 }
 /***** Direct Message Card *****/
+
+
+
+/***** Footer *****/
+
+/***** Footer *****/

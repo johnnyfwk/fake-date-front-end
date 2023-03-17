@@ -92,27 +92,30 @@ export default function ReplyCard({reply, userLoggedIn, setIsReplyUpdatedSuccess
 
     return (
         <div id="reply-card">
-            <div id="reply-card-owner">
-                <Link to={`/profile/${reply.user_id}`}>
-                    <img src={reply.avatar_url} alt={reply.avatar_url}></img>
-                </Link>
-                <Link to={`/profile/${reply.user_id}`}>{reply.username}</Link>
-            </div>
+            <Link to={`/profile/${reply.user_id}`} id="reply-card-avatar" title={reply.username}>
+                <img src={reply.avatar_url} alt={reply.avatar_url}></img>
+            </Link>
 
             <div id="reply-card-body-and-buttons">
                 <div id="reply-card-body">
                     {window.location.href.includes("profile")
                         ? <div><Link to={`/posts/${reply.post_id}`} id="reply-card-title">{reply.title}</Link></div>
                         : null}
+
+                    <div id="reply-card-username-time-and-date">
+                        <b>{reply.username}</b>
+                        <div id="reply-card-time-and-date">
+                            <div>{new Date(reply.reply_date).toLocaleTimeString()}</div>
+                            <div>{new Date(reply.reply_date).toLocaleDateString()}</div>
+                        </div>
+                    </div>
                     
                     {isEditReplyInputVisible
                         ? <textarea
                             value={editReplyInput}
                             onChange={onChangeEditReplyInput}
                         ></textarea>
-                        : <div>{reply.reply}</div>}
-
-                    <div>{new Date(reply.reply_date).toLocaleDateString()} {new Date(reply.reply_date).toLocaleTimeString()}</div>                         
+                        : <div id="reply-card-reply">{reply.reply}</div>}              
                 </div>
 
                 <div id="reply-card-buttons">

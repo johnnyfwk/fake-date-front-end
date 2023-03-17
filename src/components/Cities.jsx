@@ -6,7 +6,7 @@ export default function Cities({cityInput, setCityInput}) {
 
     return (
         <div>
-            <label htmlFor="cities">City:</label>
+            <label htmlFor="cities">City: </label>
             <select id="cities" name="cities" value={cityInput} onChange={handleCityInput}>
                 <option disabled value="default">Select City</option>
                 <optgroup label="England">

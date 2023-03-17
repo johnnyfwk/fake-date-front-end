@@ -13,7 +13,7 @@ export default function DateOfDate({dateInput, setDateInput, setIsDateValid}) {
 
     return (
         <div>
-            <label htmlFor="date">Date:</label>
+            <label htmlFor="date">Date: </label>
             <input type="date" id="date" name="date" defaultValue={dateInput} onChange={handleDateInput}></input>
         </div>
     )

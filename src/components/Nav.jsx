@@ -8,10 +8,12 @@ export default function Nav() {
     return (
         <div>
             {Object.keys(userLoggedIn).length > 0
-                ? <nav>
-                    <Link to="/home">Home</Link>
-                    <Link to="/create-post">Find a Date</Link>
-                  </nav>
+                ? <div id="nav">
+                    <nav>
+                        <Link to="/home">Home</Link>
+                        <Link to="/create-post">Find a Date</Link>
+                    </nav>
+                  </div>
                 : null}
         </div>
     )

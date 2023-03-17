@@ -220,7 +220,7 @@ export default function Post() {
                     : <p className="error">Replies for this post could not be deleted.</p>}
 
             <section id="post-info">
-                <div>
+                <div id="post-owner">
                     <Link to={`/profile/${post.user_id}`}>
                         <img src={post.avatar_url} alt={post.avatar_url} id="post-avatar-image"/>
                     </Link>            
@@ -240,13 +240,13 @@ export default function Post() {
                         <DateOfDate dateInput={dateInput} setDateInput={setDateInput} setIsDateValid={setIsDateValid} />                        
                         <Description descriptionInput={descriptionInput} setDescriptionInput={setDescriptionInput}/>
                       </div>
-                    : <div>
-                        <div>Posted: {new Date(post.post_date).toLocaleDateString()} {new Date(post.post_date).toLocaleTimeString()}</div>
-                        <div>Seeking: {post.gender_of_date}</div>
-                        <div>City: {post.city}</div>
-                        <div>Occasion: {post.occasion}</div>
-                        <div>Date: {new Date(post.date).toLocaleDateString()}</div>
-                        <div>{post.description}</div>
+                    : <div id="post-body">
+                        <div><b>Posted:</b> {new Date(post.post_date).toLocaleDateString()} {new Date(post.post_date).toLocaleTimeString()}</div>
+                        <div><b>Seeking:</b> {post.gender_of_date}</div>
+                        <div><b>City:</b> {post.city}</div>
+                        <div><b>Occasion:</b> {post.occasion}</div>
+                        <div><b>Date:</b> {new Date(post.date).toLocaleDateString()}</div>
+                        <div id="post-description">{post.description}</div>
                       </div>}
 
                 <div id="post-buttons">
@@ -299,7 +299,7 @@ export default function Post() {
                             value={replyInput}
                             onChange={handleReplyInput}
                         ></textarea>
-                        <span>{replyInput.length}/300</span>
+                        <div>{replyInput.length}/300</div>
 
                         <input type="submit" value="Send Reply" disabled={!replyInput}></input>
                       </form>
