@@ -53,45 +53,48 @@ export default function CreatePost() {
     };
 
     return (
-        <main id="create-a-post">
-            <h1>Create a Post</h1>
-            <p>Enter where and when the date will happen, who you are looking for, what the occasion will be, and additional information about why you are looking for a fake date.</p>
+        <div id="main">
+            <main id="create-a-post">
+                <h1>Find a Fake Date</h1>
+                <p>Enter where and when the date will happen, who you are looking for, what the occasion will be, and additional information about why you are looking for a fake date.</p>
 
-            {isDateValid === null || isDateValid === true
-                ? null
-                : <p className="error">Please select a date that is the same as or after today's date.</p>}
-            
-            {isPostCreatedSuccessfully === null
-                ? null
-                : isPostCreatedSuccessfully === true
-                    ? <p className="success">Your post was created.</p>
-                    : <p className="error">Post could not be created. Please try again later.</p>}
+                {isDateValid === null || isDateValid === true
+                    ? null
+                    : <p className="error">Please select a date that is the same as or after today's date.</p>}
+                
+                {isPostCreatedSuccessfully === null
+                    ? null
+                    : isPostCreatedSuccessfully === true
+                        ? <p className="success">Your post was created.</p>
+                        : <p className="error">Post could not be created. Please try again later.</p>}
 
-            <form onSubmit={handleSubmit}>
-                <div className="post-components">
-                    <Title titleInput={titleInput} setTitleInput={setTitleInput} />
-                    <GenderOfDate genderOfDateInput={genderOfDateInput} setGenderOfDateInput={setGenderOfDateInput} />
-                    <Cities cityInput={cityInput} setCityInput={setCityInput} handleCityInput={handleCityInput} componentCitiesStyle={componentCitiesStyleCreatePost}/>
-                    <Occasion occasionInput={occasionInput} setOccasionInput={setOccasionInput} />            
-                    <DateOfDate dateInput={dateInput} setDateInput={setDateInput} setIsDateValid={setIsDateValid} />                
-                    <Description descriptionInput={descriptionInput} setDescriptionInput={setDescriptionInput}/>
-                </div>
+                <form onSubmit={handleSubmit}>
+                    <div className="post-components">
+                        <Title titleInput={titleInput} setTitleInput={setTitleInput} />
+                        <GenderOfDate genderOfDateInput={genderOfDateInput} setGenderOfDateInput={setGenderOfDateInput} />
+                        <Cities cityInput={cityInput} setCityInput={setCityInput} handleCityInput={handleCityInput} componentCitiesStyle={componentCitiesStyleCreatePost}/>
+                        <Occasion occasionInput={occasionInput} setOccasionInput={setOccasionInput} />            
+                        <DateOfDate dateInput={dateInput} setDateInput={setDateInput} setIsDateValid={setIsDateValid} />                
+                        <Description descriptionInput={descriptionInput} setDescriptionInput={setDescriptionInput}/>
+                    </div>
 
-                <input
-                    type="submit"
-                    value="Submit"
-                    disabled={
-                        !titleInput ||
-                        !cityInput ||
-                        !genderOfDateInput ||
-                        !dateInput ||
-                        !isDateValid ||
-                        !occasionInput ||
-                        !descriptionInput ||
-                        isPostCreatedSuccessfully
-                    }
-                ></input>
-            </form>
-        </main>
+                    <input
+                        type="submit"
+                        value="Submit"
+                        disabled={
+                            !titleInput ||
+                            !cityInput ||
+                            !genderOfDateInput ||
+                            !dateInput ||
+                            !isDateValid ||
+                            !occasionInput ||
+                            !descriptionInput ||
+                            isPostCreatedSuccessfully
+                        }
+                    ></input>
+                </form>
+            </main>
+        </div>
+        
     )
 }

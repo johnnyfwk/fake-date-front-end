@@ -12,20 +12,20 @@ export default function Header() {
     return (
         <div id="header">
             <header>
-            <Link to="/" id="logo">FakeDate</Link>
+                <Link to="/" id="logo">FakeDate</Link>
 
-            {Object.keys(userLoggedIn).length === 0
-                ? <div>
-                    <Link to="/sign-in">Sign In</Link>
-                    <Link to="/sign-up">Sign Up</Link>
-                  </div>
-                : <div id="log-out-messages-and-profile-links">
-                    <Link to="/sign-in" onClick={onClickLogOut}>Log out</Link>
-                    <Link to={`/profile/${userLoggedIn.user_id}/messages`} id="messages-link">&#9993;</Link>
-                    <Link to={`/profile/${userLoggedIn.user_id}`}>
-                        <img src={userLoggedIn.avatar_url} title={userLoggedIn.username}></img>
-                    </Link>
-                  </div>}
+                {Object.keys(userLoggedIn).length === 0
+                    ? <div>
+                        <Link to="/sign-in">Sign In</Link>
+                        <Link to="/sign-up">Sign Up</Link>
+                    </div>
+                    : <div id="log-out-messages-and-profile-links">
+                        <Link to="/sign-in" onClick={onClickLogOut}>Log out</Link>
+                        <Link to={`/profile/${userLoggedIn.user_id}/messages`} id="messages-link">&#9993;</Link>
+                        <Link to={`/profile/${userLoggedIn.user_id}`}>
+                            <img src={userLoggedIn.avatar_url} title={userLoggedIn.username}></img>
+                        </Link>
+                    </div>}
             </header>
         </div>
     )

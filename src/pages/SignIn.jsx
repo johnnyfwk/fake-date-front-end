@@ -72,37 +72,39 @@ export default function LogIn({users, setUsers}) {
     }
 
     return (
-        <main>
-            <h1>Sign In</h1>
-            <p>Log into your account. Don't have an account? <Link to="/sign-up">Sign up</Link>.</p>
+        <div id="main">
+            <main>
+                <h1>Sign In</h1>
+                <p>Log into your account. Don't have an account? <Link to="/sign-up">Sign up</Link>.</p>
 
-            {isUsernameInDatabase === null || isUsernameInDatabase === true
-                ? null
-                : <p className="error">Username does not exist</p>}
+                {isUsernameInDatabase === null || isUsernameInDatabase === true
+                    ? null
+                    : <p className="error">Username does not exist</p>}
 
-            {isPasswordCorrect === null || isPasswordCorrect === true
-                ? null
-                : <p className="error">Password is incorrect</p>}
+                {isPasswordCorrect === null || isPasswordCorrect === true
+                    ? null
+                    : <p className="error">Password is incorrect</p>}
 
-            <form onSubmit={handleSubmit}>
-                <label htmlFor="sign-in-username">Username:</label>
-                <input
-                    type="text"
-                    id="sign-in-username"
-                    name="sign-in-username"
-                    maxLength="20"
-                    onChange={onChangeUsernameInput}
-                    value={usernameInput}
-                ></input>
+                <form onSubmit={handleSubmit}>
+                    <label htmlFor="sign-in-username">Username:</label>
+                    <input
+                        type="text"
+                        id="sign-in-username"
+                        name="sign-in-username"
+                        maxLength="20"
+                        onChange={onChangeUsernameInput}
+                        value={usernameInput}
+                    ></input>
 
-                <Password
-                    passwordInput={passwordInput}
-                    setPasswordInput={setPasswordInput}
-                    passwordInputLabel={passwordInputLabel}
-                />
+                    <Password
+                        passwordInput={passwordInput}
+                        setPasswordInput={setPasswordInput}
+                        passwordInputLabel={passwordInputLabel}
+                    />
 
-                <input type="submit" value="Log In" disabled={!usernameInput || !passwordInput}></input>
-            </form>
-        </main>
+                    <input type="submit" value="Log In" disabled={!usernameInput || !passwordInput}></input>
+                </form>
+            </main>
+        </div>
     )
 }

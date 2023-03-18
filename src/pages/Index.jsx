@@ -14,9 +14,11 @@ export default function Index() {
     }, [])
 
     return (
-        <main>
-            <h1>Welcome to FakeDate</h1>
-            <p>The app to find a fake date for any occasion.</p>
-        </main>
+        <div id="main">
+            <main>
+                <h1>Welcome to FakeDate</h1>
+                <p>The app to find a fake date for any occasion.</p>
+            </main>
+        </div>
     )
 }

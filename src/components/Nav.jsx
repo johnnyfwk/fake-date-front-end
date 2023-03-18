@@ -6,7 +6,7 @@ export default function Nav() {
     const {userLoggedIn, setUserLoggedIn} = useContext(UserContext);
 
     return (
-        <div>
+        <div id="nav">
             {Object.keys(userLoggedIn).length > 0
                 ? <div id="nav">
                     <nav>

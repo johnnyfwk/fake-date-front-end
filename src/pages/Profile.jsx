@@ -381,160 +381,162 @@ export default function Profile() {
     }
 
     return (
-        <main>
-            <img src={user.avatar_url} alt={user.avatar_url} id="profile-avatar-image"></img>
-            <h1>{user.username}</h1>
+        <div id="main">
+            <main>
+                <img src={user.avatar_url} alt={user.avatar_url} id="profile-avatar-image"></img>
+                <h1>{user.username}</h1>
 
-            <section id="profile-info">
-                {userLoggedIn.user_id === parseInt(user_id) && isAvatarUrlValid === false
-                    ? <p className="error">Please enter a valid image URL.</p>
+                <section id="profile-info">
+                    {userLoggedIn.user_id === parseInt(user_id) && isAvatarUrlValid === false
+                        ? <p className="error">Please enter a valid image URL.</p>
+                        : null}
+                    
+                    {userLoggedIn.user_id !== parseInt(user_id)
+                        ? null
+                        : isProfileUpdatedSuccessfully === null
+                            ? null
+                            : isProfileUpdatedSuccessfully === true
+                                ? <p className="success">Profile has been updated.</p>
+                                : <p className="error">Profile could not be updated.</p>}
+
+                    {userLoggedIn.user_id !== parseInt(user_id)
+                        ? null
+                        : isPasswordChangedSuccessfully === null
+                            ? null
+                            : isPasswordChangedSuccessfully === true
+                                ? <p className="success">Password has been changed.</p>
+                                : <p className="error">Password could not be changed.</p>}
+
+                    {userLoggedIn.user_id !== parseInt(user_id)
+                        ? null
+                        : doesCurrentPasswordInputMatchStoredPassword === null
+                            ? null
+                            : doesCurrentPasswordInputMatchStoredPassword === true
+                                ? null
+                                : <p className="error">Password is incorrect.</p>}
+                    
+                    {userLoggedIn.user_id !== parseInt(user_id)
+                        ? null
+                        : isAccountDeletedSuccessfully === null
+                            ? null
+                            : isAccountDeletedSuccessfully === true
+                                ? <p className="success">Your account has been deleted. You will now be redirected to the homepage.</p>
+                                : <p className="error">Your account could not be deleted.</p>}
+
+                    <div>Join date: {new Date(user.join_date).toLocaleDateString()}</div>
+
+                    {userLoggedIn.user_id === user.user_id && isProfileBeingEdited
+                        ? <div>
+                            <Gender genderInput={genderInput} setGenderInput={setGenderInput} />
+                            <Avatar avatarUrlInput={avatarUrlInput} setAvatarUrlInput={setAvatarUrlInput} setIsAvatarUrlValid={setIsAvatarUrlValid} />
+                        </div>
+                        : <div>Gender: {user.gender}</div>}                    
+
+                    <div id="profile-buttons">
+                        {userLoggedIn.user_id === user.user_id && isEditProfileButtonVisible
+                            ? <button onClick={onClickEditProfileButton}>Edit Profile</button>
+                            : null}
+                        
+                        {userLoggedIn.user_id === user.user_id && isCancelEditProfileButtonVisible
+                            ? <button onClick={onClickCancelEditProfileButton}>Cancel</button>
+                            : null}
+                        
+                        {userLoggedIn.user_id === user.user_id && isUpdateProfileButtonVisible
+                            ? <button onClick={onClickUpdateProfileButton}>Update</button>
+                            : null}
+                        
+                        {userLoggedIn.user_id === user.user_id && isChangePasswordButtonVisible
+                            ? <button onClick={onClickChangePasswordButton}>Change Password</button>
+                            : null}
+
+                        {userLoggedIn.user_id === user.user_id && isPasswordBeingChanged
+                            ? <div>
+                                <Password
+                                    passwordInput={currentPasswordInput}
+                                    setPasswordInput={setCurrentPasswordInput}
+                                    passwordInputLabel={currentPasswordInputLabel}
+                                />
+                                <Password
+                                    passwordInput={newPasswordInput}
+                                    setPasswordInput={setNewPasswordInput}
+                                    passwordInputLabel={newPasswordInputLabel}
+                                />
+                            </div>
+                            : null}
+                        
+                        {userLoggedIn.user_id === user.user_id && isCancelChangePasswordButtonVisible
+                            ? <button onClick={onClickCancelChangePasswordButton}>Cancel</button>
+                            : null}
+
+                        {userLoggedIn.user_id === user.user_id && isUpdatePasswordButtonVisible
+                            ? <button onClick={onClickUpdatePasswordButton} disabled={!currentPasswordInput || !newPasswordInput}>Update</button>
+                            : null}
+                        
+                        {userLoggedIn.user_id === user.user_id && isDeleteProfileButtonVisible
+                            ? <button onClick={onClickDeleteProfileButton}>Delete Account</button>
+                            : null}
+                        
+                        {userLoggedIn.user_id === user.user_id && isDeleteProfileConfirmationMessageAndButtonsVisible
+                            ? <div>
+                                <p className="confirm">Delete account? Your details, posts, and replies can not be restored once deleted.</p>
+                                <div id="profile-delete-account-buttons">
+                                    <button onClick={onClickDeleteProfileNoButton}>No</button>
+                                    <button onClick={onClickDeleteProfileYesButton}>Yes</button>
+                                </div>
+                            </div>
+                            : null}
+
+                        {userLoggedIn.user_id !== user.user_id
+                            ? <button onClick={onClickSendMessageButton}>Send Message</button>
+                            : null}
+                    </div>
+                </section>
+
+                <section id="profile-tabs">
+                    <h2 onClick={handleTabSelection} value="posts">Posts</h2>
+                    {userLoggedIn.user_id === user.user_id
+                        ? <h2 onClick={handleTabSelection} value="replies">Replies</h2>
+                        : null}                
+                </section>
+
+                {visibleTab === "Posts"
+                    ? <section id="profile-posts">
+                        {isUsersPostsLoading ? <p>Loading posts...</p> : null}
+                        {isGetUsersPostsSuccessful === null || isGetUsersPostsSuccessful === true
+                            ? null
+                            : <p className="error">Posts could not be loaded.</p>}
+                        {usersPosts?.length === 0 ? <div>No posts created.</div> : null}
+                        
+                        <div id="post-cards">
+                            {usersPosts
+                                ? usersPosts.map((post) => {
+                                    return <PostCard key={post.post_id} post={post}/>;
+                                    })
+                                : null}
+                        </div>
+                    </section>
                     : null}
                 
-                {userLoggedIn.user_id !== parseInt(user_id)
-                    ? null
-                    : isProfileUpdatedSuccessfully === null
-                        ? null
-                        : isProfileUpdatedSuccessfully === true
-                            ? <p className="success">Profile has been updated.</p>
-                            : <p className="error">Profile could not be updated.</p>}
-
-                {userLoggedIn.user_id !== parseInt(user_id)
-                    ? null
-                    : isPasswordChangedSuccessfully === null
-                        ? null
-                        : isPasswordChangedSuccessfully === true
-                            ? <p className="success">Password has been changed.</p>
-                            : <p className="error">Password could not be changed.</p>}
-
-                {userLoggedIn.user_id !== parseInt(user_id)
-                    ? null
-                    : doesCurrentPasswordInputMatchStoredPassword === null
-                        ? null
-                        : doesCurrentPasswordInputMatchStoredPassword === true
+                {visibleTab === "Replies"
+                    ? <section id="profile-replies">
+                        {isUsersRepliesLoading ? <p>Loading replies...</p> : null}
+                        {isGetUsersRepliesSuccessful === null || isGetUsersRepliesSuccessful === true
                             ? null
-                            : <p className="error">Password is incorrect.</p>}
-                
-                {userLoggedIn.user_id !== parseInt(user_id)
-                    ? null
-                    : isAccountDeletedSuccessfully === null
-                        ? null
-                        : isAccountDeletedSuccessfully === true
-                            ? <p className="success">Your account has been deleted. You will now be redirected to the homepage.</p>
-                            : <p className="error">Your account could not be deleted.</p>}
-
-                <div>Join date: {new Date(user.join_date).toLocaleDateString()}</div>
-
-                {userLoggedIn.user_id === user.user_id && isProfileBeingEdited
-                    ? <div>
-                        <Gender genderInput={genderInput} setGenderInput={setGenderInput} />
-                        <Avatar avatarUrlInput={avatarUrlInput} setAvatarUrlInput={setAvatarUrlInput} setIsAvatarUrlValid={setIsAvatarUrlValid} />
-                      </div>
-                    : <div>Gender: {user.gender}</div>}                    
-
-                <div id="profile-buttons">
-                    {userLoggedIn.user_id === user.user_id && isEditProfileButtonVisible
-                        ? <button onClick={onClickEditProfileButton}>Edit Profile</button>
-                        : null}
-                    
-                    {userLoggedIn.user_id === user.user_id && isCancelEditProfileButtonVisible
-                        ? <button onClick={onClickCancelEditProfileButton}>Cancel</button>
-                        : null}
-                    
-                    {userLoggedIn.user_id === user.user_id && isUpdateProfileButtonVisible
-                        ? <button onClick={onClickUpdateProfileButton}>Update</button>
-                        : null}
-                    
-                    {userLoggedIn.user_id === user.user_id && isChangePasswordButtonVisible
-                        ? <button onClick={onClickChangePasswordButton}>Change Password</button>
-                        : null}
-
-                    {userLoggedIn.user_id === user.user_id && isPasswordBeingChanged
-                        ? <div>
-                            <Password
-                                passwordInput={currentPasswordInput}
-                                setPasswordInput={setCurrentPasswordInput}
-                                passwordInputLabel={currentPasswordInputLabel}
-                            />
-                            <Password
-                                passwordInput={newPasswordInput}
-                                setPasswordInput={setNewPasswordInput}
-                                passwordInputLabel={newPasswordInputLabel}
-                            />
-                          </div>
-                        : null}
-                    
-                    {userLoggedIn.user_id === user.user_id && isCancelChangePasswordButtonVisible
-                        ? <button onClick={onClickCancelChangePasswordButton}>Cancel</button>
-                        : null}
-
-                    {userLoggedIn.user_id === user.user_id && isUpdatePasswordButtonVisible
-                        ? <button onClick={onClickUpdatePasswordButton} disabled={!currentPasswordInput || !newPasswordInput}>Update</button>
-                        : null}
-                    
-                    {userLoggedIn.user_id === user.user_id && isDeleteProfileButtonVisible
-                        ? <button onClick={onClickDeleteProfileButton}>Delete Account</button>
-                        : null}
-                    
-                    {userLoggedIn.user_id === user.user_id && isDeleteProfileConfirmationMessageAndButtonsVisible
-                        ? <div>
-                            <p className="confirm">Delete account? Your details, posts, and replies can not be restored once deleted.</p>
-                            <div id="profile-delete-account-buttons">
-                                <button onClick={onClickDeleteProfileNoButton}>No</button>
-                                <button onClick={onClickDeleteProfileYesButton}>Yes</button>
-                            </div>
-                          </div>
-                        : null}
-
-                    {userLoggedIn.user_id !== user.user_id
-                        ? <button onClick={onClickSendMessageButton}>Send Message</button>
-                        : null}
-                </div>
-            </section>
-
-            <section id="profile-tabs">
-                <h2 onClick={handleTabSelection} value="posts">Posts</h2>
-                {userLoggedIn.user_id === user.user_id
-                    ? <h2 onClick={handleTabSelection} value="replies">Replies</h2>
-                    : null}                
-            </section>
-
-            {visibleTab === "Posts"
-                ? <section id="profile-posts">
-                    {isUsersPostsLoading ? <p>Loading posts...</p> : null}
-                    {isGetUsersPostsSuccessful === null || isGetUsersPostsSuccessful === true
-                        ? null
-                        : <p className="error">Posts could not be loaded.</p>}
-                    {usersPosts?.length === 0 ? <div>No posts created.</div> : null}
-                    
-                    <div id="post-cards">
-                        {usersPosts
-                            ? usersPosts.map((post) => {
-                                return <PostCard key={post.post_id} post={post}/>;
+                            : <p className="error">Replies could not be loaded.</p>}
+                        {usersReplies?.length === 0 ? <div>No replies made.</div> : null}
+                        
+                        <div id="reply-cards">
+                            {usersReplies
+                                ? usersReplies.map((reply) => {
+                                    return <ReplyCard
+                                        key={reply.reply_id}
+                                        reply={reply}/>
                                 })
-                            : null}
-                    </div>
-                  </section>
-                : null}
-            
-            {visibleTab === "Replies"
-                ? <section id="profile-replies">
-                    {isUsersRepliesLoading ? <p>Loading replies...</p> : null}
-                    {isGetUsersRepliesSuccessful === null || isGetUsersRepliesSuccessful === true
-                        ? null
-                        : <p className="error">Replies could not be loaded.</p>}
-                    {usersReplies?.length === 0 ? <div>No replies made.</div> : null}
-                    
-                    <div id="reply-cards">
-                        {usersReplies
-                            ? usersReplies.map((reply) => {
-                                return <ReplyCard
-                                    key={reply.reply_id}
-                                    reply={reply}/>
-                            })
-                            : null}
-                    </div>
-                  </section>
-                : null}
-        </main>
+                                : null}
+                        </div>
+                    </section>
+                    : null}
+            </main>
+        </div>
     )
 }

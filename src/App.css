@@ -1,10 +1,18 @@
+:root {
+    --jet: #363537;
+    --red: #ef2d56;
+    --pumpkin: #ed7d3a;
+    --pistachio: #8cd867;
+    --emerald: #2FBF71;
+}
+
 .error, 
 .confirm {
-    color: #ff0000;
+    color: var(--red);
 }
 
 .success {
-    color: #06b600
+    color: var(--emerald)
 }
 
 * {
@@ -17,15 +25,14 @@ img {
 
 body {
     margin: 0;
+    background: var(--red);
 }
 
 #header,
 #footer {
-    background: #e2e2e2;
-}
-
-#nav {
-    background: #f3cbff;
+    background: var(--red);
+    position: sticky;
+    top: 0px;
 }
 
 header,
@@ -36,9 +43,13 @@ footer {
     margin: auto;
 }
 
-header,
-footer {
-    background: #ff8282;
+header a:link,
+header a:visited,
+header a:active,
+footer a:link,
+footer a:visited,
+footer a:active {
+    color: #ffffff;
 }
 
 label {
@@ -54,8 +65,15 @@ label {
 /***** Header *****/
 header {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
+    padding: 10px 20px 10px 20px;
+    font-weight: bold;
+}
+
+#logo {
+    font-size: 1.5rem;
 }
 
 header img {
@@ -79,19 +97,35 @@ header img {
 
 
 /***** Nav *****/
+#nav {
+    background: #000000;
+    position: fixed;
+    width: 100%;
+}
+
 nav {
-    background: #d9ffc9;
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
+    padding: 5px 20px 5px 20px;
+    font-weight: bold;
+}
+
+nav a:link,
+nav a:visited,
+nav a:active {
+    color: #ffffff;
 }
 /***** Nav *****/
 
 
 
 /***** Main *****/
+#main {
+    background: #ffffff;
+}
 main {
-    padding: 0 20px 20px 20px;
+    padding: 30px 20px 20px 20px;
 }
 /***** Main *****/
 
@@ -432,7 +466,25 @@ main {
 
 
 /***** Footer *****/
+footer {
+    padding: 20px;
+    display: grid;
+    gap: 30px;
+}
 
+#footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    gap: 30px;
+    font-weight: bold;
+}
+
+#footer-links > div {
+    display: grid;
+    align-content: start;
+    gap: 10px;
+}
 /***** Footer *****/
 
 
@@ -452,5 +504,10 @@ main {
 
     #reply-card-edit-reply {
         height: 100px;
+    }
+
+    #footer-links {
+        flex-direction: row;
+        gap: 50px;
     }
 }

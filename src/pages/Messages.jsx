@@ -61,36 +61,38 @@ export default function Messages() {
     }, [user_id]);
 
     return (
-        <main>
-            <h1>Messages</h1>
+        <div id="main">
+            <main>
+                <h1>Messages</h1>
 
-            {isMessagesLoading ? <p>Loading messages...</p> : null}
+                {isMessagesLoading ? <p>Loading messages...</p> : null}
 
-            {isGetMessagesSuccessful === null || isGetMessagesSuccessful === true
-                ? null
-                : <p className="error">Could not load messages.</p>}
-            
-            {latestMessagesFromOtherUsers.length === 0 ? <p>You don't have any messages.</p> : null}
+                {isGetMessagesSuccessful === null || isGetMessagesSuccessful === true
+                    ? null
+                    : <p className="error">Could not load messages.</p>}
+                
+                {latestMessagesFromOtherUsers.length === 0 ? <p>You don't have any messages.</p> : null}
 
-            <div id="message-cards">
-                {latestMessagesFromOtherUsers.map((message) => {
-                    return <div key={message.message_id} id="message-card">
-                        {userLoggedIn.user_id === message.sender_user_id
-                            ? <Link to={`/profile/${message.receiver_user_id}`}>
-                                <img src={message.receiver_avatar_url} alt={message.receiver_avatar_url} />
-                                <div>{message.receiver_username}</div>
+                <div id="message-cards">
+                    {latestMessagesFromOtherUsers.map((message) => {
+                        return <div key={message.message_id} id="message-card">
+                            {userLoggedIn.user_id === message.sender_user_id
+                                ? <Link to={`/profile/${message.receiver_user_id}`}>
+                                    <img src={message.receiver_avatar_url} alt={message.receiver_avatar_url} />
+                                    <div>{message.receiver_username}</div>
+                                </Link>
+                                : <Link to={`/profile/${message.sender_user_id}`}>
+                                    <img src={message.sender_avatar_url} alt={message.sender_avatar_url} />
+                                    <div>{message.sender_username}</div>
+                                </Link>}
+                            <Link to={`/profile/${userLoggedIn.user_id}/messages/${userLoggedIn.user_id === message.sender_user_id ? message.receiver_user_id : message.sender_user_id}`}>
+                                <div>{message.message}</div>
+                                <div>{new Date(message.message_date).toLocaleDateString()} {new Date(message.message_date).toLocaleTimeString()}</div>
                             </Link>
-                            : <Link to={`/profile/${message.sender_user_id}`}>
-                                <img src={message.sender_avatar_url} alt={message.sender_avatar_url} />
-                                <div>{message.sender_username}</div>
-                            </Link>}
-                        <Link to={`/profile/${userLoggedIn.user_id}/messages/${userLoggedIn.user_id === message.sender_user_id ? message.receiver_user_id : message.sender_user_id}`}>
-                            <div>{message.message}</div>
-                            <div>{new Date(message.message_date).toLocaleDateString()} {new Date(message.message_date).toLocaleTimeString()}</div>
-                        </Link>
-                    </div>
-                })}
-            </div>
-        </main>
+                        </div>
+                    })}
+                </div>
+            </main>
+        </div>
     )
 }
