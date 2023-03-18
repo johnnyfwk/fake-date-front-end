@@ -89,7 +89,6 @@ main {
 
 /***** Home *****/
 #home-form {
-    /* background: #e0e0e0; */
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
@@ -252,11 +251,13 @@ main {
 
 #reply-card-username-time-and-date {
     display: flex;
+    flex-wrap: wrap;
     gap: 10px;
 }
 
 #reply-card-time-and-date {
     display: flex;
+    flex-wrap: wrap;
     gap: 5px;
 }
 
@@ -360,13 +361,16 @@ main {
     display: grid;
     gap: 15px;
 }
+
+#title {
+    max-width: 500px;
+    height: 50px;
+}
+
+#description {
+    height: 250px;
+}
 /***** Create a Post *****/
-
-
-
-/***** Footer *****/
-
-/***** Footer *****/
 
 
 
@@ -380,20 +384,21 @@ main {
     display: grid;
     gap: 3px;
 }
-
-#title {
-    max-width: 500px;
-    height: 50px;
-}
-
-#description {
-    height: 250px;
-}
 /***** Components *****/
 
 
 
+/***** Footer *****/
+
+/***** Footer *****/
+
+
+
 @media only screen and (min-width: 600px) {
+    #title {
+        height: initial;
+    }
+
     #description {
         height: 100px;
     }
