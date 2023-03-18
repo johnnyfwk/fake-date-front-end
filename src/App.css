@@ -356,9 +356,6 @@ main {
 
 
 /***** Create a Post *****/
-#create-a-post form {
-    }
-
 .form-components {
     display: grid;
     gap: 15px;
