@@ -430,9 +430,24 @@ export default function Profile() {
                             <Gender genderInput={genderInput} setGenderInput={setGenderInput} />
                             <Avatar avatarUrlInput={avatarUrlInput} setAvatarUrlInput={setAvatarUrlInput} setIsAvatarUrlValid={setIsAvatarUrlValid} />
                         </div>
-                        : <div>Gender: {user.gender}</div>}                    
+                        : <div>Gender: {user.gender}</div>}
 
-                    <div id="profile-buttons">
+                    {userLoggedIn.user_id === user.user_id && isPasswordBeingChanged
+                        ? <div>
+                            <Password
+                                passwordInput={currentPasswordInput}
+                                setPasswordInput={setCurrentPasswordInput}
+                                passwordInputLabel={currentPasswordInputLabel}
+                            />
+                            <Password
+                                passwordInput={newPasswordInput}
+                                setPasswordInput={setNewPasswordInput}
+                                passwordInputLabel={newPasswordInputLabel}
+                            />
+                          </div>
+                        : null}                 
+
+                    <div className="buttons">
                         {userLoggedIn.user_id === user.user_id && isEditProfileButtonVisible
                             ? <button onClick={onClickEditProfileButton}>Edit Profile</button>
                             : null}
@@ -447,21 +462,6 @@ export default function Profile() {
                         
                         {userLoggedIn.user_id === user.user_id && isChangePasswordButtonVisible
                             ? <button onClick={onClickChangePasswordButton}>Change Password</button>
-                            : null}
-
-                        {userLoggedIn.user_id === user.user_id && isPasswordBeingChanged
-                            ? <div>
-                                <Password
-                                    passwordInput={currentPasswordInput}
-                                    setPasswordInput={setCurrentPasswordInput}
-                                    passwordInputLabel={currentPasswordInputLabel}
-                                />
-                                <Password
-                                    passwordInput={newPasswordInput}
-                                    setPasswordInput={setNewPasswordInput}
-                                    passwordInputLabel={newPasswordInputLabel}
-                                />
-                            </div>
                             : null}
                         
                         {userLoggedIn.user_id === user.user_id && isCancelChangePasswordButtonVisible
@@ -479,7 +479,7 @@ export default function Profile() {
                         {userLoggedIn.user_id === user.user_id && isDeleteProfileConfirmationMessageAndButtonsVisible
                             ? <div>
                                 <p className="confirm">Delete account? Your details, posts, and replies can not be restored once deleted.</p>
-                                <div id="profile-delete-account-buttons">
+                                <div className="buttons">
                                     <button onClick={onClickDeleteProfileNoButton}>No</button>
                                     <button onClick={onClickDeleteProfileYesButton}>Yes</button>
                                 </div>

@@ -85,7 +85,8 @@ export default function Home({posts, setPosts}) {
     const componentCitiesStyleHome = {
         display: "grid",
         gridTemplateColumns: "auto auto",
-        gap: "5px"
+        gap: "5px",
+        alignItems: "center"
     };
 
     return (
@@ -118,7 +119,7 @@ export default function Home({posts, setPosts}) {
                         <Cities cityInput={cityInput} setCityInput={setCityInput} componentCitiesStyle={componentCitiesStyleHome} />
                     </div>
 
-                    <div id="home-form-filters-buttons">
+                    <div className="buttons">
                         <button onClick={onClickSearchButton}>Search</button>
                         <button onClick={onClickResetFiltersButton}>Reset</button>
                     </div>

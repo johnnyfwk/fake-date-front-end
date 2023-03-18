@@ -117,44 +117,46 @@ export default function DirectMessage() {
                 
                 {messages.length === 0 ? <p>No messages.</p> : null}
                 
-                <div id="direct-message-cards">
-                    {messages?.map((message) => {
-                        return <div
-                            key={message.message_id}
-                            id="direct-message-card"
-                            className={message.sender_user_id === userLoggedIn.user_id ? "justify-content-left" : "justify-content-right"}
-                            ref={lastMessageRef}>
-                            {message.sender_user_id === userLoggedIn.user_id
-                                ? <div id="direct-message-card-message">
-                                    <div>{message.message}</div>
-                                    <div>{new Date(message.message_date).toLocaleTimeString()} {new Date(message.message_date).toLocaleDateString()}</div>
-                                </div>                            
-                                : <div id="direct-message-card-avatar-username-and-message">
-                                    <img src={message.sender_avatar_url} alt={message.sender_avatar_url} />
-                                    <div>{message.sender_username}</div>
-                                    <div>{message.message}</div>
-                                    <div>{new Date(message.message_date).toLocaleTimeString()} {new Date(message.message_date).toLocaleDateString()}</div>
-                                </div>}       
-                        </div>
-                    })}
-                </div>
+                <div id="direct-message-cards-and-form">
+                    <div id="direct-message-cards">
+                        {messages?.map((message) => {
+                            return <div
+                                key={message.message_id}
+                                id="direct-message-card"
+                                className={message.sender_user_id === userLoggedIn.user_id ? "justify-content-left" : "justify-content-right"}
+                                ref={lastMessageRef}>
+                                {message.sender_user_id === userLoggedIn.user_id
+                                    ? <div id="direct-message-card-message">
+                                        <div>{message.message}</div>
+                                        <div>{new Date(message.message_date).toLocaleTimeString()} {new Date(message.message_date).toLocaleDateString()}</div>
+                                    </div>                            
+                                    : <div id="direct-message-card-avatar-username-and-message">
+                                        <img src={message.sender_avatar_url} alt={message.sender_avatar_url} />
+                                        <div>{message.sender_username}</div>
+                                        <div>{message.message}</div>
+                                        <div>{new Date(message.message_date).toLocaleTimeString()} {new Date(message.message_date).toLocaleDateString()}</div>
+                                    </div>}       
+                            </div>
+                        })}
+                    </div>
 
-                {isMessageSentSuccessfully === null
-                    ? null
-                    : isMessageSentSuccessfully === true
+                    {isMessageSentSuccessfully === null
                         ? null
-                        : <p className="error">Message could not be sent.</p>}
-                
-                <form onSubmit={handleSubmit} id="direct-message-form">
-                    <input
-                        type="text"
-                        id="message-input"
-                        name="message-input"
-                        value={messageInput}
-                        onChange={onChangeMessageInput}
-                    ></input>
-                    <input type="submit" value="Send" onClick={onClickSendMessageButton} disabled={!messageInput}></input>
-                </form>
+                        : isMessageSentSuccessfully === true
+                            ? null
+                            : <p className="error">Message could not be sent.</p>}
+                    
+                    <form onSubmit={handleSubmit} id="direct-message-form">
+                        <input
+                            type="text"
+                            id="message-input"
+                            name="message-input"
+                            value={messageInput}
+                            onChange={onChangeMessageInput}
+                        ></input>
+                        <button type="submit" onClick={onClickSendMessageButton} disabled={!messageInput}>Send</button>
+                    </form>
+                </div>
             </main>
         </div>
     )
