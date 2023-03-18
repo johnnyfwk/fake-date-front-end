@@ -48,7 +48,8 @@ export default function CreatePost() {
 
     const componentCitiesStyleCreatePost = {
         display: "grid",
-        gridTemplateColumns: "100px auto"
+        gridTemplateColumns: "initial",
+        gap: "5px"
     };
 
     return (
@@ -67,7 +68,7 @@ export default function CreatePost() {
                     : <p className="error">Post could not be created. Please try again later.</p>}
 
             <form onSubmit={handleSubmit}>
-                <div className="form-components">
+                <div className="post-components">
                     <Title titleInput={titleInput} setTitleInput={setTitleInput} />
                     <GenderOfDate genderOfDateInput={genderOfDateInput} setGenderOfDateInput={setGenderOfDateInput} />
                     <Cities cityInput={cityInput} setCityInput={setCityInput} handleCityInput={handleCityInput} componentCitiesStyle={componentCitiesStyleCreatePost}/>

@@ -41,6 +41,16 @@ footer {
     background: #ff8282;
 }
 
+label {
+    font-weight: bold;
+}
+
+.buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
 /***** Header *****/
 header {
     display: flex;
@@ -194,7 +204,6 @@ main {
 }
 
 #post-info {
-    background: #e2e2e2;
     display: grid;
     gap: 10px;
 }
@@ -205,14 +214,38 @@ main {
     gap: 10px;
 }
 
+#post-owner-username {
+    font-size: 1.5rem;
+}
+
 #post-body {
     display: grid;
-    gap: 3px;
+    gap: 5px;
 }
 
 #post-description {
     font-size: 1.2rem;
-    line-height: 1.5rem;
+    line-height: 1.7rem;
+}
+
+#post form {
+    display: grid;
+    gap: 10px;
+}
+
+#post-reply-textarea-and-character-count {
+    display: grid;
+    gap: 3px;
+}
+
+#post-reply {
+    height: 200px;
+}
+
+#delete-post-confirmation-message-and-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
 }
 
 #update-reply-success-message,
@@ -279,6 +312,16 @@ main {
 
 #reply-card-buttons {
     background: #e0e0e0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+#reply-card-edit-reply {
+    height: 200px;
+}
+
+#delete-reply-confirmation-message-and-buttons {
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
@@ -357,11 +400,6 @@ main {
 
 
 /***** Create a Post *****/
-.form-components {
-    display: grid;
-    gap: 15px;
-}
-
 #title {
     max-width: 500px;
     height: 50px;
@@ -375,9 +413,14 @@ main {
 
 
 /***** Components *****/
+.post-components {
+    display: grid;
+    gap: 15px;
+}
+
 .component {
     display: grid;
-    grid-template-columns: 100px auto;
+    gap: 5px;
 }
 
 .component-input-and-character-length {
@@ -400,6 +443,14 @@ main {
     }
 
     #description {
+        height: 100px;
+    }
+
+    #post-reply {
+        height: 100px;
+    }
+
+    #reply-card-edit-reply {
         height: 100px;
     }
 }
