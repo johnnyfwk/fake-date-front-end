@@ -84,7 +84,8 @@ export default function Home({posts, setPosts}) {
 
     const componentCitiesStyleHome = {
         display: "grid",
-        gridTemplateColumns: "auto auto"
+        gridTemplateColumns: "auto auto",
+        gap: "5px"
     };
 
     return (

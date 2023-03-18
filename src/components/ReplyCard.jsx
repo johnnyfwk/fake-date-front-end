@@ -91,7 +91,7 @@ export default function ReplyCard({reply, userLoggedIn, setIsReplyUpdatedSuccess
     }
 
     return (
-        <div id="reply-card">
+        <div id="reply-card" loading="lazy">
             <Link to={`/profile/${reply.user_id}`} id="reply-card-avatar" title={reply.username}>
                 <img src={reply.avatar_url} alt={reply.avatar_url}></img>
             </Link>
@@ -112,13 +112,14 @@ export default function ReplyCard({reply, userLoggedIn, setIsReplyUpdatedSuccess
                     
                     {isEditReplyInputVisible
                         ? <textarea
+                        id="reply-card-edit-reply"
                             value={editReplyInput}
                             onChange={onChangeEditReplyInput}
                         ></textarea>
                         : <div id="reply-card-reply">{reply.reply}</div>}              
                 </div>
 
-                <div id="reply-card-buttons">
+                <div className="buttons">
                     {userLoggedIn?.user_id === reply.user_id && isEditReplyButtonVisible
                         ? <button onClick={onClickEditReplyButton}>Edit</button>
                         : null}
@@ -136,10 +137,12 @@ export default function ReplyCard({reply, userLoggedIn, setIsReplyUpdatedSuccess
                         : null}
                     
                     {userLoggedIn?.user_id === reply.user_id && areDeleteReplyConfirmationButtonsVisible
-                        ? <div>
+                        ? <div id="delete-reply-confirmation-message-and-buttons">
                             <span className="confirm">Delete reply?</span>
-                            <button onClick={onClickDeleteReplyNo}>No</button>
-                            <button onClick={onClickDeleteReplyYes}>Yes</button>
+                            <div className="buttons">
+                                <button onClick={onClickDeleteReplyNo}>No</button>
+                                <button onClick={onClickDeleteReplyYes}>Yes</button>
+                            </div>
                         </div>
                         : null}
                 </div>

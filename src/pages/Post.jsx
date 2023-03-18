@@ -197,8 +197,14 @@ export default function Post() {
         return <p className="error">Post could not be loaded.</p>
     }
 
+    const componentCitiesStylePost = {
+        display: "grid",
+        gridTemplateColumns: "initial",
+        gap: "5px"
+    };
+
     return (
-        <main>
+        <main id="post">
             <h1>{post.title}</h1>
 
             {isPostUpdatedSuccessfully === null
@@ -224,7 +230,7 @@ export default function Post() {
                     <Link to={`/profile/${post.user_id}`}>
                         <img src={post.avatar_url} alt={post.avatar_url} id="post-avatar-image"/>
                     </Link>            
-                    <Link to={`/profile/${post.user_id}`}>{post.username}</Link>
+                    <Link to={`/profile/${post.user_id}`} id="post-owner-username">{post.username}</Link>
                 </div>
 
                 {isPostBeingEdited
@@ -233,23 +239,25 @@ export default function Post() {
                             ? null
                             : <p className="error">Please select a date that is the same as or after today's date.</p>}
 
-                        <Title titleInput={titleInput} setTitleInput={setTitleInput} />
-                        <GenderOfDate genderOfDateInput={genderOfDateInput} setGenderOfDateInput={setGenderOfDateInput} />
-                        <Cities cityInput={cityInput} setCityInput={setCityInput} />
-                        <Occasion occasionInput={occasionInput} setOccasionInput={setOccasionInput} />
-                        <DateOfDate dateInput={dateInput} setDateInput={setDateInput} setIsDateValid={setIsDateValid} />                        
-                        <Description descriptionInput={descriptionInput} setDescriptionInput={setDescriptionInput}/>
+                        <div className="post-components">
+                            <Title titleInput={titleInput} setTitleInput={setTitleInput} />
+                            <GenderOfDate genderOfDateInput={genderOfDateInput} setGenderOfDateInput={setGenderOfDateInput} />
+                            <Cities cityInput={cityInput} setCityInput={setCityInput} componentCitiesStyle={componentCitiesStylePost} />
+                            <Occasion occasionInput={occasionInput} setOccasionInput={setOccasionInput} />
+                            <DateOfDate dateInput={dateInput} setDateInput={setDateInput} setIsDateValid={setIsDateValid} />                        
+                            <Description descriptionInput={descriptionInput} setDescriptionInput={setDescriptionInput}/>
+                        </div>
                       </div>
                     : <div id="post-body">
-                        <div><b>Posted:</b> {new Date(post.post_date).toLocaleDateString()} {new Date(post.post_date).toLocaleTimeString()}</div>
                         <div><b>Seeking:</b> {post.gender_of_date}</div>
                         <div><b>City:</b> {post.city}</div>
                         <div><b>Occasion:</b> {post.occasion}</div>
                         <div><b>Date:</b> {new Date(post.date).toLocaleDateString()}</div>
-                        <div id="post-description">{post.description}</div>
+                        <div><b>Posted:</b> {new Date(post.post_date).toLocaleDateString()} {new Date(post.post_date).toLocaleTimeString()}</div>
+                        <p id="post-description">{post.description}</p>
                       </div>}
 
-                <div id="post-buttons">
+                <div className="buttons">
                     {userLoggedIn.user_id === post.user_id && isEditPostButtonVisible
                         ? <button onClick={onClickEditPostButton}>Edit</button>
                         : null}
@@ -267,10 +275,12 @@ export default function Post() {
                         : null}
 
                     {userLoggedIn.user_id === post.user_id && isDeletePostConfirmationMessageAndButtonsVisible
-                        ? <div>
+                        ? <div id="delete-post-confirmation-message-and-buttons">
                             <span className="confirm">Delete post?</span>
-                            <button onClick={onClickDeletePostNoButton}>No</button>
-                            <button onClick={onClickDeletePostYesButton}>Yes</button>
+                            <div className="buttons">
+                                <button onClick={onClickDeletePostNoButton}>No</button>
+                                <button onClick={onClickDeletePostYesButton}>Yes</button>
+                            </div>
                           </div>
                         : null}
                 </div>
@@ -291,17 +301,20 @@ export default function Post() {
 
                 {userLoggedIn.user_id === post.user_id || userLoggedIn.gender === post.gender_of_date || post.gender_of_date === "Either"
                     ? <form onSubmit={handleSubmit}>
-                        <label htmlFor="post-reply"></label>
-                        <textarea
-                            id="post-reply"
-                            name="post-reply"
-                            maxLength="300"
-                            value={replyInput}
-                            onChange={handleReplyInput}
-                        ></textarea>
-                        <div>{replyInput.length}/300</div>
-
-                        <input type="submit" value="Send Reply" disabled={!replyInput}></input>
+                        <div id="post-reply-textarea-and-character-count">
+                            <label htmlFor="post-reply"></label>
+                            <textarea
+                                id="post-reply"
+                                name="post-reply"
+                                maxLength="300"
+                                value={replyInput}
+                                onChange={handleReplyInput}
+                            ></textarea>
+                            <div>{replyInput.length}/300</div>
+                        </div>
+                        <div id="post-reply-send-button">
+                            <input type="submit" value="Send" disabled={!replyInput}></input>
+                        </div>
                       </form>
                     : <p className="error">This user is looking for a {post.gender_of_date} date.</p>}
             </section>
