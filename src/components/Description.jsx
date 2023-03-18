@@ -5,16 +5,18 @@ export default function Description({descriptionInput, setDescriptionInput}) {
     }
 
     return (
-        <div>
-            <label htmlFor="description">Description: </label>
-            <textarea
-                id="descrption"
-                name="description"
-                value={descriptionInput}
-                onChange={handleDescriptionInput}
-                maxLength="300"
-            ></textarea>
-            <span>{descriptionInput.length}/300</span>
+        <div className="component description">
+            <label htmlFor="description">Description:</label>
+            <div className="component-input-and-character-length">
+                <textarea
+                    id="description"
+                    name="description"
+                    value={descriptionInput}
+                    onChange={handleDescriptionInput}
+                    maxLength="300"
+                ></textarea>
+                <div>{descriptionInput.length}/300</div>
+            </div>
         </div>
     )
 }

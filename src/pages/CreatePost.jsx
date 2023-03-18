@@ -46,8 +46,13 @@ export default function CreatePost() {
         setCityInput(event.target.value);
     }
 
+    const componentCitiesStyleCreatePost = {
+        display: "grid",
+        gridTemplateColumns: "100px auto"
+    };
+
     return (
-        <main>
+        <main id="create-a-post">
             <h1>Create a Post</h1>
             <p>Enter where and when the date will happen, who you are looking for, what the occasion will be, and additional information about why you are looking for a fake date.</p>
 
@@ -62,12 +67,15 @@ export default function CreatePost() {
                     : <p className="error">Post could not be created. Please try again later.</p>}
 
             <form onSubmit={handleSubmit}>
-                <Title titleInput={titleInput} setTitleInput={setTitleInput} />
-                <GenderOfDate genderOfDateInput={genderOfDateInput} setGenderOfDateInput={setGenderOfDateInput} />
-                <Cities cityInput={cityInput} setCityInput={setCityInput} handleCityInput={handleCityInput} />
-                <Occasion occasionInput={occasionInput} setOccasionInput={setOccasionInput} />            
-                <DateOfDate dateInput={dateInput} setDateInput={setDateInput} setIsDateValid={setIsDateValid} />                
-                <Description descriptionInput={descriptionInput} setDescriptionInput={setDescriptionInput}/>
+                <div className="form-components">
+                    <Title titleInput={titleInput} setTitleInput={setTitleInput} />
+                    <GenderOfDate genderOfDateInput={genderOfDateInput} setGenderOfDateInput={setGenderOfDateInput} />
+                    <Cities cityInput={cityInput} setCityInput={setCityInput} handleCityInput={handleCityInput} componentCitiesStyle={componentCitiesStyleCreatePost}/>
+                    <Occasion occasionInput={occasionInput} setOccasionInput={setOccasionInput} />            
+                    <DateOfDate dateInput={dateInput} setDateInput={setDateInput} setIsDateValid={setIsDateValid} />                
+                    <Description descriptionInput={descriptionInput} setDescriptionInput={setDescriptionInput}/>
+                </div>
+
                 <input
                     type="submit"
                     value="Submit"

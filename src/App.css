@@ -355,6 +355,43 @@ main {
 
 
 
+/***** Create a Post *****/
+#create-a-post form {
+    }
+
+.form-components {
+    display: grid;
+    gap: 15px;
+}
+/***** Create a Post *****/
+
+
+
+
 /***** Footer *****/
 
 /***** Footer *****/
+
+
+
+/***** Components *****/
+.component {
+    display: grid;
+    grid-template-columns: 100px auto;
+}
+
+.component-input-and-character-length {
+    display: grid;
+    gap: 3px;
+}
+
+#title {
+    max-width: 300px;
+}
+
+#description {
+    height: 70px;
+}
+
+
+/***** Components *****/
