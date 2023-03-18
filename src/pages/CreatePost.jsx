@@ -31,6 +31,13 @@ export default function CreatePost() {
 
     function handleSubmit(event) {
         event.preventDefault();
+    }
+
+    function handleCityInput(event) {
+        setCityInput(event.target.value);
+    }
+
+    function onClickSubmitPostButton() {
         setIsPostCreatedSuccessfully(null);
         api.createPost(new Date(), new Date(), titleInput, cityInput, genderOfDateInput, dateInput, occasionInput, descriptionInput, userLoggedIn.user_id)
             .then((response) => {
@@ -40,10 +47,6 @@ export default function CreatePost() {
             .catch((error) => {
                 setIsPostCreatedSuccessfully(false);
             })
-    }
-
-    function handleCityInput(event) {
-        setCityInput(event.target.value);
     }
 
     const componentCitiesStyleCreatePost = {
@@ -68,7 +71,7 @@ export default function CreatePost() {
                         ? <p className="success">Your post was created.</p>
                         : <p className="error">Post could not be created. Please try again later.</p>}
 
-                <form onSubmit={handleSubmit}>
+                <form onSubmit={handleSubmit} id="create-a-post-form">
                     <div className="post-components">
                         <Title titleInput={titleInput} setTitleInput={setTitleInput} />
                         <GenderOfDate genderOfDateInput={genderOfDateInput} setGenderOfDateInput={setGenderOfDateInput} />
@@ -77,10 +80,8 @@ export default function CreatePost() {
                         <DateOfDate dateInput={dateInput} setDateInput={setDateInput} setIsDateValid={setIsDateValid} />                
                         <Description descriptionInput={descriptionInput} setDescriptionInput={setDescriptionInput}/>
                     </div>
-
-                    <input
-                        type="submit"
-                        value="Submit"
+                    <button
+                        onClick={onClickSubmitPostButton}
                         disabled={
                             !titleInput ||
                             !cityInput ||
@@ -91,7 +92,7 @@ export default function CreatePost() {
                             !descriptionInput ||
                             isPostCreatedSuccessfully
                         }
-                    ></input>
+                    >Submit</button>
                 </form>
             </main>
         </div>

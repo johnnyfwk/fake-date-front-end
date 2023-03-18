@@ -1,9 +1,16 @@
 :root {
+    --black: #000000;
+    --white: #ffffff;
     --jet: #363537;
     --red: #ef2d56;
     --pumpkin: #ed7d3a;
     --pistachio: #8cd867;
     --emerald: #2FBF71;
+}
+
+body {
+    margin: 0;
+    background: var(--red);
 }
 
 .error, 
@@ -23,9 +30,8 @@ img {
     width: 100%;
 }
 
-body {
-    margin: 0;
-    background: var(--red);
+p {
+    line-height: 1.5rem;
 }
 
 #header,
@@ -56,10 +62,28 @@ label {
     font-weight: bold;
 }
 
+textarea,
+input,
+select {
+    padding: 10px;
+}
+
 .buttons {
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
+}
+
+button {
+    background: var(--black);
+    color: var(--white);
+    border: 0;
+    padding: 10px;
+    font-weight: bold;
+}
+
+button:hover {
+    background: var(--red);
 }
 
 /***** Header *****/
@@ -73,7 +97,7 @@ header {
 }
 
 #logo {
-    font-size: 1.5rem;
+    font-size: 1.8rem;
 }
 
 header img {
@@ -98,9 +122,7 @@ header img {
 
 /***** Nav *****/
 #nav {
-    background: #000000;
-    position: fixed;
-    width: 100%;
+    background: var(--black);
 }
 
 nav {
@@ -124,8 +146,9 @@ nav a:active {
 #main {
     background: #ffffff;
 }
+
 main {
-    padding: 30px 20px 20px 20px;
+    padding: 5px 20px 20px 20px;
 }
 /***** Main *****/
 
@@ -136,15 +159,11 @@ main {
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
+    padding: 0px 0px 20px 0px;
+    align-items: center;
 }
 
 #home-form-filters {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-}
-
-#home-form-filters-buttons {
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
@@ -176,6 +195,17 @@ main {
 #reply-card {
     display: grid;
     grid-template-columns: 75px auto;
+    border: 1px solid var(--red);
+}
+
+#post-card a:link,
+#post-card a:visited,
+#post-card a:active {
+    color: var(--black);
+}
+
+#post-card a:hover {
+    color: var(--red);
 }
 
 #post-card-avatar,
@@ -187,14 +217,8 @@ main {
 
 #post-card-avatar,
 #reply-card-avatar {
-    background: #ffe3e3;
+    background: var(--red);
     text-align: center;
-    border-radius: 10px 0px 0px 10px;
-}
-
-#post-card-body,
-#reply-card-body-and-buttons {
-    border-radius: 0px 10px 10px 0px;
 }
 
 /***** Post Cards *****/
@@ -205,13 +229,14 @@ main {
 /***** Post Cards *****/
 /***** Post Card *****/
 #post-card-body {
-    background: #dfdfdf;
+    background: #ffffff;
     display: grid;
     gap: 5px;
 }
 
 #post-card-title {
     font-size: 1.5rem;
+    font-weight: bold;
 }
 
 #post-card img {
@@ -306,7 +331,6 @@ main {
 /***** Reply Cards *****/
 /***** Reply Card *****/
 #reply-card-body-and-buttons {
-    background: #e0e0e0;
     display: grid;
     gap: 5px;
 }
@@ -429,11 +453,25 @@ main {
     background: #ddffd6;
     padding: 20px;
 }
+
+#direct-message-cards-and-form {
+    display: grid;
+    gap: 10px;
+}
 /***** Direct Message Card *****/
 
 
 
 /***** Create a Post *****/
+#create-a-post-form {
+    display: grid;
+    gap: 20px;
+}
+
+#create-a-post-form button {
+    width: 100px;
+}
+
 #title {
     max-width: 500px;
     height: 50px;

@@ -7,7 +7,8 @@ export default function Cities({cityInput, setCityInput, componentCitiesStyle}) 
     const styleComponentCities = {
         display: componentCitiesStyle.display,
         gridTemplateColumns: componentCitiesStyle.gridTemplateColumns,
-        gap: componentCitiesStyle.gap
+        gap: componentCitiesStyle.gap,
+        alignItems: componentCitiesStyle.alignItems
     };
 
     return (
