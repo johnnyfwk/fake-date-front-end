@@ -8,14 +8,13 @@ export default function Title({titleInput, setTitleInput}) {
         <div className="component title">
             <label htmlFor="title">Title:</label>
             <div className="component-input-and-character-length">
-                <input
-                    type="text"
+                <textarea
                     id="title"
                     name="title"
                     value={titleInput}
                     onChange={handleTitleInput}
                     maxLength="50"
-                ></input>
+                ></textarea>
                 <div>{titleInput.length}/50</div>
             </div>
         </div>
