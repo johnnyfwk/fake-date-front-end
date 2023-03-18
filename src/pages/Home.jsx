@@ -14,7 +14,6 @@ export default function Home({posts, setPosts}) {
     const [genderInput, setGenderInput] = useState("default");
     const [cityInput, setCityInput] = useState("default");
 
-
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -83,6 +82,11 @@ export default function Home({posts, setPosts}) {
         setCityInput("default");
     }
 
+    const componentCitiesStyleHome = {
+        display: "grid",
+        gridTemplateColumns: "auto auto"
+    };
+
     return (
         <main>
             <h1>Find a Fake Date</h1>
@@ -109,7 +113,7 @@ export default function Home({posts, setPosts}) {
                                 <option value="Either">Either</option>
                         </select>
                     </div>
-                    <Cities cityInput={cityInput} setCityInput={setCityInput} />
+                    <Cities cityInput={cityInput} setCityInput={setCityInput} componentCitiesStyle={componentCitiesStyleHome} />
                 </div>
 
                 <div id="home-form-filters-buttons">
