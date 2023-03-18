@@ -204,152 +204,154 @@ export default function Post() {
     };
 
     return (
-        <main id="post">
-            <h1>{post.title}</h1>
+        <div id="main">
+            <main id="post">
+                <h1>{post.title}</h1>
 
-            {isPostUpdatedSuccessfully === null
-                ? null
-                : isPostUpdatedSuccessfully === true
-                    ? <p className="success">Post has been updated.</p>
-                    : <p className="error">Post could not be updated.</p>}
+                {isPostUpdatedSuccessfully === null
+                    ? null
+                    : isPostUpdatedSuccessfully === true
+                        ? <p className="success">Post has been updated.</p>
+                        : <p className="error">Post could not be updated.</p>}
 
-            {isPostDeletedSuccessfully === null
-                ? null
-                : isPostDeletedSuccessfully === true
-                    ? <p className="success">Post has been deleted.</p>
-                    : <p className="error">Post could not be deleted.</p>}
-            
-            {areRepliesByPostIdDeletedSuccessfully === null
-                ? null
-                : areRepliesByPostIdDeletedSuccessfully === true
-                    ? <p className="success">Replies for this post have been deleted.</p>
-                    : <p className="error">Replies for this post could not be deleted.</p>}
+                {isPostDeletedSuccessfully === null
+                    ? null
+                    : isPostDeletedSuccessfully === true
+                        ? <p className="success">Post has been deleted.</p>
+                        : <p className="error">Post could not be deleted.</p>}
+                
+                {areRepliesByPostIdDeletedSuccessfully === null
+                    ? null
+                    : areRepliesByPostIdDeletedSuccessfully === true
+                        ? <p className="success">Replies for this post have been deleted.</p>
+                        : <p className="error">Replies for this post could not be deleted.</p>}
 
-            <section id="post-info">
-                <div id="post-owner">
-                    <Link to={`/profile/${post.user_id}`}>
-                        <img src={post.avatar_url} alt={post.avatar_url} id="post-avatar-image"/>
-                    </Link>            
-                    <Link to={`/profile/${post.user_id}`} id="post-owner-username">{post.username}</Link>
-                </div>
+                <section id="post-info">
+                    <div id="post-owner">
+                        <Link to={`/profile/${post.user_id}`}>
+                            <img src={post.avatar_url} alt={post.avatar_url} id="post-avatar-image"/>
+                        </Link>            
+                        <Link to={`/profile/${post.user_id}`} id="post-owner-username">{post.username}</Link>
+                    </div>
 
-                {isPostBeingEdited
-                    ? <div>
-                        {isDateValid === null || isDateValid === true
-                            ? null
-                            : <p className="error">Please select a date that is the same as or after today's date.</p>}
+                    {isPostBeingEdited
+                        ? <div>
+                            {isDateValid === null || isDateValid === true
+                                ? null
+                                : <p className="error">Please select a date that is the same as or after today's date.</p>}
 
-                        <div className="post-components">
-                            <Title titleInput={titleInput} setTitleInput={setTitleInput} />
-                            <GenderOfDate genderOfDateInput={genderOfDateInput} setGenderOfDateInput={setGenderOfDateInput} />
-                            <Cities cityInput={cityInput} setCityInput={setCityInput} componentCitiesStyle={componentCitiesStylePost} />
-                            <Occasion occasionInput={occasionInput} setOccasionInput={setOccasionInput} />
-                            <DateOfDate dateInput={dateInput} setDateInput={setDateInput} setIsDateValid={setIsDateValid} />                        
-                            <Description descriptionInput={descriptionInput} setDescriptionInput={setDescriptionInput}/>
-                        </div>
-                      </div>
-                    : <div id="post-body">
-                        <div><b>Seeking:</b> {post.gender_of_date}</div>
-                        <div><b>City:</b> {post.city}</div>
-                        <div><b>Occasion:</b> {post.occasion}</div>
-                        <div><b>Date:</b> {new Date(post.date).toLocaleDateString()}</div>
-                        <div><b>Posted:</b> {new Date(post.post_date).toLocaleDateString()} {new Date(post.post_date).toLocaleTimeString()}</div>
-                        <p id="post-description">{post.description}</p>
-                      </div>}
-
-                <div className="buttons">
-                    {userLoggedIn.user_id === post.user_id && isEditPostButtonVisible
-                        ? <button onClick={onClickEditPostButton}>Edit</button>
-                        : null}
-                    
-                    {userLoggedIn.user_id === post.user_id && isDeletePostButtonVisible
-                        ? <button onClick={onClickDeletePostButton}>Delete</button>
-                        : null}
-
-                    {userLoggedIn.user_id === post.user_id && isCancelEditPostButtonVisible
-                        ? <button onClick={onClickCancelEditPostButton}>Cancel</button>
-                        : null}
-                    
-                    {userLoggedIn.user_id === post.user_id && isUpdatePostButtonVisible
-                        ? <button onClick={onClickUpdatePostButton} disabled={!titleInput || !cityInput || !genderOfDateInput || !dateInput || !isDateValid || !occasionInput || !descriptionInput}>Update</button>
-                        : null}
-
-                    {userLoggedIn.user_id === post.user_id && isDeletePostConfirmationMessageAndButtonsVisible
-                        ? <div id="delete-post-confirmation-message-and-buttons">
-                            <span className="confirm">Delete post?</span>
-                            <div className="buttons">
-                                <button onClick={onClickDeletePostNoButton}>No</button>
-                                <button onClick={onClickDeletePostYesButton}>Yes</button>
+                            <div className="post-components">
+                                <Title titleInput={titleInput} setTitleInput={setTitleInput} />
+                                <GenderOfDate genderOfDateInput={genderOfDateInput} setGenderOfDateInput={setGenderOfDateInput} />
+                                <Cities cityInput={cityInput} setCityInput={setCityInput} componentCitiesStyle={componentCitiesStylePost} />
+                                <Occasion occasionInput={occasionInput} setOccasionInput={setOccasionInput} />
+                                <DateOfDate dateInput={dateInput} setDateInput={setDateInput} setIsDateValid={setIsDateValid} />                        
+                                <Description descriptionInput={descriptionInput} setDescriptionInput={setDescriptionInput}/>
                             </div>
-                          </div>
+                        </div>
+                        : <div id="post-body">
+                            <div><b>Seeking:</b> {post.gender_of_date}</div>
+                            <div><b>City:</b> {post.city}</div>
+                            <div><b>Occasion:</b> {post.occasion}</div>
+                            <div><b>Date:</b> {new Date(post.date).toLocaleDateString()}</div>
+                            <div><b>Posted:</b> {new Date(post.post_date).toLocaleDateString()} {new Date(post.post_date).toLocaleTimeString()}</div>
+                            <p id="post-description">{post.description}</p>
+                        </div>}
+
+                    <div className="buttons">
+                        {userLoggedIn.user_id === post.user_id && isEditPostButtonVisible
+                            ? <button onClick={onClickEditPostButton}>Edit</button>
+                            : null}
+                        
+                        {userLoggedIn.user_id === post.user_id && isDeletePostButtonVisible
+                            ? <button onClick={onClickDeletePostButton}>Delete</button>
+                            : null}
+
+                        {userLoggedIn.user_id === post.user_id && isCancelEditPostButtonVisible
+                            ? <button onClick={onClickCancelEditPostButton}>Cancel</button>
+                            : null}
+                        
+                        {userLoggedIn.user_id === post.user_id && isUpdatePostButtonVisible
+                            ? <button onClick={onClickUpdatePostButton} disabled={!titleInput || !cityInput || !genderOfDateInput || !dateInput || !isDateValid || !occasionInput || !descriptionInput}>Update</button>
+                            : null}
+
+                        {userLoggedIn.user_id === post.user_id && isDeletePostConfirmationMessageAndButtonsVisible
+                            ? <div id="delete-post-confirmation-message-and-buttons">
+                                <span className="confirm">Delete post?</span>
+                                <div className="buttons">
+                                    <button onClick={onClickDeletePostNoButton}>No</button>
+                                    <button onClick={onClickDeletePostYesButton}>Yes</button>
+                                </div>
+                            </div>
+                            : null}
+                    </div>
+                </section>
+
+                <section>
+                    <h2>Send a Reply</h2>
+
+                    {new Date(post.date).toISOString() < new Date().toISOString()
+                        ? <p className="error">This date has passed.</p>
                         : null}
-                </div>
-            </section>
 
-            <section>
-                <h2>Send a Reply</h2>
+                    {isReplyPostedSuccessfully === null
+                        ? null
+                        : isReplyPostedSuccessfully === true
+                            ? <p className="success">Your reply was posted.</p>
+                            : <p className="error">Your reply could not be posted.</p>}
 
-                {new Date(post.date).toISOString() < new Date().toISOString()
-                    ? <p className="error">This date has passed.</p>
-                    : null}
+                    {userLoggedIn.user_id === post.user_id || userLoggedIn.gender === post.gender_of_date || post.gender_of_date === "Either"
+                        ? <form onSubmit={handleSubmit}>
+                            <div id="post-reply-textarea-and-character-count">
+                                <label htmlFor="post-reply"></label>
+                                <textarea
+                                    id="post-reply"
+                                    name="post-reply"
+                                    maxLength="300"
+                                    value={replyInput}
+                                    onChange={handleReplyInput}
+                                ></textarea>
+                                <div>{replyInput.length}/300</div>
+                            </div>
+                            <div id="post-reply-send-button">
+                                <input type="submit" value="Send" disabled={!replyInput}></input>
+                            </div>
+                        </form>
+                        : <p className="error">This user is looking for a {post.gender_of_date} date.</p>}
+                </section>
 
-                {isReplyPostedSuccessfully === null
-                    ? null
-                    : isReplyPostedSuccessfully === true
-                        ? <p className="success">Your reply was posted.</p>
-                        : <p className="error">Your reply could not be posted.</p>}
+                <section>
+                    <h2>Replies ({replies.length})</h2>
 
-                {userLoggedIn.user_id === post.user_id || userLoggedIn.gender === post.gender_of_date || post.gender_of_date === "Either"
-                    ? <form onSubmit={handleSubmit}>
-                        <div id="post-reply-textarea-and-character-count">
-                            <label htmlFor="post-reply"></label>
-                            <textarea
-                                id="post-reply"
-                                name="post-reply"
-                                maxLength="300"
-                                value={replyInput}
-                                onChange={handleReplyInput}
-                            ></textarea>
-                            <div>{replyInput.length}/300</div>
-                        </div>
-                        <div id="post-reply-send-button">
-                            <input type="submit" value="Send" disabled={!replyInput}></input>
-                        </div>
-                      </form>
-                    : <p className="error">This user is looking for a {post.gender_of_date} date.</p>}
-            </section>
+                    {isRepliesLoading ? <p>Replies are loading...</p> : null}
+                    {replies.length ? null : <p>Be the first to reply to this post.</p>}
+                    {isRepliesLoadedSuccessfully === false ? <p className="error">Replies could not be loaded.</p> : null}
 
-            <section>
-                <h2>Replies ({replies.length})</h2>
+                    {isReplyUpdatedSuccessfully === null
+                        ? null
+                        : isReplyUpdatedSuccessfully === true
+                            ? <p className="success" id="update-reply-success-message">Reply was updated.</p>
+                            : <p className="error" id="update-reply-error-message">Reply could not be updated.</p>}
 
-                {isRepliesLoading ? <p>Replies are loading...</p> : null}
-                {replies.length ? null : <p>Be the first to reply to this post.</p>}
-                {isRepliesLoadedSuccessfully === false ? <p className="error">Replies could not be loaded.</p> : null}
+                    {isReplyDeletedSuccessfully === null
+                        ? null
+                        : isReplyDeletedSuccessfully === true
+                            ? <p className="success" id="delete-reply-success-message">Reply was deleted.</p>
+                            : <p className="error" id="delete-reply-error-message">Reply could not be deleted.</p>}
 
-                {isReplyUpdatedSuccessfully === null
-                    ? null
-                    : isReplyUpdatedSuccessfully === true
-                        ? <p className="success" id="update-reply-success-message">Reply was updated.</p>
-                        : <p className="error" id="update-reply-error-message">Reply could not be updated.</p>}
-
-                {isReplyDeletedSuccessfully === null
-                    ? null
-                    : isReplyDeletedSuccessfully === true
-                        ? <p className="success" id="delete-reply-success-message">Reply was deleted.</p>
-                        : <p className="error" id="delete-reply-error-message">Reply could not be deleted.</p>}
-
-                <div id="reply-cards">
-                    {replies.map((reply) => {
-                        return <ReplyCard
-                            key={reply.reply_id}
-                            reply={reply}
-                            userLoggedIn={userLoggedIn}
-                            setIsReplyUpdatedSuccessfully={setIsReplyUpdatedSuccessfully}
-                            setIsReplyDeletedSuccessfully={setIsReplyDeletedSuccessfully}
-                        />
-                    })}
-                </div>
-            </section>
-        </main>
+                    <div id="reply-cards">
+                        {replies.map((reply) => {
+                            return <ReplyCard
+                                key={reply.reply_id}
+                                reply={reply}
+                                userLoggedIn={userLoggedIn}
+                                setIsReplyUpdatedSuccessfully={setIsReplyUpdatedSuccessfully}
+                                setIsReplyDeletedSuccessfully={setIsReplyDeletedSuccessfully}
+                            />
+                        })}
+                    </div>
+                </section>
+            </main>
+        </div>
     )
 }

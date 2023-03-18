@@ -104,46 +104,48 @@ export default function SignUp({users, setUsers}) {
     }
 
     return (
-        <main>
-            <h1>Sign Up</h1>
-            <p>Create an account to find someone to go on a fake date with.</p>
-            <p>Already have an account? <Link to="/sign-in">Sign in</Link>.</p>
+        <div id="main">
+            <main>
+                <h1>Sign Up</h1>
+                <p>Create an account to find someone to go on a fake date with.</p>
+                <p>Already have an account? <Link to="/sign-in">Sign in</Link>.</p>
 
-            {isUserAddedSuccessfully === false
-                ? <p className="error">Account could not be created. Try again later.</p>
-                : null}
-
-            <form onSubmit={handleSubmit}>
-                <label htmlFor="sign-up-username">Username:</label>
-                <input
-                    type="text"
-                    id="sign-up-username"
-                    name="sign-up-username"
-                    maxLength="20"
-                    onChange={handleUsernameInput}
-                    value={usernameInput}
-                ></input>
-                {isUsernameValid === null || isUsernameValid === true
-                    ? null
-                    : <span className="error">Usernames must start with a letter and can only contain alphanumeric characters.</span>}
-                {isUsernameTaken === null
-                    ? null
-                    : isUsernameTaken === true
-                        ? <span className="error">Unavailable</span>
-                        : <span className="success">Available</span>}
-
-                <Password passwordInput={passwordInput} setPasswordInput={setPasswordInput} passwordInputLabel={passwordInputLabel}/>
-
-                <Gender genderInput={genderInput} setGenderInput={setGenderInput}/>
-
-                <Avatar avatarUrlInput={avatarUrlInput} setAvatarUrlInput={setAvatarUrlInput} setIsAvatarUrlValid={setIsAvatarUrlValid}/>
-
-                {isAvatarUrlValid === false
-                    ? <span className="error">Please enter a valid image URL.</span>
+                {isUserAddedSuccessfully === false
+                    ? <p className="error">Account could not be created. Try again later.</p>
                     : null}
 
-                <input type="submit" value="Create Account" disabled={!usernameInput || !passwordInput || isUsernameTaken || !isUsernameValid || genderInput === "default"}></input>
-            </form>
-        </main>
+                <form onSubmit={handleSubmit}>
+                    <label htmlFor="sign-up-username">Username:</label>
+                    <input
+                        type="text"
+                        id="sign-up-username"
+                        name="sign-up-username"
+                        maxLength="20"
+                        onChange={handleUsernameInput}
+                        value={usernameInput}
+                    ></input>
+                    {isUsernameValid === null || isUsernameValid === true
+                        ? null
+                        : <span className="error">Usernames must start with a letter and can only contain alphanumeric characters.</span>}
+                    {isUsernameTaken === null
+                        ? null
+                        : isUsernameTaken === true
+                            ? <span className="error">Unavailable</span>
+                            : <span className="success">Available</span>}
+
+                    <Password passwordInput={passwordInput} setPasswordInput={setPasswordInput} passwordInputLabel={passwordInputLabel}/>
+
+                    <Gender genderInput={genderInput} setGenderInput={setGenderInput}/>
+
+                    <Avatar avatarUrlInput={avatarUrlInput} setAvatarUrlInput={setAvatarUrlInput} setIsAvatarUrlValid={setIsAvatarUrlValid}/>
+
+                    {isAvatarUrlValid === false
+                        ? <span className="error">Please enter a valid image URL.</span>
+                        : null}
+
+                    <input type="submit" value="Create Account" disabled={!usernameInput || !passwordInput || isUsernameTaken || !isUsernameValid || genderInput === "default"}></input>
+                </form>
+            </main>
+        </div>
     )
 }
