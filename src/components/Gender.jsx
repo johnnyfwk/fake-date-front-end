@@ -6,7 +6,7 @@ export default function Gender({genderInput, setGenderInput}) {
 
     return (
         <div>
-            <label htmlFor="gender">Gender:</label>
+            <label htmlFor="gender">Gender: </label>
             <select
                 id="gender"
                 name="gender"

@@ -15,7 +15,7 @@ export default function Description({descriptionInput, setDescriptionInput}) {
                     onChange={handleDescriptionInput}
                     maxLength="300"
                 ></textarea>
-                <div>{descriptionInput.length}/300</div>
+                <div id="input-character-count">{descriptionInput.length}/300</div>
             </div>
         </div>
     )

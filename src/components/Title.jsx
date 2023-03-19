@@ -15,7 +15,7 @@ export default function Title({titleInput, setTitleInput}) {
                     onChange={handleTitleInput}
                     maxLength="50"
                 ></textarea>
-                <div>{titleInput.length}/50</div>
+                <div id="input-character-count">{titleInput.length}/50</div>
             </div>
         </div>
     )

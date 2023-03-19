@@ -311,7 +311,7 @@ export default function Post() {
                                     value={replyInput}
                                     onChange={handleReplyInput}
                                 ></textarea>
-                                <div>{replyInput.length}/300</div>
+                                <div id="input-character-count">{replyInput.length}/300</div>
                             </div>
                             <div id="post-reply-send-button">
                                 <input type="submit" value="Send" disabled={!replyInput}></input>

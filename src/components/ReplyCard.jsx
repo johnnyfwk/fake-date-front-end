@@ -111,11 +111,15 @@ export default function ReplyCard({reply, userLoggedIn, setIsReplyUpdatedSuccess
                     </div>
                     
                     {isEditReplyInputVisible
-                        ? <textarea
-                        id="reply-card-edit-reply"
-                            value={editReplyInput}
-                            onChange={onChangeEditReplyInput}
-                        ></textarea>
+                        ? <div id="reply-card-edit-reply-and-character-count">
+                            <textarea
+                                id="reply-card-edit-reply"
+                                maxLength="300"
+                                value={editReplyInput}
+                                onChange={onChangeEditReplyInput}
+                            ></textarea>
+                            <div id="input-character-count">{editReplyInput.length}/300</div>
+                          </div>  
                         : <div id="reply-card-reply">{reply.reply}</div>}              
                 </div>
 

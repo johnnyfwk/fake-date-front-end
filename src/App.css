@@ -1,5 +1,6 @@
 :root {
     --black: #000000;
+    --grey: #a1a1a1;
     --white: #ffffff;
     --jet: #363537;
     --red: #ef2d56;
@@ -7,6 +8,11 @@
     --pumpkin: #ed7d3a;
     --pistachio: #8cd867;
     --emerald: #2FBF71;
+}
+
+* {
+    box-sizing: border-box;
+    text-decoration: none;
 }
 
 body {
@@ -21,11 +27,6 @@ body {
 
 .success {
     color: var(--emerald)
-}
-
-* {
-    box-sizing: border-box;
-    text-decoration: none;
 }
 
 img {
@@ -68,6 +69,11 @@ button {
     padding: 8px;
 }
 
+#input-character-count {
+    color: var(--grey);
+    font-size: 0.9rem;
+}
+
 .buttons {
     display: flex;
     flex-wrap: wrap;
@@ -84,6 +90,10 @@ button {
 
 button:hover {
     background: var(--red);
+}
+
+#avatar-url-input {
+    width: 100%;
 }
 
 /***** Header *****/
@@ -195,11 +205,27 @@ main {
 
 
 /***** Profile *****/
+#profile-avatar-and-username {
+    display: grid;
+    justify-items: center;
+    padding: 20px 0px 0px 0px;
+}
+
 #profile-avatar-image {
     width: 200px;
     height: 200px;
     border-radius: 50%;
     object-fit: cover;
+}
+
+
+
+#profile-info,
+#profile-gender-and-avatar-input,
+#profile-change-password,
+#profile-info-and-buttons {
+    display: grid;
+    gap: 10px;
 }
 
 #profile-tabs {
@@ -216,7 +242,7 @@ main {
 #post-card,
 #reply-card {
     display: grid;
-    grid-template-columns: 75px auto;
+    grid-template-columns: 65px auto;
     border: 1px solid var(--red);
 }
 
@@ -243,6 +269,14 @@ main {
     text-align: center;
 }
 
+#post-card img,
+#reply-card img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
 /***** Post Cards *****/
 #post-cards {
     display: grid;
@@ -259,13 +293,6 @@ main {
 #post-card-title {
     font-size: 1.5rem;
     font-weight: bold;
-}
-
-#post-card img {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    object-fit: cover;
 }
 
 #post-card-description {
@@ -354,12 +381,12 @@ main {
 /***** Reply Card *****/
 #reply-card-body-and-buttons {
     display: grid;
-    gap: 5px;
+    gap: 10px;
 }
 
 #reply-card-body {
     display: grid;
-    gap: 5px;
+    gap: 10px;
 }
 
 #reply-card-username-time-and-date {
@@ -372,17 +399,18 @@ main {
     display: flex;
     flex-wrap: wrap;
     gap: 5px;
-}
-
-#reply-card img {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    object-fit: cover;
+    color: var(--grey);
 }
 
 #reply-card-title {
     font-size: 1.3rem;
+    font-weight: bold;
+}
+
+#reply-card-title:link,
+#reply-card-title:active,
+#reply-card-title:visited {
+    color: var(--black);
 }
 
 #reply-card-reply {
@@ -399,6 +427,11 @@ main {
 
 #reply-card-edit-reply {
     height: 200px;
+}
+
+#reply-card-edit-reply-and-character-count {
+    display: grid;
+    gap: 5px;
 }
 
 #delete-reply-confirmation-message-and-buttons {
