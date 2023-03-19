@@ -86,16 +86,16 @@ export default function Messages() {
                             
                             {userLoggedIn.user_id === message.sender_user_id
                             ? <Link to={`/profile/${userLoggedIn.user_id}/messages/${message.receiver_user_id}`} id="message-card-username-message-and-date">
-                                <div>
+                                <div id="message-card-username-and-message">
                                     <div id="message-card-username">{message.receiver_username}</div>
-                                    <div>{message.message}</div>
+                                    <div id="message-card-message">{message.message}</div>
                                 </div>
                                 <div id="message-card-date">{new Date(message.message_date).toLocaleDateString()}</div>
                             </Link>                                
                             : <Link to={`/profile/${userLoggedIn.user_id}/messages/${message.sender_user_id}`} id="message-card-username-message-and-date">
-                                <div>
+                                <div id="message-card-username-and-message">
                                     <div id="message-card-username">{message.sender_username}</div>
-                                    <div>{message.message}</div>
+                                    <div id="message-card-message">{message.message}</div>
                                 </div>
                                 <div id="message-card-date">{new Date(message.message_date).toLocaleDateString()}</div>
                             </Link>}

@@ -18,6 +18,8 @@ export default function DirectMessage() {
     const [messageInput, setMessageInput] = useState("");
     const [isMessageSentSuccessfully, setIsMessageSentSuccessfully] = useState(null);
 
+    const [messageInputHeight, setMessageInputHeight] = useState("initial");
+
     const navigate = useNavigate();
 
     const lastMessageRef = useRef(null);
@@ -75,6 +77,7 @@ export default function DirectMessage() {
 
     function onChangeMessageInput(event) {
         setMessageInput(event.target.value);
+        setMessageInputHeight(event.target.scrollHeight + "px");
     }
 
     function onClickSendMessageButton() {
@@ -83,12 +86,17 @@ export default function DirectMessage() {
             .then((response) => {
                 setIsMessageSentSuccessfully(true);
                 setMessageInput("");
+                setMessageInputHeight("initial");
                 setTimeout(() => setIsMessageSentSuccessfully(null), 3000);
             })
             .catch((error) => {
                 setIsMessageSentSuccessfully(false);
                 setTimeout(() => setIsMessageSentSuccessfully(null), 3000);
             })
+    }
+
+    const styleMessageInput = {
+        height: messageInputHeight
     }
 
     if (isUserLoading) {
@@ -102,10 +110,13 @@ export default function DirectMessage() {
     return (
         <div id="main">
             <main>
-                <Link to={`/profile/${otherUser.user_id}`}>
-                    <img src={otherUser.avatar_url} alt={otherUser.avatar_url} id="direct-message-avatar"></img>
-                </Link>
-                <Link to={`/profile/${otherUser.user_id}`}><h1>{otherUser.username}</h1></Link>
+                <div id="direct-message-avatar-andother-user-username">
+                    <Link to={`/profile/${otherUser.user_id}`}>
+                        <img src={otherUser.avatar_url} alt={otherUser.avatar_url} id="direct-message-avatar"></img>
+                    </Link>
+                    <Link to={`/profile/${otherUser.user_id}`} id="direct-message-other-user-username"><h1>{otherUser.username}</h1></Link>
+                </div>
+                
 
                 {isMessagesLoading ? <p>Loading</p> : null}
 
@@ -120,22 +131,10 @@ export default function DirectMessage() {
                 <div id="direct-message-cards-and-form">
                     <div id="direct-message-cards">
                         {messages?.map((message) => {
-                            return <div
-                                key={message.message_id}
-                                id="direct-message-card"
-                                className={message.sender_user_id === userLoggedIn.user_id ? "justify-content-left" : "justify-content-right"}
-                                ref={lastMessageRef}>
-                                {message.sender_user_id === userLoggedIn.user_id
-                                    ? <div id="direct-message-card-message">
-                                        <div>{message.message}</div>
-                                        <div>{new Date(message.message_date).toLocaleTimeString()} {new Date(message.message_date).toLocaleDateString()}</div>
-                                    </div>                            
-                                    : <div id="direct-message-card-avatar-username-and-message">
-                                        <img src={message.sender_avatar_url} alt={message.sender_avatar_url} />
-                                        <div>{message.sender_username}</div>
-                                        <div>{message.message}</div>
-                                        <div>{new Date(message.message_date).toLocaleTimeString()} {new Date(message.message_date).toLocaleDateString()}</div>
-                                    </div>}       
+                            return <div key={message.message_id} id="direct-message-card" className={message.sender_user_id === userLoggedIn.user_id ? "justify-content-left" : "justify-content-right"} ref={lastMessageRef}>
+                                <div id="direct-message-time-and-date">{new Date(message.message_date).toLocaleTimeString()} {new Date(message.message_date).toLocaleDateString()}</div>
+                                <div id="direct-message-card-message" className={message.sender_user_id === userLoggedIn.user_id ? "message-logged-in-user" : "message-other-user"}
+                                >{message.message}</div>
                             </div>
                         })}
                     </div>
@@ -147,13 +146,13 @@ export default function DirectMessage() {
                             : <p className="error">Message could not be sent.</p>}
                     
                     <form onSubmit={handleSubmit} id="direct-message-form">
-                        <input
-                            type="text"
+                        <textarea
                             id="message-input"
                             name="message-input"
                             value={messageInput}
                             onChange={onChangeMessageInput}
-                        ></input>
+                            style={styleMessageInput}
+                        ></textarea>
                         <button type="submit" onClick={onClickSendMessageButton} disabled={!messageInput}>Send</button>
                     </form>
                 </div>
