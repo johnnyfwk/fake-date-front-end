@@ -39,8 +39,6 @@ p {
 #header,
 #footer {
     background: var(--red);
-    position: sticky;
-    top: 0px;
 }
 
 header,
@@ -90,6 +88,8 @@ button:hover {
 
 /***** Header *****/
 header {
+    position: sticky;
+    top: 0px;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
