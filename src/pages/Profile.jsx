@@ -372,6 +372,18 @@ export default function Profile() {
         navigate(`/profile/${userLoggedIn.user_id}/messages/${user_id}`);
     }
 
+    const styleTabPosts = {
+        color: userLoggedIn.user_id !== user.user_id
+            ? "#000000"
+            : visibleTab === "Posts"
+                ? "#ef2d56"
+                : "#000000"
+    }
+
+    const styleTabReplies = {
+        color: visibleTab === "Replies" ? "#ef2d56" : "#000000"
+    }
+
     if (isLoading) {
         return <p>Loading...</p>
     }
@@ -383,14 +395,16 @@ export default function Profile() {
     return (
         <div id="main">
             <main>
-                <img src={user.avatar_url} alt={user.avatar_url} id="profile-avatar-image"></img>
-                <h1>{user.username}</h1>
+                <div id="profile-avatar-and-username">
+                    <img src={user.avatar_url} alt={user.avatar_url} id="profile-avatar-image"></img>
+                    <h1>{user.username}</h1>
+                </div>
 
-                <section id="profile-info">
+                <div>
                     {userLoggedIn.user_id === parseInt(user_id) && isAvatarUrlValid === false
-                        ? <p className="error">Please enter a valid image URL.</p>
-                        : null}
-                    
+                            ? <p className="error">Please enter a valid image URL.</p>
+                            : null}
+                        
                     {userLoggedIn.user_id !== parseInt(user_id)
                         ? null
                         : isProfileUpdatedSuccessfully === null
@@ -422,18 +436,21 @@ export default function Profile() {
                             : isAccountDeletedSuccessfully === true
                                 ? <p className="success">Your account has been deleted. You will now be redirected to the homepage.</p>
                                 : <p className="error">Your account could not be deleted.</p>}
+                </div>
 
-                    <div>Join date: {new Date(user.join_date).toLocaleDateString()}</div>
-
-                    {userLoggedIn.user_id === user.user_id && isProfileBeingEdited
-                        ? <div>
-                            <Gender genderInput={genderInput} setGenderInput={setGenderInput} />
-                            <Avatar avatarUrlInput={avatarUrlInput} setAvatarUrlInput={setAvatarUrlInput} setIsAvatarUrlValid={setIsAvatarUrlValid} />
-                        </div>
-                        : <div>Gender: {user.gender}</div>}
-
+                <section id="profile-info-and-buttons">
+                    <div id="profile-info">
+                        <div><b>Join date:</b> {new Date(user.join_date).toLocaleDateString()}</div>
+                        {userLoggedIn.user_id === user.user_id && isProfileBeingEdited
+                            ? <div id="profile-gender-and-avatar-input">
+                                <Gender genderInput={genderInput} setGenderInput={setGenderInput} />
+                                <Avatar avatarUrlInput={avatarUrlInput} setAvatarUrlInput={setAvatarUrlInput} setIsAvatarUrlValid={setIsAvatarUrlValid} />
+                            </div>
+                            : <div><b>Gender:</b> {user.gender}</div>}
+                    </div>
+                    
                     {userLoggedIn.user_id === user.user_id && isPasswordBeingChanged
-                        ? <div>
+                        ? <div id="profile-change-password">
                             <Password
                                 passwordInput={currentPasswordInput}
                                 setPasswordInput={setCurrentPasswordInput}
@@ -445,7 +462,7 @@ export default function Profile() {
                                 passwordInputLabel={newPasswordInputLabel}
                             />
                           </div>
-                        : null}                 
+                        : null}
 
                     <div className="buttons">
                         {userLoggedIn.user_id === user.user_id && isEditProfileButtonVisible
@@ -478,24 +495,26 @@ export default function Profile() {
                         
                         {userLoggedIn.user_id === user.user_id && isDeleteProfileConfirmationMessageAndButtonsVisible
                             ? <div>
-                                <p className="confirm">Delete account? Your details, posts, and replies can not be restored once deleted.</p>
+                                <p className="confirm">Delete account? Your posts, replies, and messages will be permanently deleted.</p>
                                 <div className="buttons">
                                     <button onClick={onClickDeleteProfileNoButton}>No</button>
                                     <button onClick={onClickDeleteProfileYesButton}>Yes</button>
                                 </div>
                             </div>
                             : null}
-
-                        {userLoggedIn.user_id !== user.user_id
-                            ? <button onClick={onClickSendMessageButton}>Send Message</button>
-                            : null}
-                    </div>
+                    </div>               
                 </section>
 
+                
+
+                {userLoggedIn.user_id !== user.user_id
+                    ? <button onClick={onClickSendMessageButton}>Send Message</button>
+                    : null}
+
                 <section id="profile-tabs">
-                    <h2 onClick={handleTabSelection} value="posts">Posts</h2>
+                    <h2 onClick={handleTabSelection} value="posts" style={styleTabPosts}>Posts</h2>
                     {userLoggedIn.user_id === user.user_id
-                        ? <h2 onClick={handleTabSelection} value="replies">Replies</h2>
+                        ? <h2 onClick={handleTabSelection} value="replies" style={styleTabReplies}>Replies</h2>
                         : null}                
                 </section>
 
