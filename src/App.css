@@ -56,7 +56,7 @@ header a:active,
 footer a:link,
 footer a:visited,
 footer a:active {
-    color: #ffffff;
+    color: var(--white);
 }
 
 label {
@@ -87,6 +87,7 @@ button {
     border: 0;
     padding: 10px;
     font-weight: bold;
+    cursor: pointer;
 }
 
 button:hover {
@@ -126,7 +127,7 @@ header {
 #show-nav-button > div {
     background: var(--black);
     width: 30px;
-    height: 3px;
+    height: 4px;
 }
 
 #hide-nav-button {
@@ -148,13 +149,13 @@ nav {
     align-items: end;
     font-size: 1.5rem;
     gap: 10px;    
-    transition: left 0.3s;
+    transition: left 0.2s;
 }
 
 nav a:link,
 nav a:visited,
 nav a:active {
-    color: #ffffff;
+    color: var(--white);
 }
 
 nav a:hover {
@@ -219,8 +220,6 @@ main {
     object-fit: cover;
 }
 
-
-
 #profile-info,
 #profile-gender-and-avatar-input,
 #profile-change-password,
@@ -243,8 +242,7 @@ main {
 #post-card,
 #reply-card {
     display: grid;
-    grid-template-columns: 65px auto;
-    border: 1px solid var(--red);
+    grid-template-columns: 60px auto;
 }
 
 #post-card a:link,
@@ -268,6 +266,7 @@ main {
 #reply-card-avatar {
     background: var(--red);
     text-align: center;
+    border-radius: 20px 0px 0px 20px;
 }
 
 #post-card img,
@@ -325,6 +324,16 @@ main {
 
 #post-owner-username {
     font-size: 1.5rem;
+}
+
+#post-owner-username:link,
+#post-owner-username:active,
+#post-owner-username:visited {
+    color: var(--black);
+}
+
+#post-owner-username:hover {
+    color: var(--red);
 }
 
 #post-body {
@@ -401,6 +410,7 @@ main {
     flex-wrap: wrap;
     gap: 5px;
     color: var(--grey);
+    font-size: 0.9rem;
 }
 
 #reply-card-title {
@@ -412,6 +422,10 @@ main {
 #reply-card-title:active,
 #reply-card-title:visited {
     color: var(--black);
+}
+
+#reply-card-title:hover {
+    color: var(--red);
 }
 
 #reply-card-reply {
@@ -453,28 +467,32 @@ main {
 
 /***** Message Card *****/
 #message-card {
-    /* background: var(--grey); */
     display: grid;
     grid-template-columns: 60px auto;
 }
 
 #message-card-avatar {
-    /* background: cyan; */
     width: 40px;
     height: 40px;
 }
 
-#message-card-username-message-and-date {
-    /* background: orange; */
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: center;
+#message-card-username-message-and-date,
+#message-card-username-and-message {
+    display: grid;
+    gap: 5px;
 }
 
 #message-card-username {
     font-weight: bold;
     font-size: 1.2rem;
+}
+
+#message-card-message {
+    line-height: 1.2rem;
+}
+
+#message-card-date {
+    color: var(--grey);
 }
 
 #message-card-username-message-and-date:link,
@@ -483,16 +501,9 @@ main {
     color: var(--black);
 }
 
-#message-card-date {
-    color: var(--grey)
-}
-
-#message-card-username-message-and-date:hover,
-#message-card-date:hover {
+#message-card-username-message-and-date:hover {
     color: var(--red);
 }
-
-
 /***** Message Card *****/
 
 
@@ -502,12 +513,36 @@ main {
     position: sticky;
     bottom: 0px;
     display: grid;
-    grid-template-columns: auto 100px;
+    grid-template-columns: auto 70px;
+}
+
+#direct-message-avatar-andother-user-username {
+    display: grid;
+    justify-items: center;
+    padding: 20px 0px 0px 0px;
 }
 
 #direct-message-avatar {
     width: 100px;
     height: 100px;
+}
+
+#direct-message-other-user-username:link,
+#direct-message-other-user-username:visited,
+#direct-message-other-user-username:active {
+    color: var(--black);
+}
+
+#direct-message-other-user-username:hover {
+    color: var(--red);
+}
+
+#message-input {
+    resize: none;
+    overflow: hidden;
+    width: 100%;
+    min-height: 50px;
+    max-height: 150px;
 }
 /***** Direct Message *****/
 
@@ -516,20 +551,21 @@ main {
 /***** Direct Message Cards *****/
 #direct-message-cards {
     display: grid;
-    gap: 20px;
+    gap: 30px;
 }
 /***** Direct Message Cards *****/
 /***** Direct Message Card *****/
 #direct-message-card {
     display: grid;
+    gap: 5px;
 }
 
 .justify-content-left {
-    justify-content: left;
+    justify-items: start;
 }
 
 .justify-content-right {
-    justify-content: right;
+    justify-items: end;
 }
 
 #direct-message-card img {
@@ -537,15 +573,32 @@ main {
     height: 30px;
 }
 
-#direct-message-card-message,
-#direct-message-card-avatar-username-and-message {
-    background: #ddffd6;
-    padding: 20px;
+#direct-message-time-and-date {
+    color: var(--grey);
+    font-size: 0.9rem;
+}
+
+#direct-message-card-message {
+    padding: 10px;
+    max-width: 75%;
+    line-height: 1.5rem;
 }
 
 #direct-message-cards-and-form {
     display: grid;
     gap: 10px;
+}
+
+.message-logged-in-user {
+    background: var(--red);
+    color: var(--white);
+    border-radius: 15px 15px 15px 0px;
+}
+
+.message-other-user {
+    background: var(--black);
+    color: var(--white);
+    border-radius: 15px 15px 0px 15px;
 }
 /***** Direct Message Card *****/
 
