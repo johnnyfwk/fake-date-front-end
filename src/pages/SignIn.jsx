@@ -40,6 +40,13 @@ export default function LogIn({users, setUsers}) {
 
     function handleSubmit(event) {
         event.preventDefault();
+    }
+
+    function onChangeUsernameInput(event) {
+        setUsernameInput(event.target.value)
+    }
+
+    function onClickSignInButton() {
         setIsUsernameInDatabase(null);
         setIsPasswordCorrect(null);
         const usernameInLowercase = usernameInput.toLowerCase();
@@ -59,10 +66,6 @@ export default function LogIn({users, setUsers}) {
         }
     }
 
-    function onChangeUsernameInput(event) {
-        setUsernameInput(event.target.value)
-    }
-
     if (isLoading) {
         return <p>Loading...</p>
     }
@@ -75,7 +78,7 @@ export default function LogIn({users, setUsers}) {
         <div id="main">
             <main>
                 <h1>Sign In</h1>
-                <p>Log into your account. Don't have an account? <Link to="/sign-up">Sign up</Link>.</p>
+                <p>Log into your account. Don't have an account? <Link to="/sign-up" id="sign-up-link">Sign up</Link>.</p>
 
                 {isUsernameInDatabase === null || isUsernameInDatabase === true
                     ? null
@@ -85,16 +88,18 @@ export default function LogIn({users, setUsers}) {
                     ? null
                     : <p className="error">Password is incorrect</p>}
 
-                <form onSubmit={handleSubmit}>
-                    <label htmlFor="sign-in-username">Username:</label>
-                    <input
-                        type="text"
-                        id="sign-in-username"
-                        name="sign-in-username"
-                        maxLength="20"
-                        onChange={onChangeUsernameInput}
-                        value={usernameInput}
-                    ></input>
+                <form onSubmit={handleSubmit} id="sign-in-form">
+                    <div id="sign-in-form-username-label-and-input">
+                        <label htmlFor="sign-in-username">Username:</label>
+                        <input
+                            type="text"
+                            id="sign-in-username"
+                            name="sign-in-username"
+                            maxLength="20"
+                            onChange={onChangeUsernameInput}
+                            value={usernameInput}
+                        ></input>
+                    </div>
 
                     <Password
                         passwordInput={passwordInput}
@@ -102,7 +107,9 @@ export default function LogIn({users, setUsers}) {
                         passwordInputLabel={passwordInputLabel}
                     />
 
-                    <input type="submit" value="Log In" disabled={!usernameInput || !passwordInput}></input>
+                    <div>
+                        <button onClick={onClickSignInButton} disabled={!usernameInput || !passwordInput}>Sign In</button>
+                    </div>
                 </form>
             </main>
         </div>

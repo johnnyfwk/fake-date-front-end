@@ -5,7 +5,7 @@ export default function Password({passwordInput, setPasswordInput, passwordInput
     }
 
     return (
-        <div>
+        <div id="component-password">
             <label htmlFor="password-input">{passwordInputLabel}</label>
             <input
                 type="password"

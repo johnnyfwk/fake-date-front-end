@@ -58,20 +58,6 @@ export default function SignUp({users, setUsers}) {
 
     function handleSubmit(event) {
         event.preventDefault();
-        setIsAvatarUrlValid(null);
-        setIsUserAddedSuccessfully(null);
-        if (avatarUrlInput.length > 0) {
-            const avatarUrlIsValid = /([a-z\-_0-9\/\:\.]*\.(jpg|jpeg|png|gif))/i.test(avatarUrlInput);
-            if (avatarUrlIsValid) {
-                setIsAvatarUrlValid(true);
-                createAccount(usernameInput, passwordInput, genderInput, avatarUrlInput);
-            } else {
-                setIsAvatarUrlValid(false);
-            }
-        } else {
-            setIsAvatarUrlValid(true);
-            createAccount(usernameInput, passwordInput, genderInput, "http://cdn.onlinewebfonts.com/svg/img_258083.png");
-        }
     }
 
     function handleUsernameInput(event) {
@@ -95,6 +81,23 @@ export default function SignUp({users, setUsers}) {
         }
     }
 
+    function onClickSignUpButton() {
+        setIsAvatarUrlValid(null);
+        setIsUserAddedSuccessfully(null);
+        if (avatarUrlInput.length > 0) {
+            const avatarUrlIsValid = /([a-z\-_0-9\/\:\.]*\.(jpg|jpeg|png|gif))/i.test(avatarUrlInput);
+            if (avatarUrlIsValid) {
+                setIsAvatarUrlValid(true);
+                createAccount(usernameInput, passwordInput, genderInput, avatarUrlInput);
+            } else {
+                setIsAvatarUrlValid(false);
+            }
+        } else {
+            setIsAvatarUrlValid(true);
+            createAccount(usernameInput, passwordInput, genderInput, "http://cdn.onlinewebfonts.com/svg/img_258083.png");
+        }
+    }
+
     if (isLoading) {
         return <p>Loading...</p>
     }
@@ -108,42 +111,49 @@ export default function SignUp({users, setUsers}) {
             <main>
                 <h1>Sign Up</h1>
                 <p>Create an account to find someone to go on a fake date with.</p>
-                <p>Already have an account? <Link to="/sign-in">Sign in</Link>.</p>
+                <p>Already have an account? <Link to="/sign-in" id="sign-in-link">Sign in</Link>.</p>
 
                 {isUserAddedSuccessfully === false
                     ? <p className="error">Account could not be created. Try again later.</p>
                     : null}
 
-                <form onSubmit={handleSubmit}>
-                    <label htmlFor="sign-up-username">Username:</label>
-                    <input
-                        type="text"
-                        id="sign-up-username"
-                        name="sign-up-username"
-                        maxLength="20"
-                        onChange={handleUsernameInput}
-                        value={usernameInput}
-                    ></input>
-                    {isUsernameValid === null || isUsernameValid === true
-                        ? null
-                        : <span className="error">Usernames must start with a letter and can only contain alphanumeric characters.</span>}
-                    {isUsernameTaken === null
-                        ? null
-                        : isUsernameTaken === true
-                            ? <span className="error">Unavailable</span>
-                            : <span className="success">Available</span>}
+                {isUsernameValid === null || isUsernameValid === true
+                    ? null
+                    : <p className="error">Usernames must start with a letter and can only contain alphanumeric characters.</p>}
+                
+                {isAvatarUrlValid === false
+                    ? <p className="error">Please enter a valid image URL.</p>
+                    : null}
 
+                <form onSubmit={handleSubmit} id="sign-up-form">
+                    <div id="sign-up-form-username-label-input-and-message">
+                        <label htmlFor="sign-up-username">Username:</label>
+                        <div id="sign-up-form-username-input-and-message">
+                            <input
+                                type="text"
+                                id="sign-up-username"
+                                name="sign-up-username"
+                                maxLength="20"
+                                onChange={handleUsernameInput}
+                                value={usernameInput}
+                            ></input>
+                            {isUsernameTaken === null
+                                ? null
+                                : isUsernameTaken === true
+                                    ? <span className="error">Unavailable</span>
+                                    : <span className="success">Available</span>}
+                        </div>
+                    </div>
+                    
                     <Password passwordInput={passwordInput} setPasswordInput={setPasswordInput} passwordInputLabel={passwordInputLabel}/>
 
                     <Gender genderInput={genderInput} setGenderInput={setGenderInput}/>
 
                     <Avatar avatarUrlInput={avatarUrlInput} setAvatarUrlInput={setAvatarUrlInput} setIsAvatarUrlValid={setIsAvatarUrlValid}/>
 
-                    {isAvatarUrlValid === false
-                        ? <span className="error">Please enter a valid image URL.</span>
-                        : null}
-
-                    <input type="submit" value="Create Account" disabled={!usernameInput || !passwordInput || isUsernameTaken || !isUsernameValid || genderInput === "default"}></input>
+                    <div>
+                        <button onClick={onClickSignUpButton} disabled={!usernameInput || !passwordInput || isUsernameTaken || !isUsernameValid || genderInput === "default"}>Sign Up</button>
+                    </div>
                 </form>
             </main>
         </div>

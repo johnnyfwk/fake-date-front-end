@@ -12,7 +12,7 @@ export default function Header() {
                 <Link to="/" id="logo">FakeDate</Link>
 
                 {Object.keys(userLoggedIn).length === 0
-                    ? <div>
+                    ? <div id="header-sign-up-and-sign-in-links">
                         <Link to="/sign-in">Sign In</Link>
                         <Link to="/sign-up">Sign Up</Link>
                     </div>
