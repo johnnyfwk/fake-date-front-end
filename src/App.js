@@ -2,7 +2,6 @@ import "./App.css";
 import { useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import Header from "./components/Header";
-import Nav from "./components/Nav";
 import Footer from "./components/Footer";
 import Index from "./pages/Index";
 import SignUp from "./pages/SignUp";
@@ -25,7 +24,6 @@ function App() {
   return (
     <div className="App">
       <Header />
-      <Nav />
       <Routes>
         <Route path="/" element={<Index />} />
         <Route path="/sign-in" element={<SignIn users={users} setUsers={setUsers} />} />

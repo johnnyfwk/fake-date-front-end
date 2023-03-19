@@ -3,6 +3,7 @@
     --white: #ffffff;
     --jet: #363537;
     --red: #ef2d56;
+    --light-red: #fda0b4;
     --pumpkin: #ed7d3a;
     --pistachio: #8cd867;
     --emerald: #2FBF71;
@@ -23,6 +24,7 @@ body {
 }
 
 * {
+    box-sizing: border-box;
     text-decoration: none;
 }
 
@@ -42,7 +44,6 @@ p {
 }
 
 header,
-nav,
 main,
 footer {
     max-width: 800px;
@@ -64,8 +65,9 @@ label {
 
 textarea,
 input,
-select {
-    padding: 10px;
+select,
+button {
+    padding: 8px;
 }
 
 .buttons {
@@ -99,44 +101,64 @@ header {
 #logo {
     font-size: 1.8rem;
 }
-
-header img {
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    object-fit: cover;
-}
-
-#log-out-messages-and-profile-links {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-#messages-link {
-    font-size: 1.8rem;
-}
 /***** Header *****/
 
 
 
 /***** Nav *****/
-#nav {
+#show-nav-button {
+    display: grid;
+    gap: 7px;
+    cursor: pointer;
+}
+
+#show-nav-button > div {
     background: var(--black);
+    width: 30px;
+    height: 3px;
+}
+
+#hide-nav-button {
+    cursor: pointer;
+    font-size: 3rem;
 }
 
 nav {
+    background: var(--red);
+    padding: 0px 20px 0px 20px;
+    position: fixed;
+    top: 0px;
+    left: 100%;
+    width: 100%;
+    height: 100%;
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
-    padding: 5px 20px 5px 20px;
-    font-weight: bold;
+    flex-direction: column;
+    align-items: end;
+    font-size: 1.5rem;
+    gap: 10px;    
+    transition: left 0.3s;
 }
 
 nav a:link,
 nav a:visited,
 nav a:active {
     color: #ffffff;
+}
+
+nav a:hover {
+    color: var(--black);
+}
+
+nav img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+#messages-link {
+    font-size: 2.5rem;
 }
 /***** Nav *****/
 
@@ -523,11 +545,46 @@ footer {
     align-content: start;
     gap: 10px;
 }
+
+#copyright {
+    color: var(--light-red);
+    line-height: 1.5rem;
+}
 /***** Footer *****/
 
 
 
 @media only screen and (min-width: 600px) {
+    #show-nav-button {
+        display: none;
+    }
+
+    #hide-nav-button {
+        display: none;
+    }
+
+    nav {
+        padding: initial;
+        position: initial;
+        top: initial;
+        left: initial;
+        width: initial;
+        height: initial;
+        flex-direction: row-reverse;
+        align-items: center;
+        font-size: 1rem;
+        gap: 20px;
+    }
+
+    #messages-link {
+        font-size: 1.8rem;
+    }
+
+    nav img {
+        width: 30px;
+        height: 30px;
+    }
+
     #title {
         height: initial;
     }
