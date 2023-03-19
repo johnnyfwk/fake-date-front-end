@@ -77,18 +77,28 @@ export default function Messages() {
                     {latestMessagesFromOtherUsers.map((message) => {
                         return <div key={message.message_id} id="message-card">
                             {userLoggedIn.user_id === message.sender_user_id
-                                ? <Link to={`/profile/${message.receiver_user_id}`}>
+                                ? <Link to={`/profile/${message.receiver_user_id}`} id="message-card-avatar">
                                     <img src={message.receiver_avatar_url} alt={message.receiver_avatar_url} />
-                                    <div>{message.receiver_username}</div>
-                                </Link>
-                                : <Link to={`/profile/${message.sender_user_id}`}>
+                                  </Link>
+                                : <Link to={`/profile/${message.sender_user_id}`} id="message-card-avatar">
                                     <img src={message.sender_avatar_url} alt={message.sender_avatar_url} />
-                                    <div>{message.sender_username}</div>
-                                </Link>}
-                            <Link to={`/profile/${userLoggedIn.user_id}/messages/${userLoggedIn.user_id === message.sender_user_id ? message.receiver_user_id : message.sender_user_id}`}>
-                                <div>{message.message}</div>
-                                <div>{new Date(message.message_date).toLocaleDateString()} {new Date(message.message_date).toLocaleTimeString()}</div>
-                            </Link>
+                                  </Link>}
+                            
+                            {userLoggedIn.user_id === message.sender_user_id
+                            ? <Link to={`/profile/${userLoggedIn.user_id}/messages/${message.receiver_user_id}`} id="message-card-username-message-and-date">
+                                <div>
+                                    <div id="message-card-username">{message.receiver_username}</div>
+                                    <div>{message.message}</div>
+                                </div>
+                                <div id="message-card-date">{new Date(message.message_date).toLocaleDateString()}</div>
+                            </Link>                                
+                            : <Link to={`/profile/${userLoggedIn.user_id}/messages/${message.sender_user_id}`} id="message-card-username-message-and-date">
+                                <div>
+                                    <div id="message-card-username">{message.sender_username}</div>
+                                    <div>{message.message}</div>
+                                </div>
+                                <div id="message-card-date">{new Date(message.message_date).toLocaleDateString()}</div>
+                            </Link>}
                         </div>
                     })}
                 </div>
