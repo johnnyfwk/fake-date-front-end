@@ -113,6 +113,12 @@ header {
 #logo {
     font-size: 1.8rem;
 }
+
+#header-sign-up-and-sign-in-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
 /***** Header *****/
 
 
@@ -185,6 +191,61 @@ main {
     padding: 5px 20px 20px 20px;
 }
 /***** Main *****/
+
+
+
+/***** Sign Up *****/
+#sign-up-link:link,
+#sign-up-link:active,
+#sign-up-link:visited,
+#sign-in-link:link,
+#sign-in-link:active,
+#sign-in-link:visited {
+    color: var(--red);
+}
+
+#sign-up-link:hover,
+#sign-in-link:hover {
+    color: var(--black);
+}
+
+#sign-up-form {
+    display: grid;
+    gap: 10px;
+}
+
+#sign-up-form-username-label-input-and-message,
+#sign-up-form-username-input-and-message {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 5px;
+}
+
+#component-password,
+#component-gender {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 5px;
+}
+/***** Sign Up *****/
+
+
+
+/***** Sign In *****/
+#sign-in-form {
+    display: grid;
+    gap: 10px;
+}
+
+#sign-in-form-username-label-and-input {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 5px;
+}
+/***** Sign In *****/
 
 
 
