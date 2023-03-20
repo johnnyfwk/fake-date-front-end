@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 export default function Error404() {
     return (
-        <div id="main">
+        <div className="main">
             <main>
                 <h1>404</h1>
                 <p>You must be lost because there is nothing here...apart from this slice of pizza &#127829; the last person who came here dropped on the floor. Help yourself to it; it's only been sitting there for 30 minutes.</p>

@@ -103,11 +103,17 @@ export default function SignUp({users, setUsers}) {
     }
 
     if (isLoadingUsersSuccessful === false) {
-        return <p className="error">Could not connect to the server. Please try again later.</p>
+        return (
+            <div id="main">
+                <main>
+                    <p>Could not connect to the server. Please try again later.</p>
+                </main>
+            </div>
+        )
     }
 
     return (
-        <div id="main">
+        <div className="main">
             <main>
                 <h1>Sign Up</h1>
                 <p>Create an account to find someone to go on a fake date with.</p>
@@ -134,8 +140,8 @@ export default function SignUp({users, setUsers}) {
                                 id="sign-up-username"
                                 name="sign-up-username"
                                 maxLength="20"
-                                onChange={handleUsernameInput}
                                 value={usernameInput}
+                                onChange={handleUsernameInput}
                             ></input>
                             {isUsernameTaken === null
                                 ? null

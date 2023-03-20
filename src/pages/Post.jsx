@@ -83,6 +83,9 @@ export default function Post() {
 
     function handleSubmit(event) {
         event.preventDefault();
+    }
+
+    function onClickSendReplyButton() {
         setIsReplyPostedSuccessfully(null);
         api.replyToAPost(new Date(), replyInput, post_id, userLoggedIn.user_id)
             .then((response) => {
@@ -204,7 +207,7 @@ export default function Post() {
     };
 
     return (
-        <div id="main">
+        <div className="main">
             <main id="post">
                 <h1>{post.title}</h1>
 
@@ -255,7 +258,7 @@ export default function Post() {
                             <div><b>Occasion:</b> {post.occasion}</div>
                             <div><b>Date:</b> {new Date(post.date).toLocaleDateString()}</div>
                             <div><b>Posted:</b> {new Date(post.post_date).toLocaleDateString()} {new Date(post.post_date).toLocaleTimeString()}</div>
-                            <p id="post-description">{post.description}</p>
+                            <p>{post.description}</p>
                         </div>}
 
                     <div className="buttons">
@@ -314,7 +317,7 @@ export default function Post() {
                                 <div id="input-character-count">{replyInput.length}/300</div>
                             </div>
                             <div id="post-reply-send-button">
-                                <input type="submit" value="Send" disabled={!replyInput}></input>
+                                <button onClick={onClickSendReplyButton} disabled={!replyInput}>Send</button>
                             </div>
                         </form>
                         : <p className="error">This user is looking for a {post.gender_of_date} date.</p>}

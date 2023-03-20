@@ -56,7 +56,7 @@ export default function CreatePost() {
     };
 
     return (
-        <div id="main">
+        <div className="main">
             <main id="create-a-post">
                 <h1>Find a Fake Date</h1>
                 <p>Enter where and when the date will happen, who you are looking for, what the occasion will be, and additional information about why you are looking for a fake date.</p>

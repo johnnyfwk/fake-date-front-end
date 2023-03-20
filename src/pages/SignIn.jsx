@@ -71,11 +71,17 @@ export default function LogIn({users, setUsers}) {
     }
 
     if (isLoadingUsersSuccessful === false) {
-        return <p className="error">Could not connect to the server. Please try again later.</p>
+        return (
+            <div id="main">
+                <main>
+                    <p>Could not connect to the server. Please try again later.</p>
+                </main>
+            </div>
+        )
     }
 
     return (
-        <div id="main">
+        <div className="main">
             <main>
                 <h1>Sign In</h1>
                 <p>Log into your account. Don't have an account? <Link to="/sign-up" id="sign-up-link">Sign up</Link>.</p>
