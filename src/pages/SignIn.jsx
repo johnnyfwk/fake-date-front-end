@@ -102,15 +102,17 @@ export default function LogIn({users, setUsers}) {
 
                 <form onSubmit={handleSubmit} id="sign-in-form">
                     <div id="sign-in-form-username-label-and-input">
-                        <label htmlFor="sign-in-username">Username:</label>
-                        <input
-                            type="text"
-                            id="sign-in-username"
-                            name="sign-in-username"
-                            maxLength="20"
-                            onChange={onChangeUsernameInput}
-                            value={usernameInput}
-                        ></input>
+                        <label htmlFor="username-input">Username:</label>
+                        <div>
+                            <input
+                                type="text"
+                                id="username-input"
+                                name="username-input"
+                                maxLength="20"
+                                onChange={onChangeUsernameInput}
+                                value={usernameInput}
+                            ></input>
+                        </div>
                     </div>
 
                     <Password

@@ -139,12 +139,12 @@ export default function SignUp({users, setUsers}) {
 
                 <form onSubmit={handleSubmit} id="sign-up-form">
                     <div id="sign-up-form-username-label-input-and-message">
-                        <label htmlFor="sign-up-username">Username:</label>
+                        <label htmlFor="username-input">Username:</label>
                         <div id="sign-up-form-username-input-and-message">
                             <input
                                 type="text"
-                                id="sign-up-username"
-                                name="sign-up-username"
+                                id="username-input"
+                                name="username-input"
                                 maxLength="20"
                                 value={usernameInput}
                                 onChange={handleUsernameInput}

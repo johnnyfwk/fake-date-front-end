@@ -284,6 +284,7 @@ main {
 /***** Index *****/
     
 
+
 /***** Sign Up *****/
 #sign-up-link:link,
 #sign-up-link:active,
@@ -307,8 +308,8 @@ main {
 #sign-up-form-username-label-input-and-message {
     display: flex;
     flex-wrap: wrap;
+    flex-direction: column;
     gap: 5px;
-    align-items: center;
 }
 
 #sign-up-form-username-input-and-message {
@@ -330,7 +331,7 @@ main {
 #sign-in-form-username-label-and-input {
     display: flex;
     flex-wrap: wrap;
-    align-items: center;
+    flex-direction: column;
     gap: 5px;
 }
 /***** Sign In *****/
@@ -784,7 +785,7 @@ main {
 #component-gender {
     display: flex;
     flex-wrap: wrap;
-    align-items: center;
+    flex-direction: column;
     gap: 5px;
 }
 /***** Components *****/
@@ -847,6 +848,11 @@ footer {
         gap: 20px;
     }
 
+    #sign-up-form-username-label-input-and-message {
+        flex-direction: row;
+        align-items: center;
+    }
+
     #index-fake-date-occassions {
         grid-template-columns: repeat(3, 1fr);
     }
@@ -879,5 +885,16 @@ footer {
     #footer-links {
         flex-direction: row;
         gap: 50px;
+    }
+
+    #component-password,
+    #component-gender {
+        flex-direction: row;
+        align-items: center;
+    }
+
+    #sign-in-form-username-label-and-input {
+        flex-direction: row;
+        align-items: center;
     }
 }
