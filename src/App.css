@@ -41,7 +41,6 @@ img {
 }
 
 p {
-    /* font-size: 1.2rem; */
     line-height: 1.5rem;
 }
 
@@ -221,7 +220,6 @@ main {
 
 .index button {
     background: var(--red);
-    /* font-size: 1.2rem; */
 }
 
 .main.index main section {
@@ -490,7 +488,6 @@ main {
 #post-body {
     display: grid;
     gap: 10px;
-    /* font-size: 1.2rem; */
 }
 
 #post form {
@@ -582,13 +579,6 @@ main {
 
 #reply-card-title:hover {
     color: var(--red);
-}
-
-#reply-card-buttons {
-    background: #e0e0e0;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
 }
 
 #reply-card-edit-reply {
