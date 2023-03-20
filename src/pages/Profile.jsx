@@ -388,7 +388,7 @@ export default function Profile() {
         return (
             <div className="main">
                 <main>
-                    <p>Loading...</p>
+                    <p>Profile is loading...</p>
                 </main>
             </div>
         )

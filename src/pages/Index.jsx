@@ -29,7 +29,7 @@ export default function Index() {
 
                 <section id="index-intro">
                     <div>
-                        <h2>Need a date soon?</h2>
+                        <h2>Looking for someone to be your fake date?</h2>
                         <p>If you have a social occasion coming up but don't want to go alone, browse our app to find someone to go with.</p>
                         <p>Whether it's a wedding, birthday party, or just a night out with friends, you'll find a great fake date to keep you company whatever the occasion.</p>
                     </div>

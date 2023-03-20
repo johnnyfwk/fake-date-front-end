@@ -192,6 +192,12 @@ export default function Post() {
             })
     }
 
+    const componentCitiesStylePost = {
+        display: "grid",
+        gridTemplateColumns: "initial",
+        gap: "5px"
+    };
+
     if (isPostLoading) {
         return (
             <div className="main">
@@ -206,17 +212,11 @@ export default function Post() {
         return (
             <div className="main">
                 <main>
-                    <p className="error">Post could not be loaded.</p>
+                    <p>Post could not be loaded.</p>
                 </main>
             </div>
         )
     }
-
-    const componentCitiesStylePost = {
-        display: "grid",
-        gridTemplateColumns: "initial",
-        gap: "5px"
-    };
 
     return (
         <div className="main">

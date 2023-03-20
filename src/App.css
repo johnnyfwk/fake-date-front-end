@@ -215,10 +215,6 @@ main {
     padding: 0px;
 }
 
-.index h2 {
-    text-align: center;
-}
-
 .index button {
     background: var(--red);
 }
@@ -626,14 +622,20 @@ main {
 #message-card-username-message-and-date,
 #message-card-username-and-message {
     display: grid;
+    gap: 5px;
 }
 
 #message-card-username {
     font-weight: bold;
 }
 
+#message-card-message {
+    line-height: 1.5rem;
+}
+
 #message-card-date {
     font-size: 0.9rem;
+    color: var(--grey);
 }
 
 #message-card-username-message-and-date:link,

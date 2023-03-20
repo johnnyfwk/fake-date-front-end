@@ -100,11 +100,23 @@ export default function DirectMessage() {
     }
 
     if (isUserLoading) {
-        return <p>Page is loading.</p>
+        return (
+            <div className="main">
+                <main>
+                    <p>Direct messages are loading...</p>
+                </main>
+            </div>
+        )
     }
 
-    if (!isUserLoadedSuccessfully) {
-        return <p className="error">Page could not be loaded.</p>
+    if (isUserLoadedSuccessfully === false) {
+        return (
+            <div className="main">
+                <main>
+                    <p>Direct messages could not be loaded.</p>
+                </main>
+            </div>
+        )
     }
 
     return (
@@ -116,15 +128,12 @@ export default function DirectMessage() {
                     </Link>
                     <Link to={`/profile/${otherUser.user_id}`} id="direct-message-other-user-username"><h1>{otherUser.username}</h1></Link>
                 </div>
-                
-
-                {isMessagesLoading ? <p>Loading</p> : null}
 
                 {isMessagesLoadedSuccessfully === null
                     ? null
                     : isMessagesLoadedSuccessfully === true
                         ? null
-                        : <p className="error">Messages could not be loaded.</p>}
+                        : <p className="error">Direct messages could not be loaded.</p>}
                 
                 {isMessagesLoadedSuccessfully === true && messages.length === 0 ? <p>No messages.</p> : null}
                 

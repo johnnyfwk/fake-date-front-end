@@ -89,17 +89,31 @@ export default function Home({posts, setPosts}) {
         alignItems: "center"
     };
 
+    if (isPostsLoading) {
+        return (
+            <div className="main">
+                <main>
+                    <p>Loading...</p>
+                </main>
+            </div>
+        )
+    }
+
+    if (arePostsLoadedSuccessfully === false) {
+        return (
+            <div className="main">
+                <main>
+                    <p>Posts could not be loaded.</p>
+                </main>
+            </div>
+        )
+    }
+
     return (
         <div className="main">
             <main>
                 <h1>Browse Fake Dates</h1>
                 <p>Browse posts by other users who are looking for a fake date or filter them by gender and city.</p>
-
-                {isPostsLoading ? <p>Loading posts...</p> : null}
-
-                {arePostsLoadedSuccessfully === null || arePostsLoadedSuccessfully === true
-                    ? null
-                    : <p className="error">Posts could not be loaded.</p>}
                 
                 <form onSubmit={handleSubmit} id="home-form">
                     <div id="home-form-filters">

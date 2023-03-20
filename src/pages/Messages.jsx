@@ -60,19 +60,33 @@ export default function Messages() {
             })
     }, [user_id]);
 
+    if (isMessagesLoading) {
+        return (
+            <div className="main">
+                <main>
+                    <p>Loading messages...</p>
+                </main>
+            </div>
+        )
+    }
+
+    if (isGetMessagesSuccessful === false) {
+        return (
+            <div className="main">
+                <main>
+                    <p>Messages could not be loaded.</p>
+                </main>
+            </div>
+        )
+    }
+
     return (
         <div className="main">
             <main>
                 <h1>Messages</h1>
-
-                {isMessagesLoading ? <p>Loading messages...</p> : null}
-
-                {isGetMessagesSuccessful === null || isGetMessagesSuccessful === true
-                    ? null
-                    : <p className="error">Could not load messages.</p>}
                 
                 {isGetMessagesSuccessful === true && latestMessagesFromOtherUsers.length === 0
-                    ? <p>You don't have any messages.</p>
+                    ? <p>You have no messages.</p>
                     : null}
 
                 <div id="message-cards">
@@ -90,14 +104,14 @@ export default function Messages() {
                             ? <Link to={`/profile/${userLoggedIn.user_id}/messages/${message.receiver_user_id}`} id="message-card-username-message-and-date">
                                 <div id="message-card-username-and-message">
                                     <div id="message-card-username">{message.receiver_username}</div>
-                                    <p id="message-card-message">{message.message}</p>
+                                    <div id="message-card-message">{message.message}</div>
                                 </div>
                                 <div id="message-card-date">{new Date(message.message_date).toLocaleDateString()}</div>
                             </Link>                                
                             : <Link to={`/profile/${userLoggedIn.user_id}/messages/${message.sender_user_id}`} id="message-card-username-message-and-date">
                                 <div id="message-card-username-and-message">
                                     <div id="message-card-username">{message.sender_username}</div>
-                                    <p id="message-card-message">{message.message}</p>
+                                    <div id="message-card-message">{message.message}</div>
                                 </div>
                                 <div id="message-card-date">{new Date(message.message_date).toLocaleDateString()}</div>
                             </Link>}
