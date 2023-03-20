@@ -3,7 +3,7 @@ import { UserContext } from "../contexts/user";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import * as api from "../api";
 
-export default function DirectMessage() {
+export default function DirectMessage({isDirectMessageFormVisible}) {
     const {userLoggedIn, setUserLoggedIn} = useContext(UserContext);
     const {other_user_id} = useParams();
 
@@ -95,6 +95,10 @@ export default function DirectMessage() {
             })
     }
 
+    const styleDirectMessageForm = {
+        display: isDirectMessageFormVisible ? "grid" : "none"
+    }
+
     const styleMessageInput = {
         height: messageInputHeight
     }
@@ -154,7 +158,7 @@ export default function DirectMessage() {
                             ? null
                             : <p className="error">Message could not be sent.</p>}
                     
-                    <form onSubmit={handleSubmit} id="direct-message-form">
+                    <form onSubmit={handleSubmit} id="direct-message-form" style={styleDirectMessageForm}>
                         <textarea
                             id="message-input"
                             name="message-input"

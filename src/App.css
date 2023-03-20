@@ -171,6 +171,7 @@ nav {
     font-size: 1.5rem;
     gap: 10px;    
     transition: left 0.2s;
+    z-index: 1;
 }
 
 nav a:link,

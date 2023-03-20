@@ -20,10 +20,11 @@ import Error404 from "./pages/Error404";
 function App() {
   const [users, setUsers] = useState([]);
   const [posts, setPosts] = useState([]);
+  const [isDirectMessageFormVisible, setIsDirectMessageFormVisible] = useState(true);
 
   return (
     <div className="App">
-      <Header />
+      <Header setIsDirectMessageFormVisible={setIsDirectMessageFormVisible} />
       <Routes>
         <Route path="/" element={<Index />} />
         <Route path="/sign-in" element={<SignIn users={users} setUsers={setUsers} />} />
@@ -33,7 +34,7 @@ function App() {
         <Route path="/posts/:post_id" element={<Post />} />
         <Route path="/create-post" element={<CreatePost />} />
         <Route path="/profile/:user_id/messages" element={<Messages />} />
-        <Route path="/profile/:logged_in_user_id/messages/:other_user_id" element={<DirectMessage />} />
+        <Route path="/profile/:logged_in_user_id/messages/:other_user_id" element={<DirectMessage isDirectMessageFormVisible={isDirectMessageFormVisible} />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="*" element={<Error404 />} />

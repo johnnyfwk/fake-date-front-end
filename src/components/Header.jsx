@@ -3,7 +3,7 @@ import { useContext } from "react";
 import { UserContext } from "../contexts/user";
 import Nav from "./Nav";
 
-export default function Header() {
+export default function Header({setIsDirectMessageFormVisible}) {
     const {userLoggedIn, setUserLoggedIn} = useContext(UserContext);
 
     return (
@@ -16,7 +16,7 @@ export default function Header() {
                         <Link to="/sign-in">Sign In</Link>
                         <Link to="/sign-up">Sign Up</Link>
                     </div>
-                    : <Nav />}
+                    : <Nav setIsDirectMessageFormVisible={setIsDirectMessageFormVisible}/>}
             </header>
         </div>
     )

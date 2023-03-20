@@ -2,7 +2,7 @@ import { useState, useContext } from "react";
 import { UserContext } from "../contexts/user";
 import { Link } from "react-router-dom";
 
-export default function Nav() {
+export default function Nav({setIsDirectMessageFormVisible}) {
     const {userLoggedIn, setUserLoggedIn} = useContext(UserContext);
     const [isNavVisible, setisNavVisible] = useState(false);
     const [isShowNavButtonVisible, setIsShowNavButtonVisible] = useState(true);
@@ -14,11 +14,13 @@ export default function Nav() {
     function onClickShowNavButton() {
         setisNavVisible(true);
         setIsShowNavButtonVisible(false);
+        setIsDirectMessageFormVisible(false);
     }
 
     function onClickHideNavButton() {
         setisNavVisible(false);
         setIsShowNavButtonVisible(true);
+        setIsDirectMessageFormVisible(true);
     }
 
     const styleNav = {
