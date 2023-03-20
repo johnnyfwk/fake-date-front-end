@@ -19,7 +19,7 @@ export default function Index() {
             <main>
                 <section id="index-hero">
                     <div id="index-hero-body">
-                        <h1>Find a fake date for any social occassion</h1>
+                        <h1>Find a fake date for any social occasion</h1>
                         <Link to="/sign-up">
                             <button>Join Today</button>
                         </Link>
