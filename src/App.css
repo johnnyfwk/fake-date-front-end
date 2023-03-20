@@ -23,7 +23,8 @@ body {
 #header-sign-up-and-sign-in-links,
 nav,
 main,
-footer {
+footer,
+textarea {
     font-family: Arial, Helvetica, sans-serif;
 }
 .error, 
