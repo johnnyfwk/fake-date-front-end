@@ -92,7 +92,7 @@ export default function Home({posts, setPosts}) {
     return (
         <div className="main">
             <main>
-                <h1>Find a Fake Date</h1>
+                <h1>Browse Fake Dates</h1>
                 <p>Browse posts by other users who are looking for a fake date or filter them by gender and city.</p>
 
                 {isPostsLoading ? <p>Loading posts...</p> : null}

@@ -70,7 +70,7 @@ export default function SignUp({users, setUsers}) {
             if (usernameIsValid) {
                 setIsUsernameValid(true);
                 const isUsernameRegistered = users.some((user) => {
-                    return user.username === usernameInputInLowercase;
+                    return user.username.toLowerCase() === usernameInputInLowercase;
                 })
                 setIsUsernameTaken(isUsernameRegistered);
             } else {
