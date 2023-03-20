@@ -67,12 +67,18 @@ export default function LogIn({users, setUsers}) {
     }
 
     if (isLoading) {
-        return <p>Loading...</p>
+        return (
+            <div className="main">
+                <main>
+                    <p>Loading...</p>
+                </main>
+            </div>
+        )
     }
 
     if (isLoadingUsersSuccessful === false) {
         return (
-            <div id="main">
+            <div className="main">
                 <main>
                     <p>Could not connect to the server. Please try again later.</p>
                 </main>

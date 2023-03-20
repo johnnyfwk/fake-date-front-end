@@ -125,7 +125,9 @@ export default function Home({posts, setPosts}) {
                     </div>
                 </form>
 
-                {filteredPosts.length === 0 ? <p>No posts match your filters</p> : null}
+                {arePostsLoadedSuccessfully === true && filteredPosts.length === 0
+                    ? <p>No posts match your filters</p>
+                    : null}
 
                 <div id="post-cards">
                     {filteredPosts

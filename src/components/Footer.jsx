@@ -4,7 +4,7 @@ export default function Footer() {
     return (
         <div id="footer">
             <footer>
-                <div id="footer-links">
+                {/* <div id="footer-links">
                     <div>
                         <Link to="/about">About</Link>
                         <Link to="/contact">Contact</Link>
@@ -15,7 +15,7 @@ export default function Footer() {
                         <Link to="/cookies-policy">Cookies Policy</Link>
                         <Link to="/disclaimer">Disclaimer</Link>
                     </div>
-                </div>
+                </div> */}
                 <div id="copyright">Copyright &copy; {new Date().getFullYear()} FakeDate.co.uk. All Rights Reserved.</div>                
             </footer>
         </div>
