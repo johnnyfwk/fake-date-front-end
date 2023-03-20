@@ -126,7 +126,7 @@ export default function DirectMessage() {
                         ? null
                         : <p className="error">Messages could not be loaded.</p>}
                 
-                {messages.length === 0 ? <p>No messages.</p> : null}
+                {isMessagesLoadedSuccessfully === true && messages.length === 0 ? <p>No messages.</p> : null}
                 
                 <div id="direct-message-cards-and-form">
                     <div id="direct-message-cards">
