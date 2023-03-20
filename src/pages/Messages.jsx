@@ -71,7 +71,9 @@ export default function Messages() {
                     ? null
                     : <p className="error">Could not load messages.</p>}
                 
-                {latestMessagesFromOtherUsers.length === 0 ? <p>You don't have any messages.</p> : null}
+                {isGetMessagesSuccessful === true && latestMessagesFromOtherUsers.length === 0
+                    ? <p>You don't have any messages.</p>
+                    : null}
 
                 <div id="message-cards">
                     {latestMessagesFromOtherUsers.map((message) => {
@@ -88,14 +90,14 @@ export default function Messages() {
                             ? <Link to={`/profile/${userLoggedIn.user_id}/messages/${message.receiver_user_id}`} id="message-card-username-message-and-date">
                                 <div id="message-card-username-and-message">
                                     <div id="message-card-username">{message.receiver_username}</div>
-                                    <div id="message-card-message">{message.message}</div>
+                                    <p id="message-card-message">{message.message}</p>
                                 </div>
                                 <div id="message-card-date">{new Date(message.message_date).toLocaleDateString()}</div>
                             </Link>                                
                             : <Link to={`/profile/${userLoggedIn.user_id}/messages/${message.sender_user_id}`} id="message-card-username-message-and-date">
                                 <div id="message-card-username-and-message">
                                     <div id="message-card-username">{message.sender_username}</div>
-                                    <div id="message-card-message">{message.message}</div>
+                                    <p id="message-card-message">{message.message}</p>
                                 </div>
                                 <div id="message-card-date">{new Date(message.message_date).toLocaleDateString()}</div>
                             </Link>}

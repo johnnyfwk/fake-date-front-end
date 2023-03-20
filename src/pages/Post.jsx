@@ -193,11 +193,23 @@ export default function Post() {
     }
 
     if (isPostLoading) {
-        return <p>Post is loading...</p>
+        return (
+            <div className="main">
+                <main>
+                    <p>Post is loading...</p>
+                </main>
+            </div>
+        )
     }
 
     if (isPostLoadedSuccessfully === false) {
-        return <p className="error">Post could not be loaded.</p>
+        return (
+            <div className="main">
+                <main>
+                    <p className="error">Post could not be loaded.</p>
+                </main>
+            </div>
+        )
     }
 
     const componentCitiesStylePost = {
@@ -257,7 +269,7 @@ export default function Post() {
                             <div><b>City:</b> {post.city}</div>
                             <div><b>Occasion:</b> {post.occasion}</div>
                             <div><b>Date:</b> {new Date(post.date).toLocaleDateString()}</div>
-                            <div><b>Posted:</b> {new Date(post.post_date).toLocaleDateString()} {new Date(post.post_date).toLocaleTimeString()}</div>
+                            <div><b>Posted:</b> {new Date(post.post_date).toLocaleTimeString()} {new Date(post.post_date).toLocaleDateString()}</div>
                             <p>{post.description}</p>
                         </div>}
 

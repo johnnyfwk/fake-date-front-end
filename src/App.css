@@ -20,6 +20,12 @@ body {
     background: var(--black);
 }
 
+#header-sign-up-and-sign-in-links,
+nav,
+main,
+footer {
+    font-family: Arial, Helvetica, sans-serif;
+}
 .error, 
 .confirm {
     color: var(--red);
@@ -64,6 +70,12 @@ input,
 select,
 button {
     padding: 8px;
+}
+
+textarea,
+input,
+select {
+    font-size: 0.9rem;
 }
 
 #input-character-count {
@@ -113,6 +125,7 @@ header {
 
 #logo {
     font-size: 1.8rem;
+    font-family: 'Philosopher', sans-serif;
 }
 
 #header-sign-up-and-sign-in-links {
@@ -140,6 +153,7 @@ header {
 #hide-nav-button {
     cursor: pointer;
     font-size: 3rem;
+    color: var(--white);
 }
 
 nav {
@@ -428,7 +442,7 @@ main {
 /***** Post Card *****/
 #post-card-body {
     display: grid;
-    gap: 5px;
+    gap: 7px;
 }
 
 #post-card-title {
@@ -475,7 +489,7 @@ main {
 
 #post-body {
     display: grid;
-    gap: 5px;
+    gap: 10px;
     /* font-size: 1.2rem; */
 }
 
@@ -503,13 +517,24 @@ main {
 #update-reply-error-message,
 #delete-reply-success-message,
 #delete-reply-error-message {
-    background: #f0f0f0;
     position: fixed;
     top: 50%;
     left: 50%;
     padding: 20px;
     text-align: center;
-    transform: translate(-50%, -50%)
+    color: var(--white);
+    font-weight: bold;
+    transform: translate(-50%, -50%);
+}
+
+#update-reply-success-message,
+#delete-reply-success-message {
+    background: var(--emerald);
+}
+
+#update-reply-error-message,
+#delete-reply-error-message {
+    background: var(--red);
 }
 /***** Post *****/
 
@@ -524,7 +549,6 @@ main {
 /***** Reply Card *****/
 #reply-card-body-and-buttons {
     display: grid;
-    gap: 10px;
 }
 
 #reply-card-body {
@@ -560,11 +584,6 @@ main {
     color: var(--red);
 }
 
-#reply-card-reply {
-    /* font-size: 1.2rem;
-    line-height: 1.5rem; */
-}
-
 #reply-card-buttons {
     background: #e0e0e0;
     display: flex;
@@ -585,6 +604,7 @@ main {
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
+    align-items: center;
 }
 /***** Reply Card *****/
 
@@ -614,16 +634,14 @@ main {
 #message-card-username-message-and-date,
 #message-card-username-and-message {
     display: grid;
-    gap: 5px;
 }
 
 #message-card-username {
     font-weight: bold;
-    /* font-size: 1.2rem; */
 }
 
-#message-card-message {
-    /* line-height: 1.2rem; */
+#message-card-date {
+    font-size: 0.9rem;
 }
 
 #message-card-username-message-and-date:link,
@@ -682,13 +700,12 @@ main {
 /***** Direct Message Cards *****/
 #direct-message-cards {
     display: grid;
-    gap: 30px;
+    gap: 10px;
 }
 /***** Direct Message Cards *****/
 /***** Direct Message Card *****/
 #direct-message-card {
     display: grid;
-    gap: 5px;
 }
 
 .justify-content-left {
@@ -712,7 +729,6 @@ main {
 #direct-message-card-message {
     padding: 10px;
     max-width: 75%;
-    line-height: 1.5rem;
 }
 
 #direct-message-cards-and-form {
@@ -811,6 +827,7 @@ footer {
 
 #copyright {
     color: var(--grey);
+    font-size: 0.9rem;
     line-height: 1.5rem;
 }
 /***** Footer *****/
