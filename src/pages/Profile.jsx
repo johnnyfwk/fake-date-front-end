@@ -385,11 +385,23 @@ export default function Profile() {
     }
 
     if (isLoading) {
-        return <p>Loading...</p>
+        return (
+            <div className="main">
+                <main>
+                    <p>Loading...</p>
+                </main>
+            </div>
+        )
     }
 
     if (isGetUserInfoSuccessful === false) {
-        return <p className="error">User information could not be loaded.</p>
+        return (
+            <div className="main">
+                <main>
+                    <p className="error">User information could not be loaded.</p>
+                </main>
+            </div>
+        )
     }
 
     return (

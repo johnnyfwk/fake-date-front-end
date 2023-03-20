@@ -51,7 +51,7 @@ export default function LogIn({users, setUsers}) {
         setIsPasswordCorrect(null);
         const usernameInLowercase = usernameInput.toLowerCase();
         const user = users.filter((user) => {
-            return user.username === usernameInLowercase;
+            return user.username.toLowerCase() === usernameInLowercase;
         })
         if (user.length > 0) {
             if (user[0].password === passwordInput) {
