@@ -108,7 +108,7 @@ export default function DirectMessage() {
     }
 
     return (
-        <div id="main">
+        <div className="main">
             <main>
                 <div id="direct-message-avatar-andother-user-username">
                     <Link to={`/profile/${otherUser.user_id}`}>

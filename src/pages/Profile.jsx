@@ -393,7 +393,7 @@ export default function Profile() {
     }
 
     return (
-        <div id="main">
+        <div className="main">
             <main>
                 <div id="profile-avatar-and-username">
                     <img src={user.avatar_url} alt={user.avatar_url} id="profile-avatar-image"></img>

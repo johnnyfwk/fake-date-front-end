@@ -4,7 +4,7 @@
     --white: #ffffff;
     --jet: #363537;
     --red: #ef2d56;
-    --light-red: #fda0b4;
+    --light-red: #ffebef;
     --pumpkin: #ed7d3a;
     --pistachio: #8cd867;
     --emerald: #2FBF71;
@@ -17,7 +17,7 @@
 
 body {
     margin: 0;
-    background: var(--red);
+    background: var(--black);
 }
 
 .error, 
@@ -35,12 +35,8 @@ img {
 }
 
 p {
+    /* font-size: 1.2rem; */
     line-height: 1.5rem;
-}
-
-#header,
-#footer {
-    background: var(--red);
 }
 
 header,
@@ -88,6 +84,7 @@ button {
     padding: 10px;
     font-weight: bold;
     cursor: pointer;
+    border-radius: 5px;
 }
 
 button:hover {
@@ -99,6 +96,10 @@ button:hover {
 }
 
 /***** Header *****/
+#header {
+    background: var(--red);
+}
+
 header {
     position: sticky;
     top: 0px;
@@ -126,13 +127,13 @@ header {
 /***** Nav *****/
 #show-nav-button {
     display: grid;
-    gap: 7px;
+    gap: 5px;
     cursor: pointer;
 }
 
 #show-nav-button > div {
     background: var(--black);
-    width: 30px;
+    width: 25px;
     height: 4px;
 }
 
@@ -183,8 +184,8 @@ nav img {
 
 
 /***** Main *****/
-#main {
-    background: #ffffff;
+.main {
+    background: var(--white);
 }
 
 main {
@@ -193,6 +194,82 @@ main {
 /***** Main *****/
 
 
+
+/***** Index *****/
+.main.index main {
+    max-width: 100%;
+    padding: 0px;
+}
+
+.index h2 {
+    text-align: center;
+}
+
+.index button {
+    background: var(--red);
+    /* font-size: 1.2rem; */
+}
+
+.main.index main section {
+    background: var(--white);
+    display: grid;
+}
+
+.main.index main section > div {
+    width: 100%;
+    max-width: 800px;
+    margin: auto;
+    padding: 20px 20px 40px 20px;
+}
+
+#index-hero {
+    background-image: url('./assets/images/brooke-cagle-IbIyUzoevUI-unsplash.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 35% 50%;
+    color: var(--white);
+}
+
+#index-hero-body {
+    display: grid;
+    gap: 20px;
+}
+
+#index-hero > div > h1 {
+    max-width: 200px;
+    font-size: 2.5rem;
+}
+
+#index-hero-image-credit a:link,
+#index-hero-image-credit a:active,
+#index-hero-image-credit a:visited {
+    color: var(--white);
+}
+
+#index-hero-image-credit a:hover {
+    color: var(--red);
+}
+
+#index-occasions {
+    background: var(--red);
+    color: var(--white);
+}
+
+#index-fake-date-occassions {
+    display: grid;
+    gap: 10px;
+}
+
+.index-fake-date-occasion {
+    background: var(--white);
+    color: var(--black);
+    display: grid;
+    justify-items: center;
+    align-content: start;
+    padding: 0px 20px 20px 20px;
+}
+/***** Index *****/
+    
 
 /***** Sign Up *****/
 #sign-up-link:link,
@@ -214,20 +291,18 @@ main {
     gap: 10px;
 }
 
-#sign-up-form-username-label-input-and-message,
+#sign-up-form-username-label-input-and-message {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    align-items: center;
+}
+
 #sign-up-form-username-input-and-message {
     display: flex;
     flex-wrap: wrap;
-    align-items: center;
     gap: 5px;
-}
-
-#component-password,
-#component-gender {
-    display: flex;
-    flex-wrap: wrap;
     align-items: center;
-    gap: 5px;
 }
 /***** Sign Up *****/
 
@@ -327,7 +402,13 @@ main {
 #reply-card-avatar {
     background: var(--red);
     text-align: center;
-    border-radius: 20px 0px 0px 20px;
+    border-radius: 10px 0px 0px 10px;
+}
+
+#post-card-body,
+#reply-card-body-and-buttons {
+    border-radius: 0px 10px 10px 0px;
+    background: var(--light-red);
 }
 
 #post-card img,
@@ -346,19 +427,18 @@ main {
 /***** Post Cards *****/
 /***** Post Card *****/
 #post-card-body {
-    background: #ffffff;
     display: grid;
     gap: 5px;
 }
 
 #post-card-title {
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     font-weight: bold;
 }
 
 #post-card-description {
-    font-size: 1.2rem;
-    line-height: 1.5rem;
+    /* font-size: 1.2rem;
+    line-height: 1.5rem; */
 }
 /***** Post Card *****/
 
@@ -373,6 +453,7 @@ main {
 }
 
 #post-info {
+    background: var(--white);
     display: grid;
     gap: 10px;
 }
@@ -400,11 +481,7 @@ main {
 #post-body {
     display: grid;
     gap: 5px;
-}
-
-#post-description {
-    font-size: 1.2rem;
-    line-height: 1.7rem;
+    /* font-size: 1.2rem; */
 }
 
 #post form {
@@ -470,7 +547,6 @@ main {
     display: flex;
     flex-wrap: wrap;
     gap: 5px;
-    color: var(--grey);
     font-size: 0.9rem;
 }
 
@@ -490,8 +566,8 @@ main {
 }
 
 #reply-card-reply {
-    font-size: 1.2rem;
-    line-height: 1.5rem;
+    /* font-size: 1.2rem;
+    line-height: 1.5rem; */
 }
 
 #reply-card-buttons {
@@ -528,8 +604,11 @@ main {
 
 /***** Message Card *****/
 #message-card {
+    background: var(--light-red);
     display: grid;
     grid-template-columns: 60px auto;
+    padding: 10px;
+    border-radius: 10px;
 }
 
 #message-card-avatar {
@@ -545,15 +624,11 @@ main {
 
 #message-card-username {
     font-weight: bold;
-    font-size: 1.2rem;
+    /* font-size: 1.2rem; */
 }
 
 #message-card-message {
-    line-height: 1.2rem;
-}
-
-#message-card-date {
-    color: var(--grey);
+    /* line-height: 1.2rem; */
 }
 
 #message-card-username-message-and-date:link,
@@ -702,11 +777,23 @@ main {
     display: grid;
     gap: 3px;
 }
+
+#component-password,
+#component-gender {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 5px;
+}
 /***** Components *****/
 
 
 
 /***** Footer *****/
+#footer {
+    background: var(--black);
+}
+
 footer {
     padding: 20px;
     display: grid;
@@ -728,14 +815,14 @@ footer {
 }
 
 #copyright {
-    color: var(--light-red);
+    color: var(--grey);
     line-height: 1.5rem;
 }
 /***** Footer *****/
 
 
 
-@media only screen and (min-width: 600px) {
+@media only screen and (min-width: 480px) {
     #show-nav-button {
         display: none;
     }
@@ -755,6 +842,10 @@ footer {
         align-items: center;
         font-size: 1rem;
         gap: 20px;
+    }
+
+    #index-fake-date-occassions {
+        grid-template-columns: repeat(3, 1fr);
     }
 
     #messages-link {

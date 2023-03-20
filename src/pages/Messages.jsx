@@ -61,7 +61,7 @@ export default function Messages() {
     }, [user_id]);
 
     return (
-        <div id="main">
+        <div className="main">
             <main>
                 <h1>Messages</h1>
 
