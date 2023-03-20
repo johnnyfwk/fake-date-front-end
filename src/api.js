@@ -1,7 +1,8 @@
 import axios from "axios";
 
 const baseUrl = axios.create({
-    baseURL: "http://localhost:9090/api"
+    // baseURL: "http://localhost:9090/api"
+    baseURL: "https://fake-date.onrender.com/api"
 });
 
 ///////////// GET
