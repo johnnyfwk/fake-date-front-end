@@ -24,7 +24,8 @@ body {
 nav,
 main,
 footer,
-textarea {
+textarea,
+input {
     font-family: Arial, Helvetica, sans-serif;
 }
 .error, 
