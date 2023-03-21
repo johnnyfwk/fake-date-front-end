@@ -192,11 +192,7 @@ export default function Post() {
             })
     }
 
-    const componentCitiesStylePost = {
-        display: "grid",
-        gridTemplateColumns: "initial",
-        gap: "5px"
-    };
+    const componentCitiesStylePost = {};
 
     if (isPostLoading) {
         return (

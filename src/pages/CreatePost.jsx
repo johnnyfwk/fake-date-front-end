@@ -49,11 +49,7 @@ export default function CreatePost() {
             })
     }
 
-    const componentCitiesStyleCreatePost = {
-        display: "grid",
-        gridTemplateColumns: "initial",
-        gap: "5px"
-    };
+    const componentCitiesStyleCreatePost = {};
 
     return (
         <div className="main">

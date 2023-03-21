@@ -5,14 +5,12 @@ export default function Cities({cityInput, setCityInput, componentCitiesStyle}) 
     }
 
     const styleComponentCities = {
-        display: componentCitiesStyle.display,
-        gridTemplateColumns: componentCitiesStyle.gridTemplateColumns,
-        gap: componentCitiesStyle.gap,
+        flexDirection: componentCitiesStyle.flexDirection,
         alignItems: componentCitiesStyle.alignItems
     };
 
     return (
-        <div style={styleComponentCities}>
+        <div className="component cities" style={styleComponentCities}>
             <label htmlFor="cities">City:</label>
             <div>
                 <select id="cities" name="cities" value={cityInput} onChange={handleCityInput}>

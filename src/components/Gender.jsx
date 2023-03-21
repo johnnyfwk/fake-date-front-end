@@ -5,12 +5,12 @@ export default function Gender({genderInput, setGenderInput}) {
     }
 
     return (
-        <div id="component-gender">
-            <label htmlFor="gender">Gender: </label>
+        <div className="component gender">
+            <label htmlFor="gender-input">Gender: </label>
             <div>
                 <select
-                    id="gender"
-                    name="gender"
+                    id="gender-input"
+                    name="gender-input"
                     defaultValue={genderInput}
                     onChange={handleGenderInput}>
                         <option disabled value="default">Select Gender</option>

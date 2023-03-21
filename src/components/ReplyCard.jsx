@@ -102,7 +102,7 @@ export default function ReplyCard({reply, userLoggedIn, setIsReplyUpdatedSuccess
                         ? <div><Link to={`/posts/${reply.post_id}`} id="reply-card-title">{reply.title}</Link></div>
                         : null}
 
-                    <div>
+                    <div id="reply-card-username-time-date-and-reply">
                         <div id="reply-card-username-time-and-date">
                             <b>{reply.username}</b>
                             <div id="reply-card-time-and-date">
@@ -121,7 +121,7 @@ export default function ReplyCard({reply, userLoggedIn, setIsReplyUpdatedSuccess
                                 ></textarea>
                                 <div id="input-character-count">{editReplyInput.length}/300</div>
                             </div>  
-                            : <p id="reply-card-reply">{reply.reply}</p>}              
+                            : <div id="reply-card-reply">{reply.reply}</div>}              
                     </div>
                 </div>
 

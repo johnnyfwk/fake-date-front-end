@@ -146,8 +146,8 @@ export default function DirectMessage({isDirectMessageFormVisible}) {
                         {messages?.map((message) => {
                             return <div key={message.message_id} id="direct-message-card" className={message.sender_user_id === userLoggedIn.user_id ? "justify-content-left" : "justify-content-right"} ref={lastMessageRef}>
                                 <div id="direct-message-time-and-date">{new Date(message.message_date).toLocaleTimeString()} {new Date(message.message_date).toLocaleDateString()}</div>
-                                <p id="direct-message-card-message" className={message.sender_user_id === userLoggedIn.user_id ? "message-logged-in-user" : "message-other-user"}
-                                >{message.message}</p>
+                                <div id="direct-message-card-message" className={message.sender_user_id === userLoggedIn.user_id ? "message-logged-in-user" : "message-other-user"}
+                                >{message.message}</div>
                             </div>
                         })}
                     </div>

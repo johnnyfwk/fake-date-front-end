@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext, useLayoutEffect } from "react";
 import { UserContext } from "../contexts/user";
 import { useNavigate } from "react-router-dom";
 import * as api from "../api";
@@ -13,6 +13,7 @@ export default function Home({posts, setPosts}) {
     const [filteredPosts, setFilteredPosts] = useState([]);
     const [genderInput, setGenderInput] = useState("default");
     const [cityInput, setCityInput] = useState("default");
+    const [screenWidth, setScreenWidth] = useState(0);
 
     const navigate = useNavigate();
 
@@ -36,6 +37,15 @@ export default function Home({posts, setPosts}) {
                 setIsPostsLoading(false);
                 setArePostsLoadedSuccessfully(false);
             })
+    }, [])
+
+    useLayoutEffect(() => {
+        function updateScreenWidth() {
+            setScreenWidth(window.innerWidth);
+        }
+        window.addEventListener("resize", updateScreenWidth);
+        updateScreenWidth();
+        return () => window.removeEventListener("resize", updateScreenWidth)
     }, [])
 
     function handleSubmit(event) {
@@ -83,10 +93,8 @@ export default function Home({posts, setPosts}) {
     }
 
     const componentCitiesStyleHome = {
-        display: "grid",
-        gridTemplateColumns: "auto auto",
-        gap: "5px",
-        alignItems: "center"
+        flexDirection: screenWidth < 480 ? "column" : "row",
+        alignItems: screenWidth < 480 ? "initial" : "center"
     };
 
     if (isPostsLoading) {
@@ -117,18 +125,20 @@ export default function Home({posts, setPosts}) {
                 
                 <form onSubmit={handleSubmit} id="home-form">
                     <div id="home-form-filters">
-                        <div id="home-form-filters-gender">
+                        <div className="component gender">
                             <label htmlFor="gender">Seeking: </label>
-                            <select
-                                id="gender"
-                                name="gender"
-                                value={genderInput}
-                                onChange={handleGenderInput}>
-                                    <option disabled value="default">Select Gender</option>
-                                    <option value="Male">Male</option>
-                                    <option value="Female">Female</option>
-                                    <option value="Either">Either</option>
-                            </select>
+                            <div>
+                                <select
+                                    id="gender"
+                                    name="gender"
+                                    value={genderInput}
+                                    onChange={handleGenderInput}>
+                                        <option disabled value="default">Select Gender</option>
+                                        <option value="Male">Male</option>
+                                        <option value="Female">Female</option>
+                                        <option value="Either">Either</option>
+                                </select>
+                            </div>
                         </div>
                         <Cities cityInput={cityInput} setCityInput={setCityInput} componentCitiesStyle={componentCitiesStyleHome} />
                     </div>
