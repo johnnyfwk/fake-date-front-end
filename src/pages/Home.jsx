@@ -93,8 +93,10 @@ export default function Home({posts, setPosts}) {
     }
 
     const componentCitiesStyleHome = {
-        flexDirection: screenWidth < 480 ? "column" : "row",
-        alignItems: screenWidth < 480 ? "initial" : "center"
+        display: "flex",
+        flexWrap: "wrap",
+        alignItems: "center",
+        gap: "5px"
     };
 
     if (isPostsLoading) {
@@ -125,7 +127,7 @@ export default function Home({posts, setPosts}) {
                 
                 <form onSubmit={handleSubmit} id="home-form">
                     <div id="home-form-filters">
-                        <div className="component gender">
+                        <div id="home-form-gender">
                             <label htmlFor="gender">Seeking: </label>
                             <div>
                                 <select

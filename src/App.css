@@ -119,6 +119,8 @@ button:hover {
 /***** Header *****/
 #header {
     background: var(--red);
+    position: sticky;
+    top: 0px;
 }
 
 header {
@@ -358,6 +360,13 @@ main {
     flex-wrap: wrap;
     flex-direction: column;
     gap: 10px;
+}
+
+#home-form-gender {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 5px;
 }
 /***** Home *****/
 
