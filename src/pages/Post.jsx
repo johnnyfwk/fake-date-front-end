@@ -335,7 +335,7 @@ export default function Post() {
                     <h2>Replies ({replies.length})</h2>
 
                     {isRepliesLoading ? <p>Replies are loading...</p> : null}
-                    {replies.length ? null : <p>Be the first to reply to this post.</p>}
+                    {replies.length ? null : <p>No replies yet.</p>}
                     {isRepliesLoadedSuccessfully === false ? <p className="error">Replies could not be loaded.</p> : null}
 
                     {isReplyUpdatedSuccessfully === null
