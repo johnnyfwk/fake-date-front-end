@@ -301,34 +301,32 @@ export default function Post() {
                 <section>
                     <h2>Send a Reply</h2>
 
-                    {new Date(post.date).toISOString() < new Date().toISOString()
-                        ? <p className="error">This date has passed.</p>
-                        : null}
-
                     {isReplyPostedSuccessfully === null
                         ? null
                         : isReplyPostedSuccessfully === true
                             ? <p className="success">Your reply was posted.</p>
                             : <p className="error">Your reply could not be posted.</p>}
 
-                    {userLoggedIn.user_id === post.user_id || userLoggedIn.gender === post.gender_of_date || post.gender_of_date === "Either"
-                        ? <form onSubmit={handleSubmit}>
-                            <div id="post-reply-textarea-and-character-count">
-                                <label htmlFor="post-reply"></label>
-                                <textarea
-                                    id="post-reply"
-                                    name="post-reply"
-                                    maxLength="300"
-                                    value={replyInput}
-                                    onChange={handleReplyInput}
-                                ></textarea>
-                                <div id="input-character-count">{replyInput.length}/300</div>
-                            </div>
-                            <div id="post-reply-send-button">
-                                <button onClick={onClickSendReplyButton} disabled={!replyInput}>Send</button>
-                            </div>
-                        </form>
-                        : <p className="error">This user is looking for a {post.gender_of_date} date.</p>}
+                    {new Date(post.date).toISOString() < new Date().toISOString()
+                        ? <p className="error">This date has passed.</p>
+                        : userLoggedIn.user_id === post.user_id || userLoggedIn.gender === post.gender_of_date || post.gender_of_date === "Either"
+                            ? <form onSubmit={handleSubmit}>
+                                <div id="post-reply-textarea-and-character-count">
+                                    <label htmlFor="post-reply"></label>
+                                    <textarea
+                                        id="post-reply"
+                                        name="post-reply"
+                                        maxLength="300"
+                                        value={replyInput}
+                                        onChange={handleReplyInput}
+                                    ></textarea>
+                                    <div id="input-character-count">{replyInput.length}/300</div>
+                                </div>
+                                <div id="post-reply-send-button">
+                                    <button onClick={onClickSendReplyButton} disabled={!replyInput}>Send</button>
+                                </div>
+                            </form>
+                            : <p className="error">This user is looking for a {post.gender_of_date} date.</p>}
                 </section>
 
                 <section>
