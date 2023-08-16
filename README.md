@@ -1,6 +1,6 @@
 FakeDate.co.uk is a full-stack app where users can find a fake date for a social occasion, such as a wedding, party, or family gathering.
 
-It was built built using PostgreSQL, Express, React, and Node.js.
+It was built using PostgreSQL, Express, React, and Node.js.
 
 Live URL: https://fakedate.co.uk
 
